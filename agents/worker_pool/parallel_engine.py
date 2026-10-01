@@ -137,6 +137,9 @@ class MultiAccountParallelEngine:
         if success and os.path.exists(out_path):
             logger.info(f"[WORKER /u/{slot_idx}/] Scene {part_id} generation succeeded -> {out_path}")
             self.db.update_part_status(part_id, "COMPLETED", account_id=f"acc_{slot_idx}", raw_path=out_path)
+            # Deduct 10 credits from assigned account in database
+            with self.db.get_connection() as conn:
+                conn.execute("UPDATE accounts SET available_credits = MAX(0, available_credits - 10) WHERE slot_index = ?", (slot_idx,))
             new_pct = int((item['part_number'] / total_parts) * 100)
             self._update_live_status(
                 story_id=story_id,

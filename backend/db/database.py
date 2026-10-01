@@ -46,7 +46,7 @@ class DatabaseManager:
                         project_id=excluded.project_id,
                         project_name=excluded.project_name,
                         status=excluded.status,
-                        available_credits=excluded.available_credits;
+                        available_credits=COALESCE(accounts.available_credits, excluded.available_credits);
                 """, (
                     f"acc_{acc['slot_index']}",
                     acc["slot_index"],
