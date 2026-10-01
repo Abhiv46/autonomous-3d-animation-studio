@@ -135,6 +135,11 @@ class GoogleFlowProjectLockedDriver:
         target_card = None
         while (time.time() - start_time) < timeout_seconds:
             time.sleep(5)
+            # Check for failure message in chat drawer
+            failed_msg = page.locator("text='Failed', text='Something went wrong'").first
+            if failed_msg.count() > 0 and failed_msg.is_visible():
+                raise RuntimeError("GOOGLE_FLOW_CLOUD_ERROR: Google Flow reported 'Failed: Something went wrong. Please try again.'")
+
             # Check if video appeared in chat or canvas
             cards = page.locator("[aria-label*='Open video in editor' i], video")
             if cards.count() > 0:

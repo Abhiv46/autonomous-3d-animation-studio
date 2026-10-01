@@ -217,8 +217,9 @@ class MultiAccountParallelEngine:
                 friendly_delay = "Brave Browser is currently open by user. Please close Brave window so automation can access session."
             elif "TIMED OUT" in err_str.upper():
                 friendly_delay = "Google Flow cloud queue took longer than 120s to render. Retrying automatically..."
-            elif "CREDITS" in err_str.upper() or "QUOTA" in err_str.upper():
-                friendly_delay = "Google Flow credits exhausted on this slot. Switching to next active account..."
+            elif "CREDITS" in err_str.upper() or "QUOTA" in err_str.upper() or "GOOGLE_FLOW_CLOUD_ERROR" in err_str:
+                friendly_delay = f"Google Flow quota limit on /u/{slot_idx}/. Automatically switching generation to healthy PRO slot..."
+                self.account_manager.mark_credits_exhausted(slot_idx)
             else:
                 friendly_delay = f"Google Flow Operational Alert: {err_str[:90]}"
 
