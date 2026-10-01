@@ -4,15 +4,15 @@ import logging
 from typing import Optional, Dict, Any, List
 from pathlib import Path
 
-from ...backend.db.database import DatabaseManager
-from ..content_strategy.strategy_agent import ContentStrategyAgent
-from ..duplicate_detection.duplicate_agent import DuplicateDetectionAgent
-from ..prompt_engineering.prompt_agent import PromptEngineeringAgent
-from ..account_manager.account_agent import AccountManagerAgent
-from ..quality_control.quality_agent import QualityControlAgent
-from ..seo.seo_agent import YouTubeSEOAgent
-from ...platforms.youtube.youtube_adapter import YouTubePlatformAdapter
-from ...platforms.tiktok.tiktok_adapter import TikTokPlatformAdapter
+from backend.db.database import DatabaseManager
+from agents.content_strategy.strategy_agent import ContentStrategyAgent
+from agents.duplicate_detection.duplicate_agent import DuplicateDetectionAgent
+from agents.prompt_engineering.prompt_agent import PromptEngineeringAgent
+from agents.account_manager.account_agent import AccountManagerAgent
+from agents.quality_control.quality_agent import QualityControlAgent
+from agents.seo.seo_agent import YouTubeSEOAgent
+from platforms.youtube.youtube_adapter import YouTubePlatformAdapter
+from platforms.tiktok.tiktok_adapter import TikTokPlatformAdapter
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] [%(name)s] %(message)s")
 logger = logging.getLogger("AutonomousOrchestrator")
