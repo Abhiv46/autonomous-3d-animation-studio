@@ -1,0 +1,78 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# Environment variables & secrets (CRITICAL)
+.env
+.env.local
+.env.*.local
+token.pickle
+client_secrets.json
+*.pem
+*.key
+*.p12
+
+# Browser Profiles & Sessions (Never commit user data)
+User Data/
+browser_session/
+*.session
+*.cookies
+Default/
+Profile */
+
+# Video, audio, rendered media files
+*.mp4
+*.mkv
+*.mov
+*.avi
+*.webm
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.wav
+*.mp3
+data/raw_clips/
+data/output/
+data/archive/
+data/tiktok_raw_clips/
+data/youtube_long_videos/
+episodes/
+output/
+raw_clips/
+archive/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+!database/migrations/*.sql
+
+# Logs & temp files
+*.log
+logs/
+autopilot_logs/
+*.tmp
+*.temp
+debug_*.json
+dialog_open.png
+*.png
+
+# OS & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
