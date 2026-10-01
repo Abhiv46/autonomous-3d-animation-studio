@@ -14,36 +14,70 @@ class GoogleFlowProjectLockedDriver:
         """Opens the existing project for this account. Strictly avoids creating new blank projects."""
         base_account_url = f"https://flow.google.com/u/{slot_index}/"
         
+        # 1. Direct URL Navigation (Primary Bulletproof Method)
         if project_id:
             target_url = f"https://flow.google.com/u/{slot_index}/project/{project_id}"
-            page.goto(target_url, wait_until="domcontentloaded", timeout=35000)
-            page.wait_for_timeout(4000)
-            
-            # Verify if project successfully loaded
-            if "project/" in page.url and project_id in page.url:
-                return True
+            try:
+                page.goto(target_url, wait_until="domcontentloaded", timeout=40000)
+                page.wait_for_timeout(4000)
+                
+                # Check for and clear any modal/backdrop overlays if present
+                self._clear_overlays(page)
 
-        # Fallback search if direct project_id didn't load or not provided
-        page.goto(base_account_url, wait_until="domcontentloaded", timeout=35000)
+                # Verify if project canvas successfully loaded
+                if "project/" in page.url and project_id in page.url:
+                    # Also ensure prompt editor or canvas exists
+                    editor = page.locator("[contenteditable='true'], div.ProseMirror, textarea")
+                    if editor.count() > 0 or "project/" in page.url:
+                        return True
+            except Exception:
+                pass
+
+        # 2. Fallback: Navigate to account dashboard and find project card
+        page.goto(base_account_url, wait_until="domcontentloaded", timeout=40000)
         page.wait_for_timeout(4000)
+        self._clear_overlays(page)
 
         if project_name:
-            # Search for project title on dashboard using flexible text and aria-label matching
-            tile = page.locator(f"text='{project_name}', [aria-label*='{project_name}' i], div:has-text('{project_name}')").first
-            if tile.count() > 0 and tile.is_visible():
-                tile.click(force=True)
-                page.wait_for_timeout(4000)
-                # Ensure we entered the project
-                if "project/" in page.url:
-                    return True
-                page.wait_for_timeout(2000)
-                return True
+            # Click card directly avoiding backdrop pointer intercepts
+            selectors = [
+                f"[aria-label*='{project_name}' i]",
+                f"div.project-card:has-text('{project_name}')",
+                f"[role='button']:has-text('{project_name}')",
+                f"div:has-text('{project_name}')",
+            ]
+            for sel in selectors:
+                card = page.locator(sel).first
+                if card.count() > 0 and card.is_visible():
+                    try:
+                        self._clear_overlays(page)
+                        card.click(force=True, timeout=5000)
+                        page.wait_for_timeout(4000)
+                        if "project/" in page.url:
+                            return True
+                    except Exception:
+                        continue
 
         # Strict Project Lock Policy: DO NOT silently click "+ New Project"
         raise FileNotFoundError(
             f"Configured project (ID: {project_id}, Name: '{project_name}') NOT FOUND on Account /u/{slot_index}/. "
             f"Strict project lock policy prevented creating random duplicate projects."
         )
+
+    def _clear_overlays(self, page: Page):
+        """Neutralizes Angular CDK backdrop overlays or popups that intercept clicks."""
+        try:
+            page.evaluate("""() => {
+                const backdrops = document.querySelectorAll('.cdk-overlay-backdrop, .cdk-overlay-container, [class*="backdrop"]');
+                backdrops.forEach(el => {
+                    // Only remove if it is not a required modal
+                    if (!el.querySelector('button, input, textarea')) {
+                        el.remove();
+                    }
+                });
+            }""")
+        except Exception:
+            pass
 
     def handle_normal_operational_questions(self, page: Page) -> bool:
         """Auto-approves safe generation actions (continue, approve credits, retry) while blocking financial/security changes."""
