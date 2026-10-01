@@ -242,7 +242,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             <h1>The Naughty Duo — Autonomous Content Operations Engine</h1>
             <p style="color: var(--muted); margin: 5px 0 0 0; font-size: 13px;">Auto-Pilot Production Matrix | Multi-Platform Distribution Locked</p>
         </div>
-        <div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <span class="badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);" id="auto-refresh-timer">
+                🔄 Auto-refresh in 60s
+            </span>
             <span class="badge badge-live">
                 <span class="pulse-dot"></span> System Online & Real-time Auto-Sync
             </span>
