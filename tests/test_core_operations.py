@@ -120,3 +120,51 @@ def test_7_tiktok_duration_compliance():
     val = adapter.validate_publication_payload(payload)
     assert val["valid"] is False
     assert "MISSING_VIDEO_FILE" in val["error"]
+
+def test_8_parallel_multi_account_generation(temp_db, monkeypatch):
+    """TEST 8: Verify multi-account parallel worker pool execution and atomic part claiming."""
+    from agents.worker_pool.parallel_engine import MultiAccountParallelEngine
+    monkeypatch.setenv("SIMULATION", "true")
+
+    config = {
+        "character_lock": {
+            "characters": [
+                {"name": "Pinki", "role": "Mom", "appearance": "25yo", "locked_clothing": "kurti"},
+                {"name": "Kaartik", "role": "Son", "appearance": "5yo", "locked_clothing": "polo"},
+                {"name": "Kaavya", "role": "Daughter", "appearance": "3yo", "locked_clothing": "dress"}
+            ],
+            "quality_benchmark": "Garden Me Jhula (High-Fidelity 3D Pixar)"
+        },
+        "google_flow": {
+            "accounts": [
+                {"slot_index": 0, "email": "acc0@test.com", "tier": "FREE", "project_name": "The Naughty Duo"},
+                {"slot_index": 1, "email": "acc1@test.com", "tier": "FREE", "project_name": "The Naughty Duo"}
+            ]
+        }
+    }
+
+    story_id = "TND-PARALLEL-001"
+    prompts = [
+        {"part_number": 1, "scene_label": "P1", "prompt_text": "Pinki drinks tea."},
+        {"part_number": 2, "scene_label": "P2", "prompt_text": "Kaartik sneaks balloon."}
+    ]
+    temp_db.register_story(story_id, "Parallel Prank Story", "Parallel test", "PROBLEM_PAYOFF", prompts)
+
+    engine = MultiAccountParallelEngine(config, max_concurrent=2, db=temp_db)
+
+    # Run parallel batch
+    results = engine.run_parallel_batch()
+    assert len(results) == 2
+    # Verify both parts completed without collision
+    for r in results:
+        assert r["status"] == "COMPLETED"
+
+    # Check database: both parts should be COMPLETED and story should be COMPLETED
+    with temp_db.get_connection() as conn:
+        parts = conn.execute("SELECT status, assigned_account_id FROM story_parts WHERE story_id = ?", (story_id,)).fetchall()
+        assert len(parts) == 2
+        assert all(p["status"] == "COMPLETED" for p in parts)
+        # Verify distinct account assignment (slot 0 and slot 1)
+        assigned = {p["assigned_account_id"] for p in parts}
+        assert "acc_0" in assigned and "acc_1" in assigned
+
