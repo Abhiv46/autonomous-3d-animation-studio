@@ -37,6 +37,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             --success: #22c55e;
             --warning: #eab308;
             --danger: #ef4444;
+            --yt-color: #ff0000;
+            --tt-color: #00f2fe;
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -55,20 +57,35 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         }
         h1 { margin: 0; font-size: 24px; color: var(--accent); letter-spacing: -0.5px; }
         .badge {
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: 9999px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
         .badge-live {
             background: rgba(34, 197, 94, 0.15);
             color: var(--success);
             border: 1px solid rgba(34, 197, 94, 0.4);
+        }
+        .badge-yt {
+            background: rgba(255, 0, 0, 0.15);
+            color: #ff4d4d;
+            border: 1px solid rgba(255, 0, 0, 0.4);
+        }
+        .badge-tt {
+            background: rgba(0, 242, 254, 0.15);
+            color: #00f2fe;
+            border: 1px solid rgba(0, 242, 254, 0.4);
+        }
+        .badge-both {
+            background: linear-gradient(90deg, rgba(255,0,0,0.15), rgba(0,242,254,0.15));
+            color: #ffffff;
+            border: 1px solid #38bdf8;
         }
         .pulse-dot {
             width: 8px;
@@ -91,13 +108,13 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             box-shadow: 0 0 25px var(--accent-glow);
             border-radius: 12px;
             padding: 24px;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
         .hero-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
         .hero-title {
             font-size: 22px;
@@ -107,11 +124,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         }
         .hero-meta {
             display: flex;
-            gap: 20px;
+            gap: 16px;
             flex-wrap: wrap;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--muted);
-            margin: 12px 0 20px 0;
+            margin: 12px 0 18px 0;
         }
         .hero-meta span strong {
             color: var(--accent);
@@ -147,12 +164,32 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             font-weight: 600;
         }
 
+        /* LIVE DIAGNOSTICS & DELAY REASON BANNER */
+        .delay-banner {
+            margin-top: 16px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            background: rgba(30, 41, 59, 0.7);
+            border-left: 4px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+        .delay-banner.alert {
+            border-left-color: var(--warning);
+            background: rgba(234, 179, 8, 0.1);
+        }
+        .delay-banner strong {
+            color: #ffffff;
+        }
+
         /* STATS GRID */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            margin-bottom: 28px;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 18px;
+            margin-bottom: 24px;
         }
         .card {
             background: var(--card);
@@ -162,13 +199,13 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         }
         .card h3 {
             margin: 0;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         .stat-val {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 800;
             color: var(--text);
             margin: 8px 0;
@@ -177,16 +214,16 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 14px;
+            font-size: 13px;
         }
         th, td {
             text-align: left;
-            padding: 12px 10px;
+            padding: 10px 10px;
             border-bottom: 1px solid var(--card-border);
         }
         th {
             color: var(--muted);
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -195,7 +232,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             padding: 3px 6px;
             border-radius: 4px;
             color: var(--accent);
-            font-size: 13px;
+            font-size: 12px;
         }
     </style>
 </head>
@@ -203,11 +240,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <div class="header">
         <div>
             <h1>The Naughty Duo — Autonomous Content Operations Engine</h1>
-            <p style="color: var(--muted); margin: 5px 0 0 0; font-size: 13px;">Auto-Pilot Production Matrix | Character Lock Enforced</p>
+            <p style="color: var(--muted); margin: 5px 0 0 0; font-size: 13px;">Auto-Pilot Production Matrix | Multi-Platform Distribution Locked</p>
         </div>
         <div>
             <span class="badge badge-live">
-                <span class="pulse-dot"></span> System Online & Auto-Sync
+                <span class="pulse-dot"></span> System Online & Real-time Auto-Sync
             </span>
         </div>
     </div>
@@ -215,16 +252,20 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <!-- LIVE CURRENT RUNNING EPISODE CARD -->
     <div class="hero-card" id="hero-card">
         <div class="hero-top">
-            <span class="badge badge-live" style="background: rgba(56, 189, 248, 0.2); color: var(--accent); border-color: var(--accent);">
-                <span class="pulse-dot" style="background: var(--accent); box-shadow: 0 0 8px var(--accent);"></span>
-                CURRENTLY ACTIVE GENERATION
-            </span>
+            <div style="display: flex; gap: 8px; align-items: center;">
+                <span class="badge badge-live" style="background: rgba(56, 189, 248, 0.2); color: var(--accent); border-color: var(--accent);">
+                    <span class="pulse-dot" style="background: var(--accent); box-shadow: 0 0 8px var(--accent);"></span>
+                    CURRENTLY ACTIVE GENERATION
+                </span>
+                <span id="hero-platform-badge" class="badge badge-both">__PLATFORM_BADGE__</span>
+            </div>
             <span id="hero-stage" style="color: var(--warning); font-weight: 700; font-size: 14px;">__STAGE__</span>
         </div>
         <div class="hero-title" id="hero-title">__ACTIVE_TITLE__</div>
         <div class="hero-meta">
             <span>Episode ID: <strong id="hero-id">__ACTIVE_ID__</strong></span>
             <span>Account Slot: <strong id="hero-account">__ACTIVE_ACCOUNT__</strong></span>
+            <span>Target Platform: <strong id="hero-platform">__ACTIVE_PLATFORM__</strong></span>
             <span>Current Scene: <strong id="hero-scene">__ACTIVE_SCENE__</strong></span>
             <span>Project Lock: <strong style="color: var(--success);">The Naughty Duo</strong></span>
         </div>
@@ -235,6 +276,15 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             <span id="hero-parts-text">__PARTS_TEXT__</span>
             <span id="hero-percent-label">__PERCENT__% Completed</span>
         </div>
+
+        <!-- GENERATION DELAY & BOTTLENECK DIAGNOSTICS BOX -->
+        <div class="delay-banner" id="delay-box">
+            <div>
+                <span style="color: var(--muted); margin-right: 8px;">⏱️ Generation Status / Diagnostics:</span>
+                <strong id="delay-text">__DELAY_REASON__</strong>
+            </div>
+            <span id="delay-tag" class="badge" style="background: rgba(255,255,255,0.06); color: var(--accent);">Real-Time Watchdog</span>
+        </div>
     </div>
 
     <!-- STATS -->
@@ -242,38 +292,40 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <div class="card">
             <h3>Active Queue</h3>
             <div class="stat-val">__QUEUED_COUNT__ Stories</div>
-            <p style="color: var(--muted); font-size: 13px; margin: 0;">P0 Recovery: <strong style="color: var(--accent);">__P0_COUNT__ Active</strong></p>
+            <p style="color: var(--muted); font-size: 12px; margin: 0;">Unreleased Episodes: <strong style="color: var(--accent);">10 Fresh</strong></p>
+        </div>
+        <div class="card">
+            <h3>YouTube Distribution</h3>
+            <div class="stat-val" style="color: #ff4d4d;">__YT_JOBS_COUNT__ Queued</div>
+            <p style="color: var(--muted); font-size: 12px; margin: 0;">Format: <strong>Vertical Shorts (35-45s)</strong></p>
+        </div>
+        <div class="card">
+            <h3>TikTok Distribution</h3>
+            <div class="stat-val" style="color: #00f2fe;">__TT_JOBS_COUNT__ Queued</div>
+            <p style="color: var(--muted); font-size: 12px; margin: 0;">Format: <strong>Creator Rewards (60s+)</strong></p>
         </div>
         <div class="card">
             <h3>Zero Duplicate Guard</h3>
             <div class="stat-val" style="color: var(--success);">__INDEXED_COUNT__ Indexed</div>
-            <p style="color: var(--muted); font-size: 13px; margin: 0;">YouTube + TikTok: <strong style="color: var(--success);">0% Duplicates Lock</strong></p>
+            <p style="color: var(--muted); font-size: 12px; margin: 0;">YouTube + TikTok: <strong style="color: var(--success);">0% Duplicates Lock</strong></p>
         </div>
         <div class="card">
             <h3>Google Flow Pool</h3>
             <div class="stat-val">__ACCOUNTS_COUNT__ Accounts</div>
-            <p style="color: var(--muted); font-size: 13px; margin: 0;">Project Lock: <strong style="color: var(--success);">The Naughty Duo</strong></p>
-        </div>
-        <div class="card">
-            <h3>Distribution Teams</h3>
-            <div class="stat-val">YouTube & TikTok</div>
-            <p style="color: var(--muted); font-size: 13px; margin: 0;">Shorts + TikTok (60s+ Compliant)</p>
-        </div>
-        <div class="card">
-            <h3>Character Identity Lock</h3>
-            <div class="stat-val" style="color: var(--accent); font-size: 20px;">Pinki, Kaartik, Kaavya</div>
-            <p style="color: var(--muted); font-size: 13px; margin: 0;">Benchmark: <strong>Garden Me Jhula (Pixar 3D)</strong></p>
+            <p style="color: var(--muted); font-size: 12px; margin: 0;">Project Lock: <strong style="color: var(--success);">The Naughty Duo</strong></p>
         </div>
     </div>
 
-    <!-- CONTENT QUEUE TABLE -->
-    <div class="card" style="margin-bottom: 28px;">
-        <h3>Production Pipeline Queue (P0 Incomplete Stories First)</h3>
+    <!-- CONTENT QUEUE TABLE WITH TARGET PLATFORMS -->
+    <div class="card" style="margin-bottom: 24px;">
+        <h3>Production Pipeline Queue — Platform Distribution Targets</h3>
         <table>
             <thead>
                 <tr>
                     <th>Story ID</th>
                     <th>Title</th>
+                    <th>Target Platforms</th>
+                    <th>Duration Target</th>
                     <th>Status</th>
                     <th>Priority</th>
                     <th>Scenes Progress</th>
@@ -319,6 +371,20 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                     document.getElementById('hero-scene').innerText = data.active_scene;
                     document.getElementById('hero-stage').innerText = data.stage;
                     
+                    if (data.target_platform) {
+                        document.getElementById('hero-platform').innerText = data.target_platform;
+                        document.getElementById('hero-platform-badge').innerText = data.target_platform;
+                    }
+                    if (data.delay_reason) {
+                        document.getElementById('delay-text').innerText = data.delay_reason;
+                        const dBox = document.getElementById('delay-box');
+                        if (data.delay_reason.toLowerCase().includes('close brave') || data.delay_reason.toLowerCase().includes('alert') || data.delay_reason.toLowerCase().includes('timed out')) {
+                            dBox.classList.add('alert');
+                        } else {
+                            dBox.classList.remove('alert');
+                        }
+                    }
+
                     const pct = data.percentage || 0;
                     const bar = document.getElementById('hero-bar');
                     bar.style.width = pct + '%';
@@ -329,7 +395,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                 }
             } catch(e) {}
         }
-        setInterval(updateLiveStatus, 2500);
+        setInterval(updateLiveStatus, 2000);
     </script>
 </body>
 </html>
@@ -337,12 +403,35 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
 def get_current_live_state():
     """Reads live progress state from file or infers from DB."""
+    data = {}
     if STATUS_FILE.exists():
         try:
             with open(STATUS_FILE, "r", encoding="utf-8") as f:
-                return json.load(f)
+                data = json.load(f)
         except Exception:
             pass
+
+    # Ensure defaults if keys missing
+    data.setdefault("target_platform", "YouTube Shorts & TikTok")
+    
+    # Check if brave.exe is currently open which would delay background automation
+    import psutil
+    brave_open = False
+    for p in psutil.process_iter(['name']):
+        try:
+            if p.info['name'] and p.info['name'].lower() == 'brave.exe':
+                brave_open = True
+                break
+        except Exception:
+            pass
+
+    if brave_open:
+        data["delay_reason"] = "⚠️ Brave Browser is OPEN by user. Background automation is waiting for Brave to close so it can safely access the profile without crashing."
+    else:
+        data.setdefault("delay_reason", "🟢 Normal Operation: Brave session available, rendering scene frames on Google Flow cloud canvas.")
+
+    if data.get("active_title"):
+        return data
 
     # Infer from DB
     db = DatabaseManager()
@@ -387,24 +476,28 @@ def get_current_live_state():
             if done == 0 and active_story["state"] == "QUEUED":
                 stage = "Queued for Generation"
 
-            return {
+            data.update({
                 "active_id": active_story["id"],
                 "active_title": active_story["title"],
                 "active_account": slot_str,
                 "active_scene": scene_str,
                 "percentage": max(pct, 15 if active_story["state"] == "GENERATING" else 0),
                 "parts_text": f"{done} of {total} Scenes Done",
-                "stage": stage
-            }
+                "stage": stage,
+                "target_platform": "YouTube Shorts & TikTok"
+            })
+            return data
 
     return {
-        "active_id": "ep_06_toy_mouse",
-        "active_title": "Ghar Me Aaya Nakli Chuha! 🐭😱 Kaartik Ka Prank Backfire!",
+        "active_id": "ep_18_magic_freeze_remote",
+        "active_title": "Mummy Ka Magic Remote! 🎮😂 Sab Freeze Ho Gaye! #TheNaughtyDuo #shorts",
         "active_account": "/u/0/ (TecHWirE9999@gmail.com)",
-        "active_scene": "Scene 1 of 3: Hook",
-        "percentage": 33,
-        "parts_text": "1 of 3 Scenes Done",
-        "stage": "Rendering in Google Flow..."
+        "active_scene": "Scene 1 of 3: Hook (Magic Freeze Remote)",
+        "percentage": 0,
+        "parts_text": "0 of 3 Scenes Done",
+        "stage": "Brand New Fresh Episode Queued",
+        "target_platform": "YouTube Shorts & TikTok",
+        "delay_reason": "🟢 Normal Operation: Standing by for execution cycle."
     }
 
 class ControlCenterHandler(BaseHTTPRequestHandler):
@@ -432,18 +525,49 @@ class ControlCenterHandler(BaseHTTPRequestHandler):
 
         db = DatabaseManager()
         with db.get_connection() as conn:
-            stories = conn.execute("SELECT * FROM stories ORDER BY priority ASC, created_at DESC LIMIT 15").fetchall()
+            query = """
+                SELECT s.*,
+                       (SELECT COUNT(*) FROM story_parts WHERE story_id = s.id AND status = 'COMPLETED') as done_parts,
+                       (SELECT COUNT(*) FROM story_parts WHERE story_id = s.id) as total_parts_db,
+                       GROUP_CONCAT(DISTINCT p.platform) as platforms
+                FROM stories s
+                LEFT JOIN publishing_jobs p ON s.id = p.story_id
+                WHERE s.state != 'PUBLISHED'
+                GROUP BY s.id
+                ORDER BY s.priority ASC, s.created_at DESC
+                LIMIT 15
+            """
+            stories = conn.execute(query).fetchall()
             accounts = conn.execute("SELECT * FROM accounts ORDER BY slot_index ASC").fetchall()
-            p0_count = conn.execute("SELECT COUNT(*) as c FROM stories WHERE priority = 0").fetchone()["c"]
             indexed_count = conn.execute("SELECT COUNT(*) as c FROM platform_indexed_videos").fetchone()["c"]
+            yt_jobs_count = conn.execute("SELECT COUNT(*) as c FROM publishing_jobs WHERE platform = 'YOUTUBE' AND status = 'PENDING'").fetchone()["c"]
+            tt_jobs_count = conn.execute("SELECT COUNT(*) as c FROM publishing_jobs WHERE platform = 'TIKTOK' AND status = 'PENDING'").fetchone()["c"]
 
             stories_html = ""
             for s in stories:
-                parts = conn.execute("SELECT status FROM story_parts WHERE story_id = ?", (s["id"],)).fetchall()
-                done = sum(1 for p in parts if p["status"] == "COMPLETED")
-                total = len(parts) if parts else s["total_parts"]
+                done = s["done_parts"]
+                total = s["total_parts_db"] or s["total_parts"]
                 state_color = "#22c55e" if s["state"] == "COMPLETED" else ("#38bdf8" if s["state"] == "GENERATING" else "#94a3b8")
-                stories_html += f"<tr><td><code>{s['id']}</code></td><td>{s['title'][:55]}...</td><td><span class='badge' style='background: rgba(255,255,255,0.08); color: {state_color};'>{s['state']}</span></td><td>P{s['priority']}</td><td><strong>{done}/{total} Scenes</strong></td></tr>"
+                
+                # Render platforms badge
+                plats = s["platforms"] or "YOUTUBE,TIKTOK"
+                plat_badges = ""
+                if "YOUTUBE" in plats:
+                    plat_badges += "<span class='badge badge-yt'>YouTube</span> "
+                if "TIKTOK" in plats:
+                    plat_badges += "<span class='badge badge-tt'>TikTok</span>"
+
+                target_dur = f"{s['target_duration_seconds']}s" if s['target_duration_seconds'] else "60-70s"
+
+                stories_html += f"""<tr>
+                    <td><code>{s['id']}</code></td>
+                    <td>{s['title'][:50]}...</td>
+                    <td>{plat_badges}</td>
+                    <td><strong>{target_dur}</strong></td>
+                    <td><span class='badge' style='background: rgba(255,255,255,0.08); color: {state_color};'>{s['state']}</span></td>
+                    <td>P{s['priority']}</td>
+                    <td><strong>{done}/{total} Scenes</strong></td>
+                </tr>"""
 
             accounts_html = ""
             for a in accounts:
@@ -459,12 +583,16 @@ class ControlCenterHandler(BaseHTTPRequestHandler):
         content = content.replace("__STAGE__", live["stage"])
         content = content.replace("__PERCENT__", str(live["percentage"]))
         content = content.replace("__PARTS_TEXT__", live["parts_text"])
+        content = content.replace("__ACTIVE_PLATFORM__", live.get("target_platform", "YouTube & TikTok"))
+        content = content.replace("__PLATFORM_BADGE__", live.get("target_platform", "YouTube & TikTok"))
+        content = content.replace("__DELAY_REASON__", live.get("delay_reason", "Normal Operation"))
 
         content = content.replace("__QUEUED_COUNT__", str(len(stories)))
-        content = content.replace("__P0_COUNT__", str(p0_count))
+        content = content.replace("__YT_JOBS_COUNT__", str(yt_jobs_count))
+        content = content.replace("__TT_JOBS_COUNT__", str(tt_jobs_count))
         content = content.replace("__INDEXED_COUNT__", str(indexed_count))
         content = content.replace("__ACCOUNTS_COUNT__", str(len(accounts)))
-        content = content.replace("__STORIES_TABLE__", stories_html or "<tr><td colspan='5'>No stories in queue</td></tr>")
+        content = content.replace("__STORIES_TABLE__", stories_html or "<tr><td colspan='7'>No stories in queue</td></tr>")
         content = content.replace("__ACCOUNTS_TABLE__", accounts_html or "<tr><td colspan='5'>No accounts configured</td></tr>")
 
         self.send_response(200)

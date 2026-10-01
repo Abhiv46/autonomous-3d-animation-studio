@@ -158,7 +158,7 @@ class MultiAccountParallelEngine:
                     conn.execute("UPDATE stories SET state = 'PARTIAL', priority = 0 WHERE id = ?", (story_id,))
             return {"slot": slot_idx, "status": "FAILED_OR_REQUEUED", "part_id": part_id}
 
-    def _update_live_status(self, story_id: str, title: str, slot: int, email: str, part_num: int, total_parts: int, stage: str, pct: int):
+    def _update_live_status(self, story_id: str, title: str, slot: int, email: str, part_num: int, total_parts: int, stage: str, pct: int, target_platform: str = "YouTube & TikTok", delay_reason: str = "None (Generating Normally)"):
         status_file = Path(BASE_DIR) / "data" / "live_production_status.json"
         data = {
             "active_id": story_id,
@@ -167,7 +167,9 @@ class MultiAccountParallelEngine:
             "active_scene": f"Scene {part_num} of {total_parts}",
             "percentage": pct,
             "parts_text": f"{part_num - 1} of {total_parts} Scenes Done",
-            "stage": stage
+            "stage": stage,
+            "target_platform": target_platform,
+            "delay_reason": delay_reason
         }
         try:
             with open(status_file, "w", encoding="utf-8") as f:
@@ -208,7 +210,38 @@ class MultiAccountParallelEngine:
             ctx.close()
             return True
         except Exception as e:
-            logger.error(f"[WORKER /u/{slot_idx}/] Browser generation error: {e}")
+            err_str = str(e)
+            logger.error(f"[WORKER /u/{slot_idx}/] Browser generation error: {err_str}")
+            # If Brave is running externally, provide clear friendly message
+            if "Target page, context or browser has been closed" in err_str or "Process singleton" in err_str or "lock" in err_str.lower():
+                friendly_delay = "Brave Browser is currently open by user. Please close Brave window so automation can access session."
+            elif "TIMED OUT" in err_str.upper():
+                friendly_delay = "Google Flow cloud queue took longer than 120s to render. Retrying automatically..."
+            elif "CREDITS" in err_str.upper() or "QUOTA" in err_str.upper():
+                friendly_delay = "Google Flow credits exhausted on this slot. Switching to next active account..."
+            else:
+                friendly_delay = f"Google Flow Operational Alert: {err_str[:90]}"
+
+            self.db.log_system_error(
+                component="GoogleFlowWorker",
+                error_type="BROWSER_GENERATION_EXCEPTION",
+                severity="WARNING",
+                message=friendly_delay,
+                account_id=f"acc_{slot_idx}"
+            )
+            # Record delay reason in live status
+            status_file = Path(BASE_DIR) / "data" / "live_production_status.json"
+            if status_file.exists():
+                try:
+                    with open(status_file, "r", encoding="utf-8") as f:
+                        cur_status = json.load(f)
+                    cur_status["delay_reason"] = friendly_delay
+                    cur_status["stage"] = "Retrying / Waiting for Access"
+                    with open(status_file, "w", encoding="utf-8") as f:
+                        json.dump(cur_status, f, indent=2, ensure_ascii=False)
+                except Exception:
+                    pass
+
             engine.close()
             return False
 
