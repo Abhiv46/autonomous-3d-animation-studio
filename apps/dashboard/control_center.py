@@ -3,6 +3,11 @@ import sys
 import json
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
 from backend.db.database import DatabaseManager
 
 HTML_TEMPLATE = """<!DOCTYPE html>
