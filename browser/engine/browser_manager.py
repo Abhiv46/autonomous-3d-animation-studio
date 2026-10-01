@@ -16,14 +16,17 @@ class BrowserAutomationEngine:
         self.context: Optional[BrowserContext] = None
 
     @staticmethod
-    def cleanup_stale_processes(browser_name: str = "brave.exe"):
-        """Safely cleans up orphaned browser or renderer processes to release lockfiles."""
-        try:
-            subprocess.run(["taskkill", "/F", "/IM", browser_name], capture_output=True)
-            subprocess.run(["taskkill", "/F", "/IM", "chrome.exe"], capture_output=True)
-            time.sleep(1.5)
-        except Exception:
-            pass
+    def cleanup_stale_processes(browser_name: str = "brave.exe", user_data_dir: Optional[str] = None):
+        """Safely cleans up stale lockfiles without touching other browsers (NEVER kills chrome.exe)."""
+        if user_data_dir and os.path.exists(user_data_dir):
+            for lock_name in ("SingletonLock", "SingletonCookie", "SingletonSocket", "lockfile"):
+                lock_path = os.path.join(user_data_dir, lock_name)
+                try:
+                    if os.path.exists(lock_path):
+                        os.remove(lock_path)
+                except Exception:
+                    pass
+        # Never kill chrome.exe since user uses it for dashboard viewing!
 
     @staticmethod
     def is_browser_running(browser_name: str = "brave.exe") -> bool:
@@ -37,8 +40,8 @@ class BrowserAutomationEngine:
 
     def launch(self) -> BrowserContext:
         """Launches persistent context with retry logic, auto-recovery on profile lock, and screenshot capability."""
-        # 1. Clean up any orphaned background processes holding profile lock
-        self.cleanup_stale_processes(os.path.basename(self.browser_exe))
+        # 1. Clean up any stale lockfiles
+        self.cleanup_stale_processes(os.path.basename(self.browser_exe), self.user_data_dir)
 
         self.playwright = sync_playwright().start()
         
@@ -65,7 +68,7 @@ class BrowserAutomationEngine:
                 return self.context
             except Exception as e:
                 time.sleep(2)
-                self.cleanup_stale_processes(os.path.basename(self.browser_exe))
+                self.cleanup_stale_processes(os.path.basename(self.browser_exe), self.user_data_dir)
                 if attempt == 2:
                     raise RuntimeError(f"Failed to launch browser after 3 attempts: {e}")
 
