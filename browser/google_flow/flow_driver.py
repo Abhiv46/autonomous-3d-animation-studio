@@ -110,11 +110,14 @@ class GoogleFlowProjectLockedDriver:
 
         editor.first.click()
         page.wait_for_timeout(300)
-        editor.first.fill(prompt_text)
-        page.wait_for_timeout(600)
+        # Use keyboard typing to trigger ProseMirror React state updates
+        page.keyboard.press("Control+A")
+        page.keyboard.press("Backspace")
+        page.keyboard.type(prompt_text, delay=5)
+        page.wait_for_timeout(800)
 
-        # Submit prompt using dedicated button or Enter
-        send_btn = page.locator("button[aria-label*='Start generation' i], button:has-text('arrow_forward'), [role='button']:has-text('arrow_forward')")
+        # Submit prompt using dedicated Start generation button or Enter
+        send_btn = page.locator("button[aria-label*='Start generation' i]")
         if send_btn.count() > 0 and send_btn.first.is_visible():
             send_btn.first.click(force=True)
         else:
@@ -126,17 +129,26 @@ class GoogleFlowProjectLockedDriver:
             if self.handle_normal_operational_questions(page):
                 break
 
-        # Dynamic cloud render polling
+        # Dynamic cloud render polling: wait until Stop button turns back into Start generation or a new video appears
         start_time = time.time()
         rendered = False
         target_card = None
         while (time.time() - start_time) < timeout_seconds:
-            time.sleep(4)
-            cards = page.locator("[aria-label*='Open video in editor' i], [class*='generation-card'], video")
+            time.sleep(5)
+            # Check if video appeared in chat or canvas
+            cards = page.locator("[aria-label*='Open video in editor' i], video")
             if cards.count() > 0:
                 rendered = True
                 target_card = cards.last
                 break
+            # Or generation finished and stop button is gone
+            stop_btn = page.locator("button:has-text('Stop')")
+            if stop_btn.count() == 0 and (time.time() - start_time) > 20:
+                cards = page.locator("video, [class*='media'], [aria-label*='Open video' i]")
+                if cards.count() > 0:
+                    rendered = True
+                    target_card = cards.last
+                    break
 
         if not rendered or not target_card:
             raise TimeoutError(f"Generation rendering timed out after {timeout_seconds} seconds.")
