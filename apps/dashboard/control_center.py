@@ -414,21 +414,27 @@ def get_current_live_state():
     # Ensure defaults if keys missing
     data.setdefault("target_platform", "YouTube Shorts & TikTok")
     
-    # Check if brave.exe is currently open which would delay background automation
+    # Check if brave.exe is currently open by USER (interactive window)
+    # Background automation runs brave with --remote-debugging-pipe or --headless, which should NOT trigger this alert
     import psutil
-    brave_open = False
-    for p in psutil.process_iter(['name']):
+    user_brave_open = False
+    for p in psutil.process_iter(['name', 'cmdline']):
         try:
             if p.info['name'] and p.info['name'].lower() == 'brave.exe':
-                brave_open = True
-                break
+                cmdline = " ".join(p.info.get('cmdline') or [])
+                # If it does NOT contain automation flags and is a main browser process (not renderer/utility/crashpad)
+                if "--type=" not in cmdline and "--remote-debugging-pipe" not in cmdline and "AutomationControlled" not in cmdline:
+                    user_brave_open = True
+                    break
         except Exception:
             pass
 
-    if brave_open:
-        data["delay_reason"] = "⚠️ Brave Browser is OPEN by user. Background automation is waiting for Brave to close so it can safely access the profile without crashing."
+    if user_brave_open:
+        data["delay_reason"] = "⚠️ Brave Browser window is OPEN by user. Background automation will resume once Brave window is closed."
     else:
-        data.setdefault("delay_reason", "🟢 Normal Operation: Brave session available, rendering scene frames on Google Flow cloud canvas.")
+        # If no specific delay from engine, show normal active status
+        if "delay_reason" not in data or "Brave Browser is OPEN" in data.get("delay_reason", ""):
+            data["delay_reason"] = "🟢 Normal Operation: Brave session active, dispatching scene prompt to Google Flow."
 
     if data.get("active_title"):
         return data

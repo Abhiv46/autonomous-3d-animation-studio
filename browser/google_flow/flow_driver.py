@@ -113,9 +113,10 @@ class GoogleFlowProjectLockedDriver:
         editor.first.fill(prompt_text)
         page.wait_for_timeout(600)
 
-        send_btn = page.locator("button:has-text('arrow_forward')")
+        # Submit prompt using dedicated button or Enter
+        send_btn = page.locator("button[aria-label*='Start generation' i], button:has-text('arrow_forward'), [role='button']:has-text('arrow_forward')")
         if send_btn.count() > 0 and send_btn.first.is_visible():
-            send_btn.first.click()
+            send_btn.first.click(force=True)
         else:
             page.keyboard.press("Enter")
 
@@ -128,18 +129,20 @@ class GoogleFlowProjectLockedDriver:
         # Dynamic cloud render polling
         start_time = time.time()
         rendered = False
+        target_card = None
         while (time.time() - start_time) < timeout_seconds:
             time.sleep(4)
-            cards = page.locator("[aria-label*='Open video in editor' i]")
+            cards = page.locator("[aria-label*='Open video in editor' i], [class*='generation-card'], video")
             if cards.count() > 0:
                 rendered = True
+                target_card = cards.last
                 break
 
-        if not rendered:
+        if not rendered or not target_card:
             raise TimeoutError(f"Generation rendering timed out after {timeout_seconds} seconds.")
 
         # Download 720p video
-        cards.last.click(force=True)
+        target_card.click(force=True)
         page.wait_for_timeout(2500)
 
         dl_btn = page.locator("button[aria-label*='Download' i]").first
