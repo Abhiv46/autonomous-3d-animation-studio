@@ -362,8 +362,21 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </table>
     </div>
 
-    <!-- REAL-TIME LIVE POLLING SCRIPT -->
+    <!-- REAL-TIME LIVE POLLING & AUTO-REFRESH SCRIPT -->
     <script>
+        let secondsLeft = 60;
+        function updateTimer() {
+            secondsLeft--;
+            const timerEl = document.getElementById('auto-refresh-timer');
+            if (timerEl) {
+                timerEl.innerText = `Auto-refresh in ${secondsLeft}s`;
+            }
+            if (secondsLeft <= 0) {
+                location.reload();
+            }
+        }
+        setInterval(updateTimer, 1000);
+
         async function updateLiveStatus() {
             try {
                 const res = await fetch('/api/live_state');

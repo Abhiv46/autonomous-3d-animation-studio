@@ -104,7 +104,7 @@ class GoogleFlowProjectLockedDriver:
         page.keyboard.press("Escape")
         page.wait_for_timeout(400)
 
-        editor = page.locator("[contenteditable='true'], div.ProseMirror")
+        editor = page.locator("flow-rich-text-editor div.ProseMirror, div.ProseMirror, [contenteditable='true']")
         if editor.count() == 0:
             raise RuntimeError("Prompt editor textarea not found on Google Flow canvas.")
 
@@ -116,8 +116,8 @@ class GoogleFlowProjectLockedDriver:
         page.keyboard.type(prompt_text, delay=5)
         page.wait_for_timeout(800)
 
-        # Submit prompt using dedicated Start generation button or Enter
-        send_btn = page.locator("button[aria-label*='Start generation' i]")
+        # Submit prompt using dedicated arrow_forward button or Start generation
+        send_btn = page.locator("button:has-text('arrow_forward'), button[aria-label*='Start generation' i]")
         if send_btn.count() > 0 and send_btn.first.is_visible():
             send_btn.first.click(force=True)
         else:
@@ -158,15 +158,17 @@ class GoogleFlowProjectLockedDriver:
         if not rendered or not target_card:
             raise TimeoutError(f"Generation rendering timed out after {timeout_seconds} seconds.")
 
-        # Download 720p video
-        target_card.click(force=True)
-        page.wait_for_timeout(2500)
+        # Open video in timeline editor by clicking the latest grid tile
+        tiles = page.locator("flow-grid-tile-container")
+        if tiles.count() > 0:
+            tiles.first.click(force=True)
+            page.wait_for_timeout(2500)
 
-        dl_btn = page.locator("button[aria-label*='Download' i]").first
+        dl_btn = page.locator("button[aria-label*='Download media' i], button[aria-label*='Download' i]").first
         if dl_btn.count() > 0 and dl_btn.is_visible():
             dl_btn.click(force=True)
             page.wait_for_timeout(1000)
-            target_720 = page.get_by_text("720p").first
+            target_720 = page.locator("[role='menuitem']:has-text('720p'), mat-menu-item:has-text('720p'), text='720p'").first
             if target_720.count() > 0:
                 out_path = os.path.join(self.raw_clips_dir, out_filename)
                 with page.expect_download(timeout=45000) as dl_info:
@@ -174,8 +176,8 @@ class GoogleFlowProjectLockedDriver:
                 download = dl_info.value
                 download.save_as(out_path)
 
-        # Close editor drawer
-        back_btn = page.locator("button[aria-label='Back'], [aria-label='Navigate back'], button:has-text('arrow_back')").first
+        # Close editor drawer or back to canvas
+        back_btn = page.locator("button[aria-label='Back'], [aria-label='Navigate back'], button:has-text('arrow_back'), button:has-text('Done')").first
         if back_btn.count() > 0 and back_btn.is_visible():
             back_btn.click(force=True)
         else:
