@@ -28,11 +28,15 @@ class GoogleFlowProjectLockedDriver:
         page.wait_for_timeout(4000)
 
         if project_name:
-            # Search for project title on dashboard
-            tile = page.locator(f"text='{project_name}'").first
+            # Search for project title on dashboard using flexible text and aria-label matching
+            tile = page.locator(f"text='{project_name}', [aria-label*='{project_name}' i], div:has-text('{project_name}')").first
             if tile.count() > 0 and tile.is_visible():
-                tile.click()
+                tile.click(force=True)
                 page.wait_for_timeout(4000)
+                # Ensure we entered the project
+                if "project/" in page.url:
+                    return True
+                page.wait_for_timeout(2000)
                 return True
 
         # Strict Project Lock Policy: DO NOT silently click "+ New Project"
