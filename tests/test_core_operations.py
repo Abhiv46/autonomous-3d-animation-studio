@@ -168,3 +168,29 @@ def test_8_parallel_multi_account_generation(temp_db, monkeypatch):
         assigned = {p["assigned_account_id"] for p in parts}
         assert "acc_0" in assigned and "acc_1" in assigned
 
+def test_9_cross_platform_zero_duplicate_guard(temp_db):
+    """TEST 9: Zero-tolerance duplicate prevention rejects candidate if already on YouTube or TikTok."""
+    from backend.services.cross_platform_scanner import CrossPlatformScanner
+    from agents.duplicate_detection.duplicate_agent import DuplicateDetectionAgent
+
+    # Index sample YouTube video
+    scanner = CrossPlatformScanner(db=temp_db)
+    with temp_db.get_connection() as conn:
+        conn.execute("""
+            INSERT INTO platform_indexed_videos (id, platform, title, normalized_title, keywords, source_type, status)
+            VALUES ('yt_test_01', 'YOUTUBE', 'Ghar Me Aaya Nakli Chuha! #shorts', 'ghar me aaya nakli chuha shorts', 'nakli,chuha', 'CHANNEL_HISTORY', 'PUBLISHED')
+        """)
+
+    agent = DuplicateDetectionAgent(scanner=scanner)
+    
+    # Attempting to verify exact title -> Must be marked duplicate
+    res_dup = agent.verify_zero_duplicate('Ghar Me Aaya Nakli Chuha!')
+    assert res_dup["is_duplicate"] is True
+    assert "YOUTUBE" in res_dup["reason"]
+
+    # Attempting to verify brand new fresh title -> Must be approved
+    res_fresh = agent.verify_zero_duplicate('Mummy Ka Magic Remote! Sab Freeze Ho Gaye!')
+    assert res_fresh["is_duplicate"] is False
+    assert res_fresh["status"] == "VERIFIED_100_PERCENT_ORIGINAL_AND_FRESH"
+
+

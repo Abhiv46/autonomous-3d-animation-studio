@@ -245,6 +245,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             <p style="color: var(--muted); font-size: 13px; margin: 0;">P0 Recovery: <strong style="color: var(--accent);">__P0_COUNT__ Active</strong></p>
         </div>
         <div class="card">
+            <h3>Zero Duplicate Guard</h3>
+            <div class="stat-val" style="color: var(--success);">__INDEXED_COUNT__ Indexed</div>
+            <p style="color: var(--muted); font-size: 13px; margin: 0;">YouTube + TikTok: <strong style="color: var(--success);">0% Duplicates Lock</strong></p>
+        </div>
+        <div class="card">
             <h3>Google Flow Pool</h3>
             <div class="stat-val">__ACCOUNTS_COUNT__ Accounts</div>
             <p style="color: var(--muted); font-size: 13px; margin: 0;">Project Lock: <strong style="color: var(--success);">The Naughty Duo</strong></p>
@@ -415,11 +420,22 @@ class ControlCenterHandler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps(data).encode("utf-8"))
             return
 
+        if self.path == "/api/sync_platforms":
+            from backend.services.cross_platform_scanner import CrossPlatformScanner
+            scanner = CrossPlatformScanner()
+            stats = scanner.sync_all_platforms()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(json.dumps(stats).encode("utf-8"))
+            return
+
         db = DatabaseManager()
         with db.get_connection() as conn:
             stories = conn.execute("SELECT * FROM stories ORDER BY priority ASC, created_at DESC LIMIT 15").fetchall()
             accounts = conn.execute("SELECT * FROM accounts ORDER BY slot_index ASC").fetchall()
             p0_count = conn.execute("SELECT COUNT(*) as c FROM stories WHERE priority = 0").fetchone()["c"]
+            indexed_count = conn.execute("SELECT COUNT(*) as c FROM platform_indexed_videos").fetchone()["c"]
 
             stories_html = ""
             for s in stories:
@@ -446,6 +462,7 @@ class ControlCenterHandler(BaseHTTPRequestHandler):
 
         content = content.replace("__QUEUED_COUNT__", str(len(stories)))
         content = content.replace("__P0_COUNT__", str(p0_count))
+        content = content.replace("__INDEXED_COUNT__", str(indexed_count))
         content = content.replace("__ACCOUNTS_COUNT__", str(len(accounts)))
         content = content.replace("__STORIES_TABLE__", stories_html or "<tr><td colspan='5'>No stories in queue</td></tr>")
         content = content.replace("__ACCOUNTS_TABLE__", accounts_html or "<tr><td colspan='5'>No accounts configured</td></tr>")

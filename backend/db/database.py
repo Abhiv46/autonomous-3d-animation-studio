@@ -23,12 +23,12 @@ class DatabaseManager:
         return conn
 
     def _init_db(self):
-        migration_file = Path(__file__).resolve().parent.parent.parent / "database" / "migrations" / "001_initial_schema.sql"
-        if migration_file.exists():
-            with open(migration_file, "r", encoding="utf-8") as f:
-                schema_sql = f.read()
+        migrations_dir = Path(__file__).resolve().parent.parent.parent / "database" / "migrations"
+        if migrations_dir.exists():
             with self.get_connection() as conn:
-                conn.executescript(schema_sql)
+                for sql_file in sorted(migrations_dir.glob("*.sql")):
+                    with open(sql_file, "r", encoding="utf-8") as f:
+                        conn.executescript(f.read())
 
     @staticmethod
     def generate_hash(text: str) -> str:
@@ -84,7 +84,7 @@ class DatabaseManager:
         prompt_hashes = [self.generate_hash(p) for p in prompts]
 
         with self.get_connection() as conn:
-            # Check title / story hash
+            # 1. Check title / story hash
             row = conn.execute("SELECT id, title, state FROM stories WHERE story_hash = ?", (story_hash,)).fetchone()
             if row:
                 return {
@@ -94,7 +94,24 @@ class DatabaseManager:
                     "state": row["state"]
                 }
 
-            # Check prompt hashes against fingerprints
+            # 2. Check cross-platform YouTube & TikTok live index
+            clean_title = "".join(c for c in title.lower() if c.isalnum() or c.isspace()).strip()
+            norm_title = " ".join(clean_title.split())
+            if norm_title:
+                plat_match = conn.execute("""
+                    SELECT platform, title FROM platform_indexed_videos
+                    WHERE normalized_title = ? OR normalized_title LIKE ? OR ? LIKE ('%' || normalized_title || '%')
+                    LIMIT 1
+                """, (norm_title, f"%{norm_title}%", norm_title)).fetchone()
+                if plat_match:
+                    return {
+                        "is_duplicate": True,
+                        "reason": f"ALREADY_ON_{plat_match['platform']}",
+                        "existing_story_id": plat_match["title"],
+                        "state": "PUBLISHED"
+                    }
+
+            # 3. Check prompt hashes against fingerprints
             for ph in prompt_hashes:
                 fp = conn.execute("""
                     SELECT f.story_id, s.title, s.state 
