@@ -23,7 +23,8 @@ class AutonomousContentOrchestrator:
     def __init__(self, config_path: Optional[str] = None):
         base_dir = Path(__file__).resolve().parent.parent.parent
         if not config_path:
-            config_path = base_dir / "config" / "master_config.example.json"
+            actual_cfg = base_dir / "config" / "config.json"
+            config_path = actual_cfg if actual_cfg.exists() else base_dir / "config" / "master_config.example.json"
 
         with open(config_path, "r", encoding="utf-8") as f:
             self.config = json.load(f)
