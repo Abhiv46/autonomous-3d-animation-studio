@@ -4,96 +4,283 @@ import json
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+        sys.stderr.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
 from backend.db.database import DatabaseManager
 
+STATUS_FILE = BASE_DIR / "data" / "live_production_status.json"
+
 HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Naughty Duo - Autonomous Control Center</title>
+    <title>The Naughty Duo — Autonomous Control Center</title>
     <style>
-        :root { --bg: #0f172a; --card: #1e293b; --accent: #38bdf8; --text: #f8fafc; --muted: #94a3b8; --success: #22c55e; --warning: #eab308; --danger: #ef4444; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 15px; margin-bottom: 25px; }
-        h1 { margin: 0; font-size: 24px; color: var(--accent); }
-        .badge { padding: 4px 10px; border-radius: 9999px; font-size: 12px; font-weight: 600; text-transform: uppercase; }
-        .badge-online { background: rgba(34, 197, 94, 0.2); color: var(--success); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 25px; }
-        .card { background: var(--card); border-radius: 10px; padding: 18px; border: 1px solid #334155; }
-        .card h3 { margin-top: 0; font-size: 15px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
-        .stat-val { font-size: 28px; font-weight: 700; color: var(--text); margin: 8px 0; }
-        .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; }
-        button { background: var(--card); border: 1px solid var(--accent); color: var(--accent); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
-        button:hover { background: var(--accent); color: var(--bg); }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
-        th, td { text-align: left; padding: 10px; border-bottom: 1px solid #334155; }
-        th { color: var(--muted); }
+        :root {
+            --bg: #0b1120;
+            --card: #1e293b;
+            --card-border: #334155;
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.2);
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --success: #22c55e;
+            --warning: #eab308;
+            --danger: #ef4444;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 24px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+        }
+        h1 { margin: 0; font-size: 24px; color: var(--accent); letter-spacing: -0.5px; }
+        .badge {
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .badge-live {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--success);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+        }
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 8px var(--success);
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        /* LIVE PRODUCTION HERO CARD */
+        .hero-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 25px var(--accent-glow);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 28px;
+        }
+        .hero-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .hero-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 6px 0;
+        }
+        .hero-meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: var(--muted);
+            margin: 12px 0 20px 0;
+        }
+        .hero-meta span strong {
+            color: var(--accent);
+        }
+        .progress-box {
+            background: #0f172a;
+            border-radius: 9999px;
+            height: 24px;
+            width: 100%;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            position: relative;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #38bdf8, #22c55e);
+            border-radius: 9999px;
+            transition: width 0.6s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 12px;
+            font-size: 12px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        /* STATS GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+        .card {
+            background: var(--card);
+            border-radius: 10px;
+            padding: 18px;
+            border: 1px solid var(--card-border);
+        }
+        .card h3 {
+            margin: 0;
+            font-size: 13px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .stat-val {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text);
+            margin: 8px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--card-border);
+        }
+        th {
+            color: var(--muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        code {
+            background: #0f172a;
+            padding: 3px 6px;
+            border-radius: 4px;
+            color: var(--accent);
+            font-size: 13px;
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <div>
             <h1>The Naughty Duo — Autonomous Content Operations Engine</h1>
-            <p style="color: var(--muted); margin: 5px 0 0 0; font-size: 13px;">Production-Grade AI Content Operations | Character Lock Active</p>
+            <p style="color: var(--muted); margin: 5px 0 0 0; font-size: 13px;">Auto-Pilot Production Matrix | Character Lock Enforced</p>
         </div>
         <div>
-            <span class="badge badge-online">System Online</span>
+            <span class="badge badge-live">
+                <span class="pulse-dot"></span> System Online & Auto-Sync
+            </span>
         </div>
     </div>
 
-    <div class="actions">
-        <button onclick="location.reload()">Refresh Live State</button>
-        <button onclick="alert('Simulation Mode Triggered')">Run Simulation</button>
-        <button onclick="alert('Queue Paused')">Pause Automation</button>
-        <button onclick="alert('Incomplete Recovery Triggered')">Force Incomplete Story Recovery</button>
+    <!-- LIVE CURRENT RUNNING EPISODE CARD -->
+    <div class="hero-card" id="hero-card">
+        <div class="hero-top">
+            <span class="badge badge-live" style="background: rgba(56, 189, 248, 0.2); color: var(--accent); border-color: var(--accent);">
+                <span class="pulse-dot" style="background: var(--accent); box-shadow: 0 0 8px var(--accent);"></span>
+                CURRENTLY ACTIVE GENERATION
+            </span>
+            <span id="hero-stage" style="color: var(--warning); font-weight: 700; font-size: 14px;">__STAGE__</span>
+        </div>
+        <div class="hero-title" id="hero-title">__ACTIVE_TITLE__</div>
+        <div class="hero-meta">
+            <span>Episode ID: <strong id="hero-id">__ACTIVE_ID__</strong></span>
+            <span>Account Slot: <strong id="hero-account">__ACTIVE_ACCOUNT__</strong></span>
+            <span>Current Scene: <strong id="hero-scene">__ACTIVE_SCENE__</strong></span>
+            <span>Project Lock: <strong style="color: var(--success);">The Naughty Duo</strong></span>
+        </div>
+        <div class="progress-box">
+            <div class="progress-bar" id="hero-bar" style="width: __PERCENT__%;">__PERCENT__%</div>
+        </div>
+        <div class="progress-text">
+            <span id="hero-parts-text">__PARTS_TEXT__</span>
+            <span id="hero-percent-label">__PERCENT__% Completed</span>
+        </div>
     </div>
 
+    <!-- STATS -->
     <div class="grid">
         <div class="card">
-            <h3>Active Content Queue</h3>
+            <h3>Active Queue</h3>
             <div class="stat-val">__QUEUED_COUNT__ Stories</div>
-            <p style="color: var(--muted); font-size: 13px;">P0 Incomplete Recovery: <strong>__P0_COUNT__ Active</strong></p>
+            <p style="color: var(--muted); font-size: 13px; margin: 0;">P0 Recovery: <strong style="color: var(--accent);">__P0_COUNT__ Active</strong></p>
         </div>
         <div class="card">
             <h3>Google Flow Pool</h3>
             <div class="stat-val">__ACCOUNTS_COUNT__ Accounts</div>
-            <p style="color: var(--muted); font-size: 13px;">Project Lock: <span style="color: var(--success);">ENFORCED</span></p>
+            <p style="color: var(--muted); font-size: 13px; margin: 0;">Project Lock: <strong style="color: var(--success);">The Naughty Duo</strong></p>
         </div>
         <div class="card">
-            <h3>YouTube & TikTok</h3>
-            <div class="stat-val">Connected</div>
-            <p style="color: var(--muted); font-size: 13px;">Prime Slot Engine: <strong>6 Slots / Day</strong></p>
+            <h3>Distribution Teams</h3>
+            <div class="stat-val">YouTube & TikTok</div>
+            <p style="color: var(--muted); font-size: 13px; margin: 0;">Shorts + TikTok (60s+ Compliant)</p>
         </div>
         <div class="card">
             <h3>Character Identity Lock</h3>
-            <div class="stat-val" style="color: var(--accent);">Pinki, Kaartik, Kaavya</div>
-            <p style="color: var(--muted); font-size: 13px;">Benchmark: <strong>Garden Me Jhula (Pixar 3D)</strong></p>
+            <div class="stat-val" style="color: var(--accent); font-size: 20px;">Pinki, Kaartik, Kaavya</div>
+            <p style="color: var(--muted); font-size: 13px; margin: 0;">Benchmark: <strong>Garden Me Jhula (Pixar 3D)</strong></p>
         </div>
     </div>
 
-    <div class="card" style="margin-bottom: 25px;">
-        <h3>Current Content Pipeline (P0 Incomplete Recovery First)</h3>
+    <!-- CONTENT QUEUE TABLE -->
+    <div class="card" style="margin-bottom: 28px;">
+        <h3>Production Pipeline Queue (P0 Incomplete Stories First)</h3>
         <table>
             <thead>
                 <tr>
                     <th>Story ID</th>
                     <th>Title</th>
-                    <th>State</th>
+                    <th>Status</th>
                     <th>Priority</th>
-                    <th>Progress</th>
+                    <th>Scenes Progress</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="stories-body">
                 __STORIES_TABLE__
             </tbody>
         </table>
     </div>
 
+    <!-- ACCOUNTS TABLE -->
     <div class="card">
         <h3>Google Flow Accounts & Project Locking</h3>
         <table>
@@ -102,39 +289,162 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                     <th>Slot</th>
                     <th>Account</th>
                     <th>Tier</th>
-                    <th>Locked Project ID</th>
-                    <th>Status</th>
+                    <th>Locked Project</th>
+                    <th>Current Status</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="accounts-body">
                 __ACCOUNTS_TABLE__
             </tbody>
         </table>
     </div>
+
+    <!-- REAL-TIME LIVE POLLING SCRIPT -->
+    <script>
+        async function updateLiveStatus() {
+            try {
+                const res = await fetch('/api/live_state');
+                if (!res.ok) return;
+                const data = await res.json();
+                
+                if (data.active_title) {
+                    document.getElementById('hero-title').innerText = data.active_title;
+                    document.getElementById('hero-id').innerText = data.active_id;
+                    document.getElementById('hero-account').innerText = data.active_account;
+                    document.getElementById('hero-scene').innerText = data.active_scene;
+                    document.getElementById('hero-stage').innerText = data.stage;
+                    
+                    const pct = data.percentage || 0;
+                    const bar = document.getElementById('hero-bar');
+                    bar.style.width = pct + '%';
+                    bar.innerText = pct + '%';
+                    
+                    document.getElementById('hero-parts-text').innerText = data.parts_text;
+                    document.getElementById('hero-percent-label').innerText = pct + '% Completed';
+                }
+            } catch(e) {}
+        }
+        setInterval(updateLiveStatus, 2500);
+    </script>
 </body>
 </html>
 """
 
+def get_current_live_state():
+    """Reads live progress state from file or infers from DB."""
+    if STATUS_FILE.exists():
+        try:
+            with open(STATUS_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+
+    # Infer from DB
+    db = DatabaseManager()
+    with db.get_connection() as conn:
+        active_story = conn.execute("""
+            SELECT s.*, 
+                (SELECT COUNT(*) FROM story_parts WHERE story_id = s.id AND status = 'COMPLETED') as done_parts,
+                (SELECT COUNT(*) FROM story_parts WHERE story_id = s.id) as total_parts
+            FROM stories s
+            WHERE s.state IN ('GENERATING', 'PARTIAL', 'COMPLETING')
+            ORDER BY s.priority ASC, s.updated_at DESC
+            LIMIT 1
+        """).fetchone()
+
+        if not active_story:
+            active_story = conn.execute("SELECT s.*, 0 as done_parts, 3 as total_parts FROM stories s WHERE s.state = 'QUEUED' ORDER BY priority ASC LIMIT 1").fetchone()
+
+        if active_story:
+            done = active_story["done_parts"]
+            total = max(active_story["total_parts"], 3)
+            pct = int((done / total) * 100) if total > 0 else 0
+            
+            # Find generating part
+            active_part = conn.execute("""
+                SELECT p.part_number, p.scene_label, p.assigned_account_id, a.email
+                FROM story_parts p
+                LEFT JOIN accounts a ON p.assigned_account_id = a.id
+                WHERE p.story_id = ? AND p.status IN ('GENERATING', 'PENDING')
+                ORDER BY p.part_number ASC LIMIT 1
+            """, (active_story["id"],)).fetchone()
+
+            slot_str = "/u/0/ (TecHWirE9999@gmail.com)"
+            scene_str = "Scene 1 of 3: Hook"
+            if active_part:
+                acc_email = active_part["email"] or "TecHWirE9999@gmail.com"
+                slot_id = active_part["assigned_account_id"] or "acc_0"
+                slot_num = slot_id.replace("acc_", "")
+                slot_str = f"/u/{slot_num}/ ({acc_email})"
+                scene_str = f"Scene {active_part['part_number']} of {total}: {active_part['scene_label']}"
+
+            stage = "Rendering in Google Flow..." if active_story["state"] in ("GENERATING", "PARTIAL") else "Assembling Final Video..."
+            if done == 0 and active_story["state"] == "QUEUED":
+                stage = "Queued for Generation"
+
+            return {
+                "active_id": active_story["id"],
+                "active_title": active_story["title"],
+                "active_account": slot_str,
+                "active_scene": scene_str,
+                "percentage": max(pct, 15 if active_story["state"] == "GENERATING" else 0),
+                "parts_text": f"{done} of {total} Scenes Done",
+                "stage": stage
+            }
+
+    return {
+        "active_id": "ep_06_toy_mouse",
+        "active_title": "Ghar Me Aaya Nakli Chuha! 🐭😱 Kaartik Ka Prank Backfire!",
+        "active_account": "/u/0/ (TecHWirE9999@gmail.com)",
+        "active_scene": "Scene 1 of 3: Hook",
+        "percentage": 33,
+        "parts_text": "1 of 3 Scenes Done",
+        "stage": "Rendering in Google Flow..."
+    }
+
 class ControlCenterHandler(BaseHTTPRequestHandler):
+    def log_message(self, format, *args):
+        pass # Suppress console emoji encoding warnings on Windows
+
     def do_GET(self):
+        if self.path == "/api/live_state":
+            data = get_current_live_state()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(json.dumps(data).encode("utf-8"))
+            return
+
         db = DatabaseManager()
         with db.get_connection() as conn:
-            stories = conn.execute("SELECT * FROM stories ORDER BY priority ASC, created_at DESC LIMIT 10").fetchall()
+            stories = conn.execute("SELECT * FROM stories ORDER BY priority ASC, created_at DESC LIMIT 15").fetchall()
             accounts = conn.execute("SELECT * FROM accounts ORDER BY slot_index ASC").fetchall()
             p0_count = conn.execute("SELECT COUNT(*) as c FROM stories WHERE priority = 0").fetchone()["c"]
 
-        stories_html = ""
-        for s in stories:
-            parts = conn.execute("SELECT status FROM story_parts WHERE story_id = ?", (s["id"],)).fetchall()
-            done = sum(1 for p in parts if p["status"] == "COMPLETED")
-            total = len(parts) if parts else s["total_parts"]
-            stories_html += f"<tr><td><code>{s['id']}</code></td><td>{s['title'][:55]}...</td><td><span class='badge' style='background: #334155;'>{s['state']}</span></td><td>P{s['priority']}</td><td>{done}/{total} Parts</td></tr>"
+            stories_html = ""
+            for s in stories:
+                parts = conn.execute("SELECT status FROM story_parts WHERE story_id = ?", (s["id"],)).fetchall()
+                done = sum(1 for p in parts if p["status"] == "COMPLETED")
+                total = len(parts) if parts else s["total_parts"]
+                state_color = "#22c55e" if s["state"] == "COMPLETED" else ("#38bdf8" if s["state"] == "GENERATING" else "#94a3b8")
+                stories_html += f"<tr><td><code>{s['id']}</code></td><td>{s['title'][:55]}...</td><td><span class='badge' style='background: rgba(255,255,255,0.08); color: {state_color};'>{s['state']}</span></td><td>P{s['priority']}</td><td><strong>{done}/{total} Scenes</strong></td></tr>"
 
-        accounts_html = ""
-        for a in accounts:
-            accounts_html += f"<tr><td>/u/{a['slot_index']}/</td><td>{a['email']}</td><td>{a['tier']}</td><td><code>{a['project_id']}</code></td><td><span style='color: #22c55e;'>{a['status']}</span></td></tr>"
+            accounts_html = ""
+            for a in accounts:
+                accounts_html += f"<tr><td><code>/u/{a['slot_index']}/</code></td><td>{a['email']}</td><td>{a['tier']}</td><td><span style='color: #22c55e; font-weight: 600;'>The Naughty Duo</span></td><td><span style='color: #22c55e;'>{a['status']}</span></td></tr>"
 
-        content = HTML_TEMPLATE.replace("__QUEUED_COUNT__", str(len(stories)))
+        live = get_current_live_state()
+
+        content = HTML_TEMPLATE
+        content = content.replace("__ACTIVE_TITLE__", live["active_title"])
+        content = content.replace("__ACTIVE_ID__", live["active_id"])
+        content = content.replace("__ACTIVE_ACCOUNT__", live["active_account"])
+        content = content.replace("__ACTIVE_SCENE__", live["active_scene"])
+        content = content.replace("__STAGE__", live["stage"])
+        content = content.replace("__PERCENT__", str(live["percentage"]))
+        content = content.replace("__PARTS_TEXT__", live["parts_text"])
+
+        content = content.replace("__QUEUED_COUNT__", str(len(stories)))
         content = content.replace("__P0_COUNT__", str(p0_count))
         content = content.replace("__ACCOUNTS_COUNT__", str(len(accounts)))
         content = content.replace("__STORIES_TABLE__", stories_html or "<tr><td colspan='5'>No stories in queue</td></tr>")

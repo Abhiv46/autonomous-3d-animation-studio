@@ -104,6 +104,19 @@ class MultiAccountParallelEngine:
         story_id = item["story_id"]
         logger.info(f"[WORKER /u/{slot_idx}/] Processing Scene {item['part_number']} of Story {story_id}: '{item['title'][:35]}...'")
 
+        total_parts = 3
+        current_pct = int(((item['part_number'] - 1) / total_parts) * 100)
+        self._update_live_status(
+            story_id=story_id,
+            title=item['title'],
+            slot=slot_idx,
+            email=account_email,
+            part_num=item['part_number'],
+            total_parts=total_parts,
+            stage="Generating Scene in Google Flow...",
+            pct=current_pct
+        )
+
         # Step 1: Format Prompt with Character Lock
         locked_prompt = self.prompt_agent.build_locked_prompt(item["prompt_text"])
         out_filename = f"{part_id}.mp4"
@@ -124,6 +137,17 @@ class MultiAccountParallelEngine:
         if success and os.path.exists(out_path):
             logger.info(f"[WORKER /u/{slot_idx}/] Scene {part_id} generation succeeded -> {out_path}")
             self.db.update_part_status(part_id, "COMPLETED", account_id=f"acc_{slot_idx}", raw_path=out_path)
+            new_pct = int((item['part_number'] / total_parts) * 100)
+            self._update_live_status(
+                story_id=story_id,
+                title=item['title'],
+                slot=slot_idx,
+                email=account_email,
+                part_num=item['part_number'],
+                total_parts=total_parts,
+                stage="Scene Completed" if new_pct < 100 else "Assembling Final Video...",
+                pct=new_pct
+            )
             self._check_and_trigger_story_assembly(story_id)
             return {"slot": slot_idx, "status": "COMPLETED", "part_id": part_id, "story_id": story_id}
         else:
@@ -134,18 +158,40 @@ class MultiAccountParallelEngine:
                     conn.execute("UPDATE stories SET state = 'PARTIAL', priority = 0 WHERE id = ?", (story_id,))
             return {"slot": slot_idx, "status": "FAILED_OR_REQUEUED", "part_id": part_id}
 
+    def _update_live_status(self, story_id: str, title: str, slot: int, email: str, part_num: int, total_parts: int, stage: str, pct: int):
+        status_file = Path(BASE_DIR) / "data" / "live_production_status.json"
+        data = {
+            "active_id": story_id,
+            "active_title": title,
+            "active_account": f"/u/{slot}/ ({email})",
+            "active_scene": f"Scene {part_num} of {total_parts}",
+            "percentage": pct,
+            "parts_text": f"{part_num - 1} of {total_parts} Scenes Done",
+            "stage": stage
+        }
+        try:
+            with open(status_file, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+        except Exception:
+            pass
+
     def _run_browser_generation(self, account: Dict[str, Any], prompt: str, out_filename: str) -> bool:
         """Executes actual Google Flow generation with Playwright persistent context."""
         slot_idx = account["slot_index"]
         project_name = account.get("project_name", "The Naughty Duo")
         project_id = account.get("project_id")
 
-        browser_dir = str(Path(BASE_DIR) / "browser_session")
-        if not os.path.exists(browser_dir):
-            browser_dir = r"C:\TheNaughtyDuo_Automation\browser_session"
+        brave_exe = r"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
+        brave_data = r"C:\Users\user\AppData\Local\BraveSoftware\Brave-Browser\User Data"
+        if os.path.exists(brave_exe) and os.path.exists(brave_data):
+            browser_exe = brave_exe
+            browser_dir = brave_data
+        else:
+            browser_exe = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+            browser_dir = str(Path(BASE_DIR) / "browser_session")
 
         engine = BrowserAutomationEngine(
-            browser_exe=r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+            browser_exe=browser_exe,
             user_data_dir=browser_dir,
             headless=True
         )
