@@ -314,6 +314,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             <div class="stat-val">__ACCOUNTS_COUNT__ Accounts</div>
             <p style="color: var(--muted); font-size: 12px; margin: 0;">Project Lock: <strong style="color: var(--success);">The Naughty Duo</strong></p>
         </div>
+        <div class="card">
+            <h3>Total Daily Credits</h3>
+            <div class="stat-val" style="color: #a855f7;">__TOTAL_CREDITS__ Credits</div>
+            <p style="color: var(--muted); font-size: 12px; margin: 0;">Across All 8 ID Slots</p>
+        </div>
     </div>
 
     <!-- CONTENT QUEUE TABLE WITH TARGET PLATFORMS -->
@@ -337,17 +342,18 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </table>
     </div>
 
-    <!-- ACCOUNTS TABLE -->
+    <!-- ACCOUNTS TABLE WITH CREDITS BREAKDOWN -->
     <div class="card">
-        <h3>Google Flow Accounts & Project Locking</h3>
+        <h3>Google Flow Accounts — Live Credits & Quota Breakdown</h3>
         <table>
             <thead>
                 <tr>
                     <th>Slot</th>
-                    <th>Account</th>
+                    <th>Google Account (Email)</th>
                     <th>Tier</th>
+                    <th>Total Available Credits</th>
                     <th>Locked Project</th>
-                    <th>Current Status</th>
+                    <th>Account Status</th>
                 </tr>
             </thead>
             <tbody id="accounts-body">
@@ -576,8 +582,21 @@ class ControlCenterHandler(BaseHTTPRequestHandler):
                 </tr>"""
 
             accounts_html = ""
+            total_credits = 0
             for a in accounts:
-                accounts_html += f"<tr><td><code>/u/{a['slot_index']}/</code></td><td>{a['email']}</td><td>{a['tier']}</td><td><span style='color: #22c55e; font-weight: 600;'>The Naughty Duo</span></td><td><span style='color: #22c55e;'>{a['status']}</span></td></tr>"
+                creds = a["available_credits"] if "available_credits" in a.keys() and a["available_credits"] is not None else 50
+                total_credits += creds
+                tier_badge = f"<span class='badge' style='background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4);'>{a['tier']}</span>" if a['tier'] == 'PRO' else f"<span class='badge' style='background: rgba(255, 255, 255, 0.08); color: var(--muted);'>{a['tier']}</span>"
+                creds_badge = f"<strong style='color: #c084fc; font-size: 14px;'>{creds} Credits</strong>" if a['tier'] == 'PRO' else f"<strong style='color: #38bdf8; font-size: 14px;'>{creds} Credits</strong>"
+                status_color = "#22c55e" if a['status'] == 'ACTIVE' else "#eab308"
+                accounts_html += f"""<tr>
+                    <td><code>/u/{a['slot_index']}/</code></td>
+                    <td><strong>{a['email']}</strong></td>
+                    <td>{tier_badge}</td>
+                    <td>{creds_badge}</td>
+                    <td><span style='color: #22c55e; font-weight: 600;'>The Naughty Duo</span></td>
+                    <td><span style='color: {status_color}; font-weight: 600;'>{a['status']}</span></td>
+                </tr>"""
 
         live = get_current_live_state()
 
@@ -598,8 +617,9 @@ class ControlCenterHandler(BaseHTTPRequestHandler):
         content = content.replace("__TT_JOBS_COUNT__", str(tt_jobs_count))
         content = content.replace("__INDEXED_COUNT__", str(indexed_count))
         content = content.replace("__ACCOUNTS_COUNT__", str(len(accounts)))
+        content = content.replace("__TOTAL_CREDITS__", str(total_credits))
         content = content.replace("__STORIES_TABLE__", stories_html or "<tr><td colspan='7'>No stories in queue</td></tr>")
-        content = content.replace("__ACCOUNTS_TABLE__", accounts_html or "<tr><td colspan='5'>No accounts configured</td></tr>")
+        content = content.replace("__ACCOUNTS_TABLE__", accounts_html or "<tr><td colspan='6'>No accounts configured</td></tr>")
 
         self.send_response(200)
         self.send_header("Content-Type", "text/html; charset=utf-8")
