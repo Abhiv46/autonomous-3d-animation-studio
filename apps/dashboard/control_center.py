@@ -597,18 +597,29 @@ class ControlCenterHandler(BaseHTTPRequestHandler):
             accounts_html = ""
             total_credits = 0
             for a in accounts:
-                creds = a["available_credits"] if "available_credits" in a.keys() and a["available_credits"] is not None else 50
+                creds = a["available_credits"] if "available_credits" in a.keys() and a["available_credits"] is not None else 0
                 total_credits += creds
                 tier_badge = f"<span class='badge' style='background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4);'>{a['tier']}</span>" if a['tier'] == 'PRO' else f"<span class='badge' style='background: rgba(255, 255, 255, 0.08); color: var(--muted);'>{a['tier']}</span>"
-                creds_badge = f"<strong style='color: #c084fc; font-size: 14px;'>{creds} Credits</strong>" if a['tier'] == 'PRO' else f"<strong style='color: #38bdf8; font-size: 14px;'>{creds} Credits</strong>"
-                status_color = "#22c55e" if a['status'] == 'ACTIVE' else "#eab308"
+                
+                if creds > 0:
+                    creds_badge = f"<strong style='color: #22c55e; font-size: 14px;'>{creds} Credits</strong>"
+                else:
+                    creds_badge = f"<strong style='color: #ef4444; font-size: 14px;'>0 Credits</strong>"
+                    
+                if a['status'] == 'ACTIVE':
+                    status_badge = "<span class='badge' style='background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.4);'>🟢 READY / ACTIVE</span>"
+                elif a['status'] == 'COOLDOWN':
+                    status_badge = "<span class='badge' style='background: rgba(234, 179, 8, 0.15); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.4);'>⏳ QUOTA COOLDOWN</span>"
+                else:
+                    status_badge = f"<span class='badge' style='background: rgba(239, 68, 68, 0.15); color: #ef4444;'>{a['status']}</span>"
+
                 accounts_html += f"""<tr>
                     <td><code>/u/{a['slot_index']}/</code></td>
                     <td><strong>{a['email']}</strong></td>
                     <td>{tier_badge}</td>
                     <td>{creds_badge}</td>
                     <td><span style='color: #22c55e; font-weight: 600;'>The Naughty Duo</span></td>
-                    <td><span style='color: {status_color}; font-weight: 600;'>{a['status']}</span></td>
+                    <td>{status_badge}</td>
                 </tr>"""
 
         live = get_current_live_state()
