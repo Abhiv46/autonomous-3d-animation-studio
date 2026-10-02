@@ -86,6 +86,10 @@ class DirectSession:
         return res.get("result", {}).get("value")
 
     async def screenshot(self, file_path):
+        try:
+            await self.send("Page.enable")
+        except Exception:
+            pass
         res = await self.send("Page.captureScreenshot", {"format": "png"})
         img_bytes = base64.b64decode(res["data"])
         with open(file_path, "wb") as f:

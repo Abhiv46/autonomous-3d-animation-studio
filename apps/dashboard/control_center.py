@@ -561,23 +561,30 @@ class ControlCenterHandler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         pass # Suppress console emoji encoding warnings on Windows
 
+    def _safe_write(self, data, content_type="application/json; charset=utf-8", status=200):
+        try:
+            self.send_response(status)
+            self.send_header("Content-Type", content_type)
+            self.end_headers()
+            if isinstance(data, str):
+                data = data.encode("utf-8")
+            self.wfile.write(data)
+        except (ConnectionAbortedError, ConnectionResetError, BrokenPipeError, ConnectionError):
+            pass
+        except Exception:
+            pass
+
     def do_GET(self):
         if self.path == "/api/live_state":
             data = get_current_live_state()
-            self.send_response(200)
-            self.send_header("Content-Type", "application/json; charset=utf-8")
-            self.end_headers()
-            self.wfile.write(json.dumps(data).encode("utf-8"))
+            self._safe_write(json.dumps(data), "application/json; charset=utf-8")
             return
 
         if self.path == "/api/sync_platforms":
             from backend.services.cross_platform_scanner import CrossPlatformScanner
             scanner = CrossPlatformScanner()
             stats = scanner.sync_all_platforms()
-            self.send_response(200)
-            self.send_header("Content-Type", "application/json; charset=utf-8")
-            self.end_headers()
-            self.wfile.write(json.dumps(stats).encode("utf-8"))
+            self._safe_write(json.dumps(stats), "application/json; charset=utf-8")
             return
 
         db = DatabaseManager()
@@ -731,10 +738,7 @@ class ControlCenterHandler(BaseHTTPRequestHandler):
         content = content.replace("__STORIES_TABLE__", stories_html or "<tr><td colspan='7'>No stories in queue</td></tr>")
         content = content.replace("__ACCOUNTS_TABLE__", accounts_html or "<tr><td colspan='6'>No accounts configured</td></tr>")
 
-        self.send_response(200)
-        self.send_header("Content-Type", "text/html; charset=utf-8")
-        self.end_headers()
-        self.wfile.write(content.encode("utf-8"))
+        self._safe_write(content, "text/html; charset=utf-8")
 
 def run_server(port=8088):
     server = HTTPServer(("127.0.0.1", port), ControlCenterHandler)
