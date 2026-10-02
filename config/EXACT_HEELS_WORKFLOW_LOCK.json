@@ -1,0 +1,23 @@
+{
+    "workflow_rule_lock": "EXACT_HEELS_EP21_STANDARD",
+    "enforce_i2v_ingredient_binding": true,
+    "enforce_character_binding": true,
+    "disallow_pure_text_to_video": true,
+    "aspect_ratio": "9:16",
+    "resolution": "720p",
+    "duration": "8s",
+    "animation_style": "Pixar 3D animated comedy (NO CGI / NO semi-realistic)",
+    "dialogue_language": "Cute toddler and child Hindi in all 3 parts",
+    "scene_3_cta": "Kaavya/Kaartik looks at camera and asks viewers to LIKE video and follow/subscribe",
+    "audio_pipeline": "100% Original Google Flow natural audio (No external synthetic dubbing)",
+    "steps": [
+        "1. Generate 9:16 Scene 3D Reference Image",
+        "2. Click '+' on prompt bar -> Select Characters (Kaavya, Kaartik, Pinki)",
+        "3. Select Scene Image as I2V Ingredient Anchor",
+        "4. Paste Video Prompt with Hindi dialogues",
+        "5. Submit and Auto-Approve (Always approve)",
+        "6. Download raw 720p/1080p clips",
+        "7. Concatenate preserving 100% original audio into 1080x1920 Full HD Master",
+        "8. Auto-upload to YouTube Shorts and TikTok Studio"
+    ]
+}
