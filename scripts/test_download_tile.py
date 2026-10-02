@@ -7,7 +7,7 @@ import websockets
 
 SCREENSHOT_DIR = Path(r"C:\Users\user\.gemini\antigravity\brain\2ebe07f2-7a70-428f-ab41-dc22d7b904d2")
 
-async def check_videos_tab():
+async def click_tile():
     tabs = json.loads(urllib.request.urlopen('http://127.0.0.1:9222/json/list').read())
     flow_tab = next(t for t in tabs if 'flow.google.com' in t.get('url', ''))
     ws_url = flow_tab['webSocketDebuggerUrl']
@@ -23,41 +23,45 @@ async def check_videos_tab():
                 if res.get('id') == cur_id:
                     return res.get('result', {})
 
-        # Switch to 'Videos' tab on left navigation menu
-        print('Switching to Videos tab on left menu...')
+        # Click the first tile in tile-row
+        print('Clicking Tile 1...')
         await send('Runtime.evaluate', {
             'expression': """
             (() => {
-                const tabs = Array.from(document.querySelectorAll('mat-list-item, [role="tab"], button, span, div'));
-                const vidTab = tabs.find(t => t.innerText && t.innerText.trim() === 'Videos');
-                if (vidTab) { vidTab.click(); return 'clicked Videos'; }
-                return 'not found';
+                const row = document.querySelector('.tile-row.virtual-item-container');
+                if (!row) return 'no row';
+                const firstChild = row.children[0];
+                if (firstChild) {
+                    firstChild.click();
+                    return 'clicked first tile: ' + firstChild.className;
+                }
+                return 'no child';
             })()
             """
         })
-        await asyncio.sleep(3)
+        await asyncio.sleep(2)
 
-        # Capture screenshot of Videos tab
+        # Take screenshot of what opened
         shot = await send('Page.captureScreenshot', {'format': 'png'})
-        with open(SCREENSHOT_DIR / 'videos_tab_live.png', 'wb') as f:
+        with open(SCREENSHOT_DIR / 'tile1_opened.png', 'wb') as f:
             f.write(base64.b64decode(shot['data']))
-        print('Screenshot saved: videos_tab_live.png')
+        print('Screenshot saved: tile1_opened.png')
 
-        # List all video cards on canvas
+        # Check for download button or player
         res = await send('Runtime.evaluate', {
             'expression': """
             (() => {
-                const cards = Array.from(document.querySelectorAll('flow-project-card, [class*="card"], [class*="item"]'));
-                return cards.map(c => ({
-                    text: c.innerText ? c.innerText.trim().replace(/\\n/g, ' | ') : '',
-                    hasVideo: !!c.querySelector('video, flow-video-player'),
-                    hasImg: !!c.querySelector('img')
-                })).filter(c => c.text.length > 0).slice(0, 15);
+                const btns = Array.from(document.querySelectorAll('button, a')).map(b => ({
+                    text: b.innerText.trim(),
+                    aria: b.getAttribute('aria-label'),
+                    class: b.className
+                })).filter(b => b.text || b.aria);
+                return btns.slice(0, 30);
             })()
             """,
             'returnByValue': True
         })
-        print('Cards on Videos tab:', json.dumps(res.get('result', {}).get('value', []), indent=2))
+        print('Buttons visible:', json.dumps(res.get('result', {}).get('value', []), indent=2))
 
 if __name__ == '__main__':
-    asyncio.run(check_videos_tab())
+    asyncio.run(click_tile())
