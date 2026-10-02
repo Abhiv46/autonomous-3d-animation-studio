@@ -1,0 +1,53 @@
+{
+    "uploaded": [
+        {
+            "key": "ep_07_spicy_golgappa",
+            "filename": "ep_07_spicy_golgappa_final.mp4",
+            "size_mb": 9.34,
+            "youtube": "https://youtube.com/shorts/2wePkYa9lqw",
+            "youtube_title": "Mummy Ka Spicy Golgappa Prank! \ud83c\udf36\ufe0f\ud83d\ude35 Mirchi Lag Gayi! #TheNaughtyDuo #shorts",
+            "visual_style": "100% 3D CGI CoComelon & Pixar (Frame-Chained Strict Consistency)",
+            "continuity_method": "Last-Frame Image-to-Video Anchor (FFmpeg -> Flow Canvas)",
+            "youtube_status": "LIVE",
+            "timestamp": "2026-10-02 08:46:58"
+        },
+        {
+            "key": "ep_15_fake_moustache_cop",
+            "filename": "ep_15_fake_moustache_cop_master.mp4",
+            "size_mb": 10.31,
+            "youtube": "https://youtube.com/shorts/-aSuNsIxk_w",
+            "youtube_title": "Inspector Kaartik Ne Pakda Mummy Ko! \ud83d\udc6e\u200d\u2642\ufe0f\ud83c\udf6a #shorts #comedy #cartoon",
+            "youtube_status": "LIVE",
+            "tiktok_status": "IN_PROGRESS",
+            "visual_style": "100% 3D CGI Pixar Character Animation (Full 3D Consistency)",
+            "continuity_method": "Clean Pixar Multi-Scene Narrative",
+            "timestamp": "2026-10-02 14:21:00"
+        },
+        {
+            "key": "ep_15_fake_moustache_cop",
+            "filename": "ep_15_fake_moustache_cop_master.mp4",
+            "size_mb": 10.31,
+            "youtube": "https://youtube.com/shorts/LgYQuo9lf3s",
+            "youtube_title": "Inspector Kaartik Ne Pakda Mummy Ko! \ud83d\udc6e\u200d\u2642\ufe0f\ud83c\udf6a #shorts #comedy #cartoon",
+            "youtube_status": "LIVE",
+            "tiktok_status": "LIVE",
+            "tiktok_caption": "Inspector Kaartik ne Mummy ko kiya arrest! \ud83d\udc6e\u200d\u2642\ufe0f\ud83c\udf6a Wait for the moustache twist at the end! \ud83e\udd23\u2764\ufe0f Who is the boss of your house? #TheNaughtyDuo #shorts #cartoon #mummy #funny #comedy #animation #relatable #viral",
+            "visual_style": "100% 3D CGI Pixar Character Animation (Frame-Chained Continuity)",
+            "continuity_method": "Last-Frame Image-to-Video Anchor (FFmpeg -> Flow Canvas)",
+            "timestamp": "2026-10-02 14:24:23"
+        },
+        {
+            "key": "ep_15_fake_moustache_cop",
+            "filename": "ep_15_fake_moustache_cop_master.mp4",
+            "size_mb": 9.38,
+            "youtube": "https://youtube.com/shorts/NgPFJeNBWBs",
+            "youtube_title": "Inspector Kaartik Ne Pakda Mummy Ko! \ud83d\udc6e\u200d\u2642\ufe0f\ud83c\udf6a #shorts #comedy #cartoon",
+            "youtube_status": "LIVE",
+            "tiktok_status": "LIVE",
+            "tiktok_caption": "Inspector Kaartik ne Mummy ko kiya arrest! \ud83d\udc6e\u200d\u2642\ufe0f\ud83c\udf6a Wait for the moustache twist at the end! \ud83e\udd23\u2764\ufe0f Who is the boss of your house? #TheNaughtyDuo #shorts #cartoon #mummy #funny #comedy #animation #relatable #viral",
+            "visual_style": "100% 3D CGI Pixar Character Animation (Frame-Chained Continuity)",
+            "continuity_method": "Last-Frame Image-to-Video Anchor (FFmpeg -> Flow Canvas)",
+            "timestamp": "2026-10-02 15:03:30"
+        }
+    ]
+}

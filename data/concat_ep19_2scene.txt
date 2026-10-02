@@ -1,0 +1,2 @@
+file 'C:\TheNaughtyDuo_Automation\the-naughty-duo-autonomous-content-engine\data\raw_clips\ep19_flying_cockroach_p1.mp4'
+file 'C:\TheNaughtyDuo_Automation\the-naughty-duo-autonomous-content-engine\data\raw_clips\ep19_flying_cockroach_p2.mp4'

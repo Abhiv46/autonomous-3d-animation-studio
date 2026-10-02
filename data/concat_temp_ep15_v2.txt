@@ -1,0 +1,3 @@
+file 'C:\TheNaughtyDuo_Automation\the-naughty-duo-autonomous-content-engine\data\raw_clips\ep_15_fake_moustache_cop_p1.mp4'
+file 'C:\TheNaughtyDuo_Automation\the-naughty-duo-autonomous-content-engine\data\raw_clips\ep_15_scene2_slot0_clean.mp4'
+file 'C:\TheNaughtyDuo_Automation\the-naughty-duo-autonomous-content-engine\data\raw_clips\ep_15_scene3_slot0_clean.mp4'

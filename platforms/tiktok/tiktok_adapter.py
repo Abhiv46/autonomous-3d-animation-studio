@@ -16,22 +16,10 @@ class TikTokPlatformAdapter(BasePlatformAdapter):
         video_path = payload.get("video_path")
         if not video_path or not os.path.exists(video_path):
             return {"valid": False, "error": "MISSING_VIDEO_FILE"}
-
-        # Verify 60s minimum duration for TikTok Creator Rewards
-        duration = payload.get("duration_seconds", 0)
-        if duration > 0 and duration < 58.0:
-            return {
-                "valid": False, 
-                "error": f"TIKTOK_CREATOR_REWARDS_COMPLIANCE_ERROR: Duration ({duration}s) is under 60 seconds."
-            }
-
         return {"valid": True}
 
     def upload_short(self, video_path: str, metadata: Dict[str, Any], schedule_iso: Optional[str] = None) -> Dict[str, Any]:
-        val = self.validate_publication_payload({
-            "video_path": video_path,
-            "duration_seconds": metadata.get("duration_seconds", 65.0)
-        })
+        val = self.validate_publication_payload({"video_path": video_path})
         if not val["valid"]:
             raise ValueError(f"TikTok publication validation failed: {val['error']}")
 
@@ -42,11 +30,14 @@ class TikTokPlatformAdapter(BasePlatformAdapter):
                 "status": "SIMULATED_POSTED"
             }
 
-        # Actual posting delegated to browser/tiktok engine when live
+        caption = metadata.get("caption") or metadata.get("title", "")
+        from scripts.tiktok_studio_uploader import upload_to_tiktok_studio
+        ok = upload_to_tiktok_studio(video_path, caption)
         return {
-            "success": True,
+            "success": ok,
             "platform_video_id": f"tt_{os.path.basename(video_path)}",
-            "url": f"https://www.tiktok.com/{self.target_account_handle}"
+            "url": f"https://www.tiktok.com/{self.target_account_handle}",
+            "status": "LIVE" if ok else "FAILED"
         }
 
     def get_status(self, platform_video_id: str) -> Dict[str, Any]:

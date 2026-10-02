@@ -44,6 +44,7 @@ Profile */
 *.wav
 *.mp3
 data/raw_clips/
+data/processed_episodes/
 data/output/
 data/archive/
 data/tiktok_raw_clips/

@@ -5,23 +5,37 @@ from typing import Dict, Any, List
 class PromptEngineeringAgent:
     """Enforces Character Lock, visual benchmark consistency, and automatic prompt repair for Google Flow."""
 
-    def __init__(self, characters: List[Dict[str, Any]], benchmark: str = "Garden Me Jhula (High-Fidelity 3D Pixar)"):
-        self.characters = {c["name"]: c for c in characters}
+    def __init__(self, characters: List[Dict[str, Any]] = None, benchmark: str = "CoComelon & Pixar 3D Masterpiece (https://youtube.com/shorts/mROirKAfmE4)"):
+        self.characters = {c["name"]: c for c in characters} if characters else {}
         self.benchmark = benchmark
+        self.style_lock = (
+            "Vertical 9:16 aspect ratio, ultra-detailed Pixar 3D animated comedy style. "
+            "Pure 3D character animation, ultra-adorable rounded chubby toddler character models, oversized cute heads, "
+            "rosy blushing cheeks, big expressive glassy 3D brown eyes, volumetric 3D hair with glossy highlights, "
+            "soft glowing peach skin, bright cheerful family room lighting, soft ambient occlusion, "
+            "STRICTLY NO CGI artifacts, NO semi-realistic, NO 2D drawings, NO flat sketches, NO line art outlines, NO speech bubbles, NO text overlays."
+        )
 
-    def build_locked_prompt(self, base_scene_action: str, active_characters: List[str] = None) -> str:
+    def build_locked_prompt(self, base_scene_action: str, active_characters: List[str] = None, is_final_part: bool = False) -> str:
         """Constructs an airtight generation prompt with permanent character locks and no hallucinations."""
         if not active_characters:
-            char_refs = "@Kaartik, @Kaavya, and @Pinki (Mummy)"
+            char_refs = "@Kaartik (5, chubby rounded cheeks, yellow polo), @Kaavya (3, adorable toddler, pink frock, double buns), and @Pinki (Mummy, 25, powder-blue kurti)"
         else:
             char_refs = ", ".join([f"@{c}" for c in active_characters])
 
+        cta_instruction = ""
+        if is_final_part:
+            cta_instruction = (
+                " At the end, Kaavya or Kaartik looks at camera with a super cute bright smile and speaks in cute toddler Hindi: "
+                "'Dosto agar maza aaya toh video ko LIKE zaroor karna aur follow karna! Love you!'"
+            )
+
         prompt = (
-            f"Pixar 3D animated comedy children entertainment, cinematic lighting, expressive eyes, "
-            f"ultra-crisp rendering matching {self.benchmark} benchmark. "
+            f"{self.style_lock} "
             f"Characters locked: {char_refs}. "
-            f"Scene: {base_scene_action.strip()}. "
-            f"Strict constraints: No duplicate or clone characters, locked clothing only, no visual glitches, no 2D drawings, 9:16 vertical ratio."
+            f"Scene action: {base_scene_action.strip()}.{cta_instruction} "
+            f"Dialogue constraint: All characters speak strictly in cute natural HINDI dialogues. "
+            f"Strict constraints: Exactly ONE of each character, locked clothing, joyful toddler expressions, fluid 3D character motion, 9:16 vertical."
         )
         return prompt
 

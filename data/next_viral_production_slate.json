@@ -1,0 +1,284 @@
+{
+  "slate_metadata": {
+    "production_title": "The Naughty Duo - Viral High-Graphic 3D Slate (Episodes 15, 16, 17)",
+    "channel_handle": "@TheNaughtyDuoOfficial",
+    "created_at": "2026-10-02T10:45:00Z",
+    "director": "Chief Viral Research Director",
+    "visual_standard_benchmark": {
+      "gold_standard_url": "https://youtube.com/shorts/mROirKAfmE4",
+      "style_name": "CoComelon & Pixar 3D CGI Ultra-High Fidelity Toddler Standard",
+      "aspect_ratio": "9:16 vertical (1080x1920)",
+      "target_duration_per_episode": "24.0 seconds (3 scenes x 8.0s)",
+      "universal_prompt_prefix": "Vertical 9:16 aspect ratio, 8 seconds. CoComelon meets Pixar 3D animated style for toddlers (gold standard: https://youtube.com/shorts/mROirKAfmE4). Full 3D CGI animation, ultra-adorable rounded chubby toddler character models, oversized cute heads, rosy blushing cheeks, big expressive glassy 3D brown eyes, volumetric 3D hair with glossy highlights, soft glowing peach skin with gentle subsurface scattering, bright pastel studio lighting, soft ambient occlusion. STRICTLY NO 2D drawings, NO flat sketches, NO line art outlines, NO comic speech bubbles, NO text overlays."
+    }
+  },
+  "studio_intelligence_harvest": {
+    "audit_source": "YouTube Studio Live Dashboard & Content Scraper",
+    "top_performing_shorts_metrics": [
+      {
+        "title": "Kutta Bhow Bhow, Billi Meow! 🐶🐱 Animal Sounds Song | CoComelon Hindi #shorts",
+        "youtube_id": "-hKzsOK1Rt8",
+        "realtime_views": 12,
+        "view_velocity": "Highest consistent 48-hour velocity across channel catalog",
+        "category": "Nursery Rhyme / Animal Sensory Audio"
+      },
+      {
+        "title": "Yummy Yummy Fruits! 🍎🍌 No Junk Food Song | CoComelon Style Hindi Rhymes #TheNaughtyDuo #shorts",
+        "youtube_id": "IU7CgYn8wQE",
+        "realtime_views": 9,
+        "view_velocity": "High steady organic search & suggested shorts discovery",
+        "category": "Good Habits / Food & Color Sensory"
+      },
+      {
+        "title": "Brush Brush Brush! 🪥✨ Daant Saaf Karo! | CoComelon Style Hindi Kids Song #TheNaughtyDuo #shorts",
+        "youtube_id": "mROirKAfmE4",
+        "realtime_views": 7,
+        "view_velocity": "Top engagement & highest retention completion rate (Channel Benchmark)",
+        "category": "Toddler Morning Routine / Action Song"
+      }
+    ],
+    "algorithmic_discrepancy_analysis": {
+      "core_question": "Why did 'Kutta Bhow Bhow', 'Brush Brush Brush', and 'Yummy Yummy Fruits' receive consistent 48-hour views while brand-new narrative shorts take 6-24 hours to enter the algorithmic seed test?",
+      "nursery_rhyme_advantages": [
+        {
+          "factor": "Evergreen Search Demand & Toddler Autoplay Loops",
+          "explanation": "Queries like 'kutta bhow bhow', 'animal sounds song hindi', 'brush your teeth song', and 'yummy yummy fruits' carry massive ongoing baseline search volumes on YouTube Search and YouTube Kids. Parents actively search these terms or leave them on auto-repeat for toddlers, providing an immediate non-algorithmic traffic baseline."
+        },
+        {
+          "factor": "Zero Cognitive Friction (Instant Recognition)",
+          "explanation": "Rhymes require zero story setup. Within 0.3 seconds, the listener hears the rhythm and the visual shows an animal or bright fruit. Toddlers instantly recognize the stimulus without needing narrative comprehension, driving swiped-away rate down near zero."
+        },
+        {
+          "factor": "Replay Velocity & Over-100% APV",
+          "explanation": "Short, catchy musical beats naturally loop 2 to 3 times before a toddler or parent touches the screen. When Average Percentage Viewed (APV) exceeds 120-150%, YouTube's ranking engine categorizes the video as high-satisfaction and keeps it continuously indexed in the 48-hour Realtime browse feed."
+        }
+      ],
+      "narrative_short_lag_factors": [
+        {
+          "factor": "Zero Direct Search Volume (Algorithmic Cold Start)",
+          "explanation": "Original comedic narrative titles (e.g. 'Mummy Ka Bubble Wrap Trap', 'Ghar Me Aaya Nakli Chuha') have virtually zero search query volume. They rely 100% on the Shorts Algorithm Feed recommendation engine."
+        },
+        {
+          "factor": "Multi-Phase Algorithmic Seed Testing (6 to 24 Hour Cold Window)",
+          "explanation": "The YouTube Shorts algorithm processes new narrative content in strict chronological tiers: Tier 1 (0-2h: Audio transcript generation, video categorization, safety/COPPA tagging), Tier 2 (2-6h: Embedding into neural vector space), and Tier 3 (6-24h: Seed Bucket Distribution to a micro-cohort of 2-10 random active users in the Shorts feed). Only when this initial seed bucket achieves >75% VVSA (Viewed vs Swiped Away) and >85% APV does the system trigger the secondary 10k-100k view explosion."
+        },
+        {
+          "factor": "1.5-Second Hook Vulnerability",
+          "explanation": "If a narrative Short takes 2-3 seconds to explain the joke, seed viewers swipe away. The algorithm's cold-start model penalizes the initial drop and freezes recommendations for 12-24 hours until the next testing cycle. To eliminate this delay, narrative shorts must adopt the 'In-Media-Res 1.5-Second Slapstick Hook'."
+        }
+      ]
+    }
+  },
+  "production_slate": [
+    {
+      "episode_number": 15,
+      "episode_id": "ep_15_fake_moustache_cop",
+      "title": "Kaartik Bana Inspector Sahab! 🥸🚔 Kitchen Me Checking! #TheNaughtyDuo #shorts",
+      "logline": "Kaartik draws a giant Singham handlebar moustache and conducts a serious police raid in Mummy's kitchen searching for stolen biscuits—until Mummy bribes the tough cop with a warm chocolate cookie!",
+      "runtime_seconds": 24.0,
+      "thumbnail_spec": {
+        "hook_text": "INSPECTOR KAARTIK AAYA! 🥸🚔",
+        "font_color": "#FFE600",
+        "border_color": "#000000",
+        "prompt": "Vertical 9:16 aspect ratio, ultra-detailed Pixar 3D animated comedy movie poster. Modern sunlit Indian modular kitchen. In the center, ONE Indian boy (Kaartik, 5 years old, bright yellow polo shirt) standing tough with chest puffed out, sporting a comically gigantic curved black Singham handlebar moustache drawn on his upper lip, holding a toy magnifying glass directly up to the camera with hilarious squinty tough-cop scowl! Beside him, ONE toddler girl (Kaavya, 3 years old, baby-pink polka-dot frock, double buns) wearing a tin foil police badge, saluting with a giant wooden ladle. In background, ONE Indian mother (Pinki, 25, powder-blue kurti) laughing with hand over mouth while holding a jar of fresh chocolate cookies. Bright cheerful studio lighting, rich 3D subsurface skin shader, 4K render quality."
+      },
+      "scenes": [
+        {
+          "scene_index": 1,
+          "scene_name": "The High-Stakes Police Raid Entry",
+          "timestamp_range": "0:00 - 0:08",
+          "hook_1_5s": {
+            "visual_action": "EXTREME MACRO CLOSE-UP directly into camera lens: Kaartik's chubby face fills the screen with a massive drawn black handlebar moustache, blowing a shiny whistle (*TWEEET!*) with puffed rosy cheeks, scowling like a serious Bollywood inspector!",
+            "audio_sfx": "Loud cartoon police whistle blast, heavy dramatic Bollywood action thud bass hit.",
+            "dialogue_hindi": "Kaartik: 'Hands up! Inspector Kaartik aa gaya!'"
+          },
+          "veo_prompt": "Vertical 9:16 aspect ratio, 8 seconds. CoComelon meets Pixar 3D animated style for toddlers (gold standard: https://youtube.com/shorts/mROirKAfmE4). Full 3D CGI animation, ultra-adorable rounded chubby toddler character models, oversized cute heads, rosy blushing cheeks, big expressive glassy 3D brown eyes, volumetric 3D hair with glossy highlights, soft glowing peach skin with gentle subsurface scattering, bright pastel studio lighting, soft ambient occlusion. Camera starts in extreme macro close-up on Kaartik (5 years old, yellow polo) who has an oversized black drawn handlebar moustache on his face. He blows a toy whistle with puffed cheeks, scowling comically like a tough cop. Camera zooms back rapidly to reveal him marching with heavy slow steps into a bright colorful modern kitchen holding a giant red plastic magnifying glass. Behind him, Kaavya (3 years old, pink frock, double buns) waddles excitedly wearing a shiny foil badge and saluting with a wooden cooking spatula. STRICTLY NO 2D drawings, NO flat sketches, NO line art outlines, NO comic speech bubbles, NO text overlays. (All character voices, exclamations and spoken dialogue must strictly be in cheerful HINDI language matching the Hindi title. No English speech).",
+          "continuity_anchor_frame": "p1_last_frame: Kaartik pointing magnifying glass at kitchen counter with intense investigative scowl, Kaavya saluting beside him."
+        },
+        {
+          "scene_index": 2,
+          "scene_name": "The Kitchen Counter Interrogation",
+          "timestamp_range": "0:08 - 0:16",
+          "hook_1_5s": {
+            "visual_action": "INSTANT HIGH-IMPACT REACTION: Mummy Pinki turns around from the sink with giant comical round cartoon eyes, theatrically throwing both hands high in the air as Kaartik slams his tiny palm onto the counter!",
+            "audio_sfx": "Dramatic cartoon gasp, comical cymbal smash, ticking clock sound effect.",
+            "dialogue_hindi": "Kaartik: 'Mummy! Chori ke biscuits kahan chhipaye hain?!'"
+          },
+          "veo_prompt": "Vertical 9:16 aspect ratio, 8 seconds. CoComelon meets Pixar 3D animated style for toddlers (gold standard: https://youtube.com/shorts/mROirKAfmE4). Full 3D CGI animation, ultra-adorable rounded chubby toddler character models, oversized cute heads, rosy blushing cheeks, big expressive glassy 3D brown eyes, volumetric 3D hair with glossy highlights, soft glowing peach skin with gentle subsurface scattering, bright pastel studio lighting, soft ambient occlusion. CONTINUITY: Starts exactly from Kaartik in yellow polo with drawn black moustache and Kaavya with wooden spatula in modern sunlit kitchen. Kaartik slams his tiny hand playfully on the clean counter and inspects the glass biscuit jar through his red magnifying glass. Mummy Pinki (25, powder-blue kurti) drops a kitchen towel in comical theatrical surrender, raising both hands with exaggerated wide eyes: 'Arre Inspector Sahab, hum nirdosh hain!' Kaavya blows through a straw making funny siren noises. STRICTLY NO 2D drawings, NO flat sketches, NO line art outlines, NO comic speech bubbles, NO text overlays. (All character voices, exclamations and spoken dialogue must strictly be in cheerful HINDI language matching the Hindi title. No English speech).",
+          "continuity_anchor_frame": "p2_last_frame: Mummy smiling warmly reaching behind her back while Kaartik maintains his serious scowl."
+        },
+        {
+          "scene_index": 3,
+          "scene_name": "The Cookie Bribe & The Smudge Loop",
+          "timestamp_range": "0:16 - 0:24",
+          "hook_1_5s": {
+            "visual_action": "SLAPSTICK TWIST PUNCHLINE: Mummy presents a huge warm chocolate chip cookie right in front of Kaartik's nose; Kaartik's tough-cop scowl instantly melts into a wide goofy toddler grin as he bites down (*CHOMP!*), smudging the black moustache all over his cheeks into funny cat whiskers!",
+            "audio_sfx": "Crisp cartoon cookie crunch, boing sound effect, joyful contagious toddler giggles.",
+            "dialogue_hindi": "Kaartik: 'Case closed! Yummy cookie!' | Mummy: 'Inspector Sahab toh meow ban gaye!'"
+          },
+          "veo_prompt": "Vertical 9:16 aspect ratio, 8 seconds. CoComelon meets Pixar 3D animated style for toddlers (gold standard: https://youtube.com/shorts/mROirKAfmE4). Full 3D CGI animation, ultra-adorable rounded chubby toddler character models, oversized cute heads, rosy blushing cheeks, big expressive glassy 3D brown eyes, volumetric 3D hair with glossy highlights, soft glowing peach skin with gentle subsurface scattering, bright pastel studio lighting, soft ambient occlusion. CONTINUITY: Seamless continuation from kitchen scene. Mummy hands Kaartik and Kaavya warm chocolate cookies. Kaartik takes a huge bite; as he rubs his mouth, the black drawn moustache smudges across his chubby cheeks into funny cat whiskers! Kaavya giggles hysterically, clapping with cookie crumbs on her nose. Mummy pulls both kids into a warm laughing hug. Kaartik winks at the camera, marching on the spot to restart inspection. STRICTLY NO 2D drawings, NO flat sketches, NO line art outlines, NO comic speech bubbles, NO text overlays. (All character voices, exclamations and spoken dialogue must strictly be in cheerful HINDI language matching the Hindi title. No English speech).",
+          "continuity_anchor_frame": "p3_last_frame: Kaartik marching toward camera smiling with whiskered cheeks, ready to loop back to Scene 1."
+        }
+      ],
+      "retention_loop_mechanic": "At 0:23s, Kaartik begins marching forward again toward the camera shouting 'Agli checking kahan hai?!', leading smoothly back into the opening whistle in Scene 1 for a seamless replay loop (>115% APV).",
+      "seo_metadata": {
+        "title": "Kaartik Bana Inspector Sahab! 🥸🚔 Kitchen Me Checking! #TheNaughtyDuo #shorts",
+        "description": "Ghar me aaye naye Inspector Kaartik Sahab! 🥸🚔\nLambi handle-bar moustache laga kar kitchen me chori ke chocolates ki checking shuru hui! 😂\nLekin Mummy ke fresh cookies ke aage police ki duty khatam! 🍪😋\n\nVideo thodi si bhi achi lagi ho toh LIKE zaroor karein aur aisi hi mazedaar 3D animated family stories ke liye @TheNaughtyDuoOfficial ko SUBSCRIBE karein! ❤️🔔\n\nAapke ghar me chocolates kaun chori karke khata hai? Comment me batana! 👇❤️\n\n#shorts #TheNaughtyDuo #inspectorprank #funnycartoon #3danimation #kartikandkaavya #comedy #familycomedy #viralshorts",
+        "tags": [
+          "The Naughty Duo",
+          "@TheNaughtyDuoOfficial",
+          "fake moustache funny",
+          "inspector cartoon hindi",
+          "funny kids animation",
+          "3d animation shorts",
+          "hindi cartoon shorts",
+          "kartik and kaavya",
+          "viral shorts 2026",
+          "family comedy shorts",
+          "kids comedy cartoon",
+          "toddler comedy 3d"
+        ]
+      }
+    },
+    {
+      "episode_number": 16,
+      "episode_id": "ep_16_papa_big_shoes",
+      "title": "Papa Ke Bade Jooton Ki Race! 👞🤣 Kaavya Ka High Heels Dhamaka! #TheNaughtyDuo #shorts",
+      "logline": "Kaartik steps into Papa's giant formal leather shoes and Kaavya rocks Mummy's bright red high heels for the clumsiest, highest-energy hallway sprint ever created!",
+      "runtime_seconds": 24.0,
+      "thumbnail_spec": {
+        "hook_text": "BADE JOOTON KI RACE! 👞😂",
+        "font_color": "#FFE600",
+        "border_color": "#000000",
+        "prompt": "Vertical 9:16 aspect ratio, ultra-detailed Pixar 3D animated family comedy scene. Sunlit hallway of modern Indian home. In front, ONE tiny Indian boy (Kaartik, 5 years old, yellow polo) has his feet deep inside Papa's gigantic shiny black size-10 formal leather shoes, waddling comically like a cartoon penguin with arms out for balance! Beside him, ONE tiny toddler girl (Kaavya, 3 years old, pink frock, double buns) wearing Mummy's bright red oversized high heels, balancing on one wobbly foot with giant funny grin. Ahead of them, ONE Indian mother (Pinki, 25, powder-blue kurti) kneeling on the rug with open arms laughing joyfully. High-energy Pixar 3D lighting, exaggerated slapstick poses, 4K render quality."
+      },
+      "scenes": [
+        {
+          "scene_index": 1,
+          "scene_name": "The Giant Footwear Launch",
+          "timestamp_range": "0:00 - 0:08",
+          "hook_1_5s": {
+            "visual_action": "EXTREME LOW-ANGLE IMPACT SHOT: Two enormous shiny black leather dress shoes slam onto the shiny hardwood floor with a massive *CLOMP-CLOMP!* Camera snaps upward to reveal tiny Kaartik engulfed inside them, waddling like a wobbly penguin while Kaavya stomps alongside in oversized red high heels (*KLIK-KLAK!*)!",
+            "audio_sfx": "Loud cartoon clomping wood sounds, squeaky rubber friction, lively brass fanfare.",
+            "dialogue_hindi": "Kaartik: 'Ready, steady... GO! Papa ke joote jeetenge!'"
+          },
+          "veo_prompt": "Vertical 9:16 aspect ratio, 8 seconds. CoComelon meets Pixar 3D animated style for toddlers (gold standard: https://youtube.com/shorts/mROirKAfmE4). Full 3D CGI animation, ultra-adorable rounded chubby toddler character models, oversized cute heads, rosy blushing cheeks, big expressive glassy 3D brown eyes, volumetric 3D hair with glossy highlights, soft glowing peach skin with gentle subsurface scattering, bright pastel studio lighting, soft ambient occlusion. Camera low on polished hallway floor. Kaartik (5, yellow polo) wears Papa's giant size-10 black leather shoes that reach up to his shins, waddling forward with wide spread arms. Beside him, Kaavya (3, pink frock) wobbles in Mummy's bright red high heels, taking gigantic funny high-steps. Both have excited mischievous toddler grins as they race toward the camera. STRICTLY NO 2D drawings, NO flat sketches, NO line art outlines, NO comic speech bubbles, NO text overlays. (All character voices, exclamations and spoken dialogue must strictly be in cheerful HINDI language matching the Hindi title. No English speech).",
+          "continuity_anchor_frame": "p1_last_frame: Kaartik sliding forward mid-hallway, Kaavya catching up with red heels clicking."
+        },
+        {
+          "scene_index": 2,
+          "scene_name": "The Living Room Carpet Drift",
+          "timestamp_range": "0:08 - 0:16",
+          "hook_1_5s": {
+            "visual_action": "SLAPSTICK DRIFT MOMENTUM: Kaartik's oversized shoe hits the smooth tile corner and slides forward in an uncontrolled cartoon hockey glide! His arms windmill in panic while Kaavya overtakes him with a funny model strut!",
+            "audio_sfx": "Cartoon tire screeching skid sound, slide whistle rising, joyful audience laugh track.",
+            "dialogue_hindi": "Kaavya: 'Kaavya aage nikal gayi! Bhaiya peeche reh gaye!'"
+          },
+          "veo_prompt": "Vertical 9:16 aspect ratio, 8 seconds. CoComelon meets Pixar 3D animated style for toddlers (gold standard: https://youtube.com/shorts/mROirKAfmE4). Full 3D CGI animation, ultra-adorable rounded chubby toddler character models, oversized cute heads, rosy blushing cheeks, big expressive glassy 3D brown eyes, volumetric 3D hair with glossy highlights, soft glowing peach skin with gentle subsurface scattering, bright pastel studio lighting, soft ambient occlusion. CONTINUITY: Continues exactly from hallway race into open living room. Kaartik in big black shoes slides smoothly across the floor tiles like an ice skater, windmilling his arms with wide comic eyes. Kaavya stomps ahead clicking red heels like a proud toddler runway model. At the edge of the living room, Mummy Pinki (25, powder-blue kurti) kneels by a mountain of plush sofa cushions with open arms, clapping and cheering: 'Dheere dheere bacchon!' STRICTLY NO 2D drawings, NO flat sketches, NO line art outlines, NO comic speech bubbles, NO text overlays. (All character voices, exclamations and spoken dialogue must strictly be in cheerful HINDI language matching the Hindi title. No English speech).",
+          "continuity_anchor_frame": "p2_last_frame: Both toddlers leaning forward mid-air heading toward the cushion pile."
+        },
+        {
+          "scene_index": 3,
+          "scene_name": "The Cushion Mountain Soft Landing",
+          "timestamp_range": "0:16 - 0:24",
+          "hook_1_5s": {
+            "visual_action": "SYNCHRONIZED PILLOW IMPACT: Both toddlers belly-flop safely into a massive pile of bright pastel sofa cushions! Pillows puff up into the air, the giant shoes fly off their tiny feet, and Mummy scoops them up into a mega tickle fest!",
+            "audio_sfx": "Giant soft cartoon pillow poof, flying shoe 'whoosh', burst of uncontrolled toddler belly laughter.",
+            "dialogue_hindi": "Mummy: 'Dono winner hain! Ab tickle time!' | Kaartik: 'Hahaha Mummy ruko!'"
+          },
+          "veo_prompt": "Vertical 9:16 aspect ratio, 8 seconds. CoComelon meets Pixar 3D animated style for toddlers (gold standard: https://youtube.com/shorts/mROirKAfmE4). Full 3D CGI animation, ultra-adorable rounded chubby toddler character models, oversized cute heads, rosy blushing cheeks, big expressive glassy 3D brown eyes, volumetric 3D hair with glossy highlights, soft glowing peach skin with gentle subsurface scattering, bright pastel studio lighting, soft ambient occlusion. CONTINUITY: Kaartik and Kaavya land softly into a mountain of colorful cushions. The huge shoes flip off and land neatly on the carpet. Mummy Pinki dives in, hugging and tickling both kids' tiny bare feet. Kaartik and Kaavya roll in fits of pure giggles. Kaartik grabs Papa's shoe playfully pointing back to the hallway: 'Fir se race!', preparing to restart. STRICTLY NO 2D drawings, NO flat sketches, NO line art outlines, NO comic speech bubbles, NO text overlays. (All character voices, exclamations and spoken dialogue must strictly be in cheerful HINDI language matching the Hindi title. No English speech).",
+          "continuity_anchor_frame": "p3_last_frame: Kaartik sitting with Papa's shoe in hand pointing to the hallway start line."
+        }
+      ],
+      "retention_loop_mechanic": "Kaartik holding Papa's shoe and shouting 'Fir se race!' at 0:23s perfectly matches the start line frame in Scene 1, driving endless loop replayability (>112% APV).",
+      "seo_metadata": {
+        "title": "Papa Ke Bade Jooton Ki Race! 👞🤣 Kaavya Ka High Heels Dhamaka! #TheNaughtyDuo #shorts",
+        "description": "Kaartik ne pehen liye Papa ke Size-10 ke bade joote! 👞🤣\nAur Kaavya ne pehni Mummy ki high heels! Fir hallway me shuru hui sabse wobbly aur funny race! 😂👠\n\nVideo thodi si bhi achi lagi ho toh LIKE zaroor karein aur aisi hi mazedaar 3D animated family stories ke liye @TheNaughtyDuoOfficial ko SUBSCRIBE karein! ❤️🔔\n\nBachpan me kis kis ne papa ke joote pehan kar chalne ki koshish ki hai? Sach batana! 👇❤️\n\n#shorts #TheNaughtyDuo #bigshoesrace #funnycartoon #3danimation #kartikandkaavya #comedy #familycomedy #viralshorts",
+        "tags": [
+          "The Naughty Duo",
+          "@TheNaughtyDuoOfficial",
+          "papa shoes race cartoon",
+          "kids funny shoes",
+          "funny kids animation",
+          "3d animation shorts",
+          "hindi cartoon shorts",
+          "kartik and kaavya",
+          "viral shorts 2026",
+          "family comedy shorts",
+          "relatable childhood comedy",
+          "3d animation hindi"
+        ]
+      }
+    },
+    {
+      "episode_number": 17,
+      "episode_id": "ep_17_roohafza_pink_rabbit",
+      "title": "Pink Mustache Wala Khargosh! 🐰🍓 Roohafza Milk Party! #TheNaughtyDuo #shorts",
+      "logline": "A frosty glass of pink strawberry Roohafza milk leaves Kaartik with a thick bright-pink foam moustache and bunny ears, turning the entire dining room into a hilarious rabbit hop party!",
+      "runtime_seconds": 24.0,
+      "thumbnail_spec": {
+        "hook_text": "PINK RABBIT KAARTIK! 🐰🍓",
+        "font_color": "#FFE600",
+        "border_color": "#000000",
+        "prompt": "Vertical 9:16 aspect ratio, ultra-detailed Pixar 3D animated comedy still. Cheerful modern Indian dining room. In the center, ONE Indian boy (Kaartik, 5 years old, bright yellow polo shirt) has just finished chugging a tall glass of sweet pink Roohafza strawberry milk, leaving a thick bright-pink milk-foam moustache and a pink foam drop on the tip of his button nose! He holds two fingers up behind his head like rabbit ears with cute buck teeth smiling comically! Beside him, ONE toddler girl (Kaavya, 3, pink frock, double buns) wearing a matching pink milk mustache, clapping and hopping like a baby bunny. Behind them, ONE Indian mother (Pinki, 25, powder-blue kurti) holds the glass pitcher, laughing with sparkling eyes. Vibrant colorful Pixar 3D lighting, ultra-cute comedic 4K render."
+      },
+      "scenes": [
+        {
+          "scene_index": 1,
+          "scene_name": "The Chilled Pink Swirl Chug",
+          "timestamp_range": "0:00 - 0:08",
+          "hook_1_5s": {
+            "visual_action": "HYPER-TACTILE MACRO VORTEX: Cold creamy white milk splashes into a tall glass while swirls of deep ruby-pink Roohafza syrup mix in a glowing vortex! Cut instantly to Kaartik's chubby face buried in the glass, chugging noisily (*GLUG-GLUG-GLUG!*) with cheeks expanding!",
+            "audio_sfx": "Satisfying liquid swirl splash, rapid comical cartoon gulping sound effects, cheerful flute melody.",
+            "dialogue_hindi": "Kaartik: 'Gulp gulp gulp... Aahaa! Thanda thanda pink doodh!'"
+          },
+          "veo_prompt": "Vertical 9:16 aspect ratio, 8 seconds. CoComelon meets Pixar 3D animated style for toddlers (gold standard: https://youtube.com/shorts/mROirKAfmE4). Full 3D CGI animation, ultra-adorable rounded chubby toddler character models, oversized cute heads, rosy blushing cheeks, big expressive glassy 3D brown eyes, volumetric 3D hair with glossy highlights, soft glowing peach skin with gentle subsurface scattering, bright pastel studio lighting, soft ambient occlusion. In sunlit dining room, cold sweet pink strawberry Roohafza milk is poured into tall clear glasses. Kaartik (5, yellow polo) picks up the glass with both chubby hands, drinking with rapid enthusiastic cartoon gulps. Beside him, Kaavya (3, pink frock) sips from a curly straw with huge sparkling eyes. Mummy Pinki (25, powder-blue kurti) watches lovingly with a warm smile. STRICTLY NO 2D drawings, NO flat sketches, NO line art outlines, NO comic speech bubbles, NO text overlays. (All character voices, exclamations and spoken dialogue must strictly be in cheerful HINDI language matching the Hindi title. No English speech).",
+          "continuity_anchor_frame": "p1_last_frame: Kaartik lowering the empty glass from his face with big pink milk foam covering his upper lip."
+        },
+        {
+          "scene_index": 2,
+          "scene_name": "The Pink Mustache Transformation",
+          "timestamp_range": "0:08 - 0:16",
+          "hook_1_5s": {
+            "visual_action": "INSTANT CHARACTER SHIFT: Kaartik slams the glass down: his upper lip sports a thick, fluffy, bright-pink milk foam moustache and a bright pink foam dot on his nose! He flashes cute buck-teeth, puts two fingers up as bunny ears, and starts hopping on the dining chair: 'Boing! Boing!'",
+            "audio_sfx": "Cute cartoon spring boing sound, high-pitch bunny chirp, Kaavya's cheerful squeal.",
+            "dialogue_hindi": "Kaartik: 'Main Pink Bunny ban gaya! Hop hop hop!' | Kaavya: 'Mummy dekho, khargosh aa gaya!'"
+          },
+          "veo_prompt": "Vertical 9:16 aspect ratio, 8 seconds. CoComelon meets Pixar 3D animated style for toddlers (gold standard: https://youtube.com/shorts/mROirKAfmE4). Full 3D CGI animation, ultra-adorable rounded chubby toddler character models, oversized cute heads, rosy blushing cheeks, big expressive glassy 3D brown eyes, volumetric 3D hair with glossy highlights, soft glowing peach skin with gentle subsurface scattering, bright pastel studio lighting, soft ambient occlusion. CONTINUITY: Continues directly from dining table. Kaartik has a bright pink milk-foam moustache and a pink foam dot on his button nose. He wiggles his nose playfully and holds two fingers behind his head like rabbit ears, hopping in circles on his chair. Kaavya claps in joy and dips her tiny finger into the foam, gently booping Mummy Pinki's cheek with a spot of pink foam. Mummy laughs with sparkling eyes. STRICTLY NO 2D drawings, NO flat sketches, NO line art outlines, NO comic speech bubbles, NO text overlays. (All character voices, exclamations and spoken dialogue must strictly be in cheerful HINDI language matching the Hindi title. No English speech).",
+          "continuity_anchor_frame": "p2_last_frame: Mummy Pinki laughing with pink foam spot on cheek, holding up two spatulas like rabbit ears."
+        },
+        {
+          "scene_index": 3,
+          "scene_name": "The Three Bunnies Hop Finale",
+          "timestamp_range": "0:16 - 0:24",
+          "hook_1_5s": {
+            "visual_action": "WHOLESOME SLAPSTICK CLIMAX: Mummy Pinki holds up two wooden cooking spatulas like giant rabbit ears and joins the hopping train! All three hop around the dining table in synchronized bunny formation, laughing in musical harmony!",
+            "audio_sfx": "Upbeat bouncy toddler accordion and xylophone jingle, triple boing bounce, group family laughter.",
+            "dialogue_hindi": "Mummy: 'Main bhi Bunny ban gayi!' | Kaartik: 'Bunny party rocks!'"
+          },
+          "veo_prompt": "Vertical 9:16 aspect ratio, 8 seconds. CoComelon meets Pixar 3D animated style for toddlers (gold standard: https://youtube.com/shorts/mROirKAfmE4). Full 3D CGI animation, ultra-adorable rounded chubby toddler character models, oversized cute heads, rosy blushing cheeks, big expressive glassy 3D brown eyes, volumetric 3D hair with glossy highlights, soft glowing peach skin with gentle subsurface scattering, bright pastel studio lighting, soft ambient occlusion. CONTINUITY: Living room / dining area. Kaartik, Kaavya, and Mummy Pinki all have cute pink milk-foam moustaches. They hop in a train around the dining table like adorable cartoon bunnies, giggling with pure delight. Kaartik turns to the camera with a wink, holding his glass forward asking 'Pink doodh piyoge?' as the camera moves close toward the sweet pink swirl. STRICTLY NO 2D drawings, NO flat sketches, NO line art outlines, NO comic speech bubbles, NO text overlays. (All character voices, exclamations and spoken dialogue must strictly be in cheerful HINDI language matching the Hindi title. No English speech).",
+          "continuity_anchor_frame": "p3_last_frame: Kaartik holding glass forward toward camera with pink foam smile, matching Scene 1 entrance."
+        }
+      ],
+      "retention_loop_mechanic": "Kaartik holding the glass toward the lens at 0:23s asking if the viewer wants pink milk connects seamlessly back to the cold pouring vortex in Scene 1, generating high repeat replay value (>120% APV).",
+      "seo_metadata": {
+        "title": "Pink Mustache Wala Khargosh! 🐰🍓 Roohafza Milk Party! #TheNaughtyDuo #shorts",
+        "description": "Thandi-thandi Pink Roohafza milk party! 🥛🍓😋\nKaartik ne ek saans me glass khatam kiya aur chehre par ban gayi bright pink moustache! 🐰😂\nDekhiye jab ghar me teen-teen bunnies hop karne lage!\n\nVideo thodi si bhi achi lagi ho toh LIKE zaroor karein aur aisi hi mazedaar 3D animated family stories ke liye @TheNaughtyDuoOfficial ko SUBSCRIBE karein! ❤️🔔\n\nAapko Roohafza wala pink doodh pasand hai ya chocolate doodh? Comment me batana! 👇❤️\n\n#shorts #TheNaughtyDuo #roohafzafunny #pinkrabbit #funnycartoon #3danimation #kartikandkaavya #comedy #familycomedy #viralshorts",
+        "tags": [
+          "The Naughty Duo",
+          "@TheNaughtyDuoOfficial",
+          "pink milk moustache cartoon",
+          "roohafza funny video",
+          "pink rabbit cartoon",
+          "funny kids animation",
+          "3d animation shorts",
+          "hindi cartoon shorts",
+          "kartik and kaavya",
+          "viral shorts 2026",
+          "family comedy shorts",
+          "toddler sensory comedy"
+        ]
+      }
+    }
+  ]
+}

@@ -1,54 +1,31 @@
-import os
-import sys
-import time
-from pathlib import Path
 from playwright.sync_api import sync_playwright
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-brave_exe = r"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
-brave_data = r"C:\Users\user\AppData\Local\BraveSoftware\Brave-Browser\User Data"
-
 with sync_playwright() as p:
-    ctx = p.chromium.launch_persistent_context(
-        user_data_dir=brave_data,
-        executable_path=brave_exe,
-        headless=True,
-        args=["--disable-blink-features=AutomationControlled"]
-    )
-    url = "https://flow.google.com/u/3/project/a1c6f19b-b046-41f3-9b33-fbc756646163"
-    page = ctx.new_page()
-    page.goto(url, wait_until="domcontentloaded", timeout=45000)
-    page.wait_for_timeout(6000)
-    
-    # 1. Look for custom elements on canvas
-    tile_containers = page.locator("flow-grid-tile-container").all()
-    print("Tile containers count:", len(tile_containers))
-    
-    # Hover first tile container
-    if tile_containers:
-        tc = tile_containers[0]
-        tc.hover()
-        page.wait_for_timeout(1000)
-        page.screenshot(path=str(BASE_DIR / "data" / "tile_hovered.png"))
-        
-        # Check hotbar buttons
-        hotbar_buttons = tc.locator("button, [role='button']").all()
-        print("Hotbar buttons on hovered tile:", len(hotbar_buttons))
-        for idx, btn in enumerate(hotbar_buttons):
-            aria = btn.get_attribute("aria-label") or ""
-            txt = btn.inner_text().strip()
-            print(f"Hotbar btn {idx}: aria='{aria}', text='{txt}'")
-            
-        # Click the tile itself (or double click)
-        print("Clicking first tile...")
-        tc.click(force=True)
-        page.wait_for_timeout(2000)
-        page.screenshot(path=str(BASE_DIR / "data" / "tile_clicked.png"))
-        
-        # Check if full view or download option appeared
-        dl = page.locator("button[aria-label*='Download' i], [aria-label*='Export' i], button:has-text('download')").all()
-        print("Download elements visible:", len(dl))
-        for d in dl:
-            print(f"Download el: aria='{d.get_attribute('aria-label')}' text='{d.inner_text()}'")
+    browser = p.chromium.connect_over_cdp("http://127.0.0.1:9222")
+    page = browser.contexts[0].pages[0]
 
-    ctx.close()
+    char_tile = page.locator(".character-tile-container").all()
+    print("Found character tiles:", len(char_tile))
+    for idx, ct in enumerate(char_tile):
+        txt = ct.inner_text().strip()
+        print(f"Tile {idx}: text='{txt}'")
+
+    # Let's hover and click on kaavya tile (index that contains 'kaavya')
+    for ct in char_tile:
+        if "kaavya" in ct.inner_text().lower():
+            print("Found kaavya tile! Hovering...")
+            ct.hover()
+            page.wait_for_timeout(1000)
+            
+            # Check buttons inside this tile
+            tile_btns = ct.locator("button, [role='button']").all()
+            print("Buttons inside kaavya tile:", len(tile_btns))
+            for b in tile_btns:
+                print("Tile button:", b.get_attribute("aria-label"), b.inner_text().strip())
+
+            # Click it
+            ct.click(force=True)
+            page.wait_for_timeout(1500)
+            break
+
+    page.screenshot(path=r"C:\TheNaughtyDuo_Automation\the-naughty-duo-autonomous-content-engine\data\after_hover_kaavya_tile.png")

@@ -1,0 +1,84 @@
+[
+  {
+    "slot": 0,
+    "email": "techwire9999@gmail.com",
+    "tier": "PLUS",
+    "status": "LOW CREDITS",
+    "credits": [
+      "10 credits"
+    ],
+    "banner": " | info\nYou're running low on Google Flow credits. Your credits will reset monthly, or upgrade to get more now. | open_in_new\nUpgrade\nclose | You're running low on Google Flow credits. Your credits will reset monthly, or upgrade to get more now. | Agree | open_in_new\nUpgrade | info\nYou're running low on Google Flow credits. Your credits will reset monthly, or upgrade to get more now.\nopen_in_new\nUpgrade\nclose | info | Learn more | No thanks | close",
+    "editor_ready": true
+  },
+  {
+    "slot": 1,
+    "email": "abhiv46@gmail.com",
+    "tier": "FREE",
+    "status": "READY / ACTIVE",
+    "credits": [
+      "15 credits"
+    ],
+    "banner": " | Agree | Learn more | No thanks",
+    "editor_ready": true
+  },
+  {
+    "slot": 2,
+    "email": "rkumar.pub@gmail.com",
+    "tier": "PRO",
+    "status": "LOW CREDITS",
+    "credits": [
+      "15 credits"
+    ],
+    "banner": " | info\nYou're running low on Google Flow credits. Your credits will reset monthly, or top up to get more now.\nopen_in_new\nAdd AI credits\nclose | open_in_new\nAdd AI credits\nclose | open_in_new\nAdd AI credits | info\nYou're running low on Google Flow credits. Your credits will reset monthly, or top up to get more now. | You're running low on Google Flow credits. Your credits will reset monthly, or top up to get more now. | Agree | info | Learn more | No thanks | close",
+    "editor_ready": true
+  },
+  {
+    "slot": 3,
+    "email": "pinku.pub@gmail.com",
+    "tier": "FREE",
+    "status": "READY / ACTIVE",
+    "credits": [],
+    "banner": " | Agree | Learn more | No thanks",
+    "editor_ready": true
+  },
+  {
+    "slot": 4,
+    "email": "infolillylooks@gmail.com",
+    "tier": "FREE",
+    "status": "EXHAUSTED (0 credits)",
+    "credits": [
+      "10 credits"
+    ],
+    "banner": " | open_in_new\nUpgrade\nclose | info\nYou're out of Google Flow credits. You can wait until they refresh or upgrade to get more Google Flow credits now. | Learn more | Agree | open_in_new\nUpgrade | You're out of Google Flow credits. You can wait until they refresh or upgrade to get more Google Flow credits now. | info | info\nYou're out of Google Flow credits. You can wait until they refresh or upgrade to get more Google Flow credits now.\nopen_in_new\nUpgrade\nclose | No thanks | close",
+    "editor_ready": true
+  },
+  {
+    "slot": 5,
+    "email": "elegantdriveways4u@gmail.com",
+    "tier": "FREE",
+    "status": "READY / ACTIVE",
+    "credits": [
+      "45 credits"
+    ],
+    "banner": " | Agree | Learn more | No thanks",
+    "editor_ready": true
+  },
+  {
+    "slot": 6,
+    "email": "abhiv446@gmail.com",
+    "tier": "FREE",
+    "status": "READY / ACTIVE",
+    "credits": [],
+    "banner": " | Agree | Learn more | No thanks",
+    "editor_ready": true
+  },
+  {
+    "slot": 7,
+    "email": "rkumar.ukb@gmail.com",
+    "tier": "FREE",
+    "status": "READY / ACTIVE",
+    "credits": [],
+    "banner": " | Agree | Learn more | No thanks",
+    "editor_ready": true
+  }
+]

@@ -1,0 +1,223 @@
+[
+  {
+    "slot": 0,
+    "expected_email": "techwire9999@gmail.com",
+    "detected_email": "techwire9999@gmail.com",
+    "tier": "FREE",
+    "banners": [
+      "flow.google.com uses cookies to deliver and enhance the quality of its services and to analyze traffic. If you agree, cookies are also used to serve advertising and to personalize the content and advertisements that you see. Learn moreAgreeNo thanks",
+      "flow.google.com uses cookies to deliver and enhance the quality of its services and to analyze traffic. If you agree, cookies are also used to serve advertising and to personalize the content and advertisements that you see. Learn more",
+      "Learn more",
+      "Agree",
+      "No thanks",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.\n\nRSVP Here\nclose",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.\n\nRSVP Here",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.",
+      "Long Live the Process",
+      "Real work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.",
+      "RSVP Here",
+      "close",
+      "info\nYou're running low on Google Flow credits. Your credits will reset monthly, or upgrade to get more now.\nopen_in_new\nUpgrade\nclose",
+      "info\nYou're running low on Google Flow credits. Your credits will reset monthly, or upgrade to get more now.",
+      "info",
+      "You're running low on Google Flow credits. Your credits will reset monthly, or upgrade to get more now.",
+      "open_in_new\nUpgrade\nclose",
+      "open_in_new\nUpgrade"
+    ],
+    "credit_text": [
+      "10 credits"
+    ],
+    "avatar_details": "Google Account: Ramesh Kumar  \n(techwire9999@gmail.com), Google membership",
+    "status": "UNKNOWN",
+    "notes": ""
+  },
+  {
+    "slot": 1,
+    "expected_email": "abhiv46@gmail.com",
+    "detected_email": "abhiv46@gmail.com",
+    "tier": "FREE",
+    "banners": [
+      "flow.google.com uses cookies to deliver and enhance the quality of its services and to analyze traffic. If you agree, cookies are also used to serve advertising and to personalize the content and advertisements that you see. Learn moreAgreeNo thanks",
+      "flow.google.com uses cookies to deliver and enhance the quality of its services and to analyze traffic. If you agree, cookies are also used to serve advertising and to personalize the content and advertisements that you see. Learn more",
+      "Learn more",
+      "Agree",
+      "No thanks",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.\n\nRSVP Here\nclose",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.\n\nRSVP Here",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.",
+      "Long Live the Process",
+      "Real work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.",
+      "RSVP Here",
+      "close"
+    ],
+    "credit_text": [
+      "15 credits"
+    ],
+    "avatar_details": "Google Account: abhi verma  \n(abhiv46@gmail.com)",
+    "status": "UNKNOWN",
+    "notes": ""
+  },
+  {
+    "slot": 2,
+    "expected_email": "rkumar.pub@gmail.com",
+    "detected_email": "rkumar.pub@gmail.com",
+    "tier": "FREE",
+    "banners": [
+      "flow.google.com uses cookies to deliver and enhance the quality of its services and to analyze traffic. If you agree, cookies are also used to serve advertising and to personalize the content and advertisements that you see. Learn moreAgreeNo thanks",
+      "flow.google.com uses cookies to deliver and enhance the quality of its services and to analyze traffic. If you agree, cookies are also used to serve advertising and to personalize the content and advertisements that you see. Learn more",
+      "Learn more",
+      "Agree",
+      "No thanks",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.\n\nRSVP Here\nclose",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.\n\nRSVP Here",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.",
+      "Long Live the Process",
+      "Real work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.",
+      "RSVP Here",
+      "close",
+      "info\nYou're running low on Google Flow credits. Your credits will reset monthly, or top up to get more now.\nopen_in_new\nAdd AI credits\nclose",
+      "info\nYou're running low on Google Flow credits. Your credits will reset monthly, or top up to get more now.",
+      "info",
+      "You're running low on Google Flow credits. Your credits will reset monthly, or top up to get more now.",
+      "open_in_new\nAdd AI credits\nclose",
+      "open_in_new\nAdd AI credits"
+    ],
+    "credit_text": [
+      "15 credits"
+    ],
+    "avatar_details": "Google Account: Ramesh Kumar  \n(rkumar.pub@gmail.com), Google membership",
+    "status": "UNKNOWN",
+    "notes": ""
+  },
+  {
+    "slot": 3,
+    "expected_email": "pinku.pub@gmail.com",
+    "detected_email": "pinku.pub@gmail.com",
+    "tier": "FREE",
+    "banners": [
+      "flow.google.com uses cookies to deliver and enhance the quality of its services and to analyze traffic. If you agree, cookies are also used to serve advertising and to personalize the content and advertisements that you see. Learn moreAgreeNo thanks",
+      "flow.google.com uses cookies to deliver and enhance the quality of its services and to analyze traffic. If you agree, cookies are also used to serve advertising and to personalize the content and advertisements that you see. Learn more",
+      "Learn more",
+      "Agree",
+      "No thanks",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.\n\nRSVP Here\nclose",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.\n\nRSVP Here",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.",
+      "Long Live the Process",
+      "Real work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.",
+      "RSVP Here",
+      "close"
+    ],
+    "credit_text": [],
+    "avatar_details": "Google Account: Pinki Kumari  \n(pinku.pub@gmail.com)",
+    "status": "UNKNOWN",
+    "notes": ""
+  },
+  {
+    "slot": 4,
+    "expected_email": "infolillylooks@gmail.com",
+    "detected_email": "infolillylooks@gmail.com",
+    "tier": "FREE",
+    "banners": [
+      "flow.google.com uses cookies to deliver and enhance the quality of its services and to analyze traffic. If you agree, cookies are also used to serve advertising and to personalize the content and advertisements that you see. Learn moreAgreeNo thanks",
+      "flow.google.com uses cookies to deliver and enhance the quality of its services and to analyze traffic. If you agree, cookies are also used to serve advertising and to personalize the content and advertisements that you see. Learn more",
+      "Learn more",
+      "Agree",
+      "No thanks",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.\n\nRSVP Here\nclose",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.\n\nRSVP Here",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.",
+      "Long Live the Process",
+      "Real work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.",
+      "RSVP Here",
+      "close",
+      "info\nYou're out of Google Flow credits. You can wait until they refresh or upgrade to get more Google Flow credits now.\nopen_in_new\nUpgrade\nclose",
+      "info\nYou're out of Google Flow credits. You can wait until they refresh or upgrade to get more Google Flow credits now.",
+      "info",
+      "You're out of Google Flow credits. You can wait until they refresh or upgrade to get more Google Flow credits now.",
+      "open_in_new\nUpgrade\nclose",
+      "open_in_new\nUpgrade",
+      "Out of Google Flow credits"
+    ],
+    "credit_text": [
+      "10 credits"
+    ],
+    "avatar_details": "Google Account: Lilly Looks  \n(infolillylooks@gmail.com)",
+    "status": "UNKNOWN",
+    "notes": ""
+  },
+  {
+    "slot": 5,
+    "expected_email": "elegantdriveways4u@gmail.com",
+    "detected_email": "elegantdriveways4u@gmail.com",
+    "tier": "FREE",
+    "banners": [
+      "flow.google.com uses cookies to deliver and enhance the quality of its services and to analyse traffic. If you agree, cookies are also used to serve advertising and to personalise the content and advertisements that you see. Learn moreAgreeNo thanks",
+      "flow.google.com uses cookies to deliver and enhance the quality of its services and to analyse traffic. If you agree, cookies are also used to serve advertising and to personalise the content and advertisements that you see. Learn more",
+      "Learn more",
+      "Agree",
+      "No thanks",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.\n\nRSVP Here\nclose",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.\n\nRSVP Here",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.",
+      "Long Live the Process",
+      "Real work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.",
+      "RSVP Here",
+      "close"
+    ],
+    "credit_text": [
+      "45 credits"
+    ],
+    "avatar_details": "Google Account: Elegant Driveways  \n(elegantdriveways4u@gmail.com)",
+    "status": "UNKNOWN",
+    "notes": ""
+  },
+  {
+    "slot": 6,
+    "expected_email": "abhiv446@gmail.com",
+    "detected_email": "abhiv446@gmail.com",
+    "tier": "FREE",
+    "banners": [
+      "flow.google.com uses cookies to deliver and enhance the quality of its services and to analyze traffic. If you agree, cookies are also used to serve advertising and to personalize the content and advertisements that you see. Learn moreAgreeNo thanks",
+      "flow.google.com uses cookies to deliver and enhance the quality of its services and to analyze traffic. If you agree, cookies are also used to serve advertising and to personalize the content and advertisements that you see. Learn more",
+      "Learn more",
+      "Agree",
+      "No thanks",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.\n\nRSVP Here\nclose",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.\n\nRSVP Here",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.",
+      "Long Live the Process",
+      "Real work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.",
+      "RSVP Here",
+      "close"
+    ],
+    "credit_text": [],
+    "avatar_details": "Google Account: Abhi Verma  \n(abhiv446@gmail.com)",
+    "status": "UNKNOWN",
+    "notes": ""
+  },
+  {
+    "slot": 7,
+    "expected_email": "rkumar.ukb@gmail.com",
+    "detected_email": "rkumar.ukb@gmail.com",
+    "tier": "FREE",
+    "banners": [
+      "flow.google.com uses cookies to deliver and enhance the quality of its services and to analyze traffic. If you agree, cookies are also used to serve advertising and to personalize the content and advertisements that you see. Learn moreAgreeNo thanks",
+      "flow.google.com uses cookies to deliver and enhance the quality of its services and to analyze traffic. If you agree, cookies are also used to serve advertising and to personalize the content and advertisements that you see. Learn more",
+      "Learn more",
+      "Agree",
+      "No thanks",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.\n\nRSVP Here\nclose",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.\n\nRSVP Here",
+      "Long Live the Process\n\nReal work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.",
+      "Long Live the Process",
+      "Real work requires real craft. Join us for a workshop to learn how Google Flow can support your creative process.",
+      "RSVP Here",
+      "close"
+    ],
+    "credit_text": [],
+    "avatar_details": "Google Account: Ramesh Kumar  \n(rkumar.ukb@gmail.com), Important account alert",
+    "status": "UNKNOWN",
+    "notes": ""
+  }
+]

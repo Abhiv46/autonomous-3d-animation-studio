@@ -1,0 +1,30 @@
+{
+    "benchmark_url": "https://youtube.com/shorts/mROirKAfmE4",
+    "benchmark_title": "Brush Brush Brush! 🪥✨ Daant Saaf Karo! | CoComelon Style Hindi Kids Song",
+    "style_name": "CoComelon & Pixar Ultra-Adorable 3D CGI Toddler Standard",
+    "locked_status": "PERMANENTLY_LOCKED",
+    "core_visual_dna": {
+        "aspect_ratio": "9:16 vertical (1080x1920)",
+        "render_engine": "Full 3D CGI Animation (Veo / Google Flow)",
+        "character_proportions": "Adorable chubby toddler proportions, oversized cute heads, rounded rosy blushing cheeks, big expressive glassy 3D brown eyes, tiny cute toddler teeth",
+        "hair_shader": "Volumetric 3D silky hair with soft highlights (combed toddler hair for Kaartik, cute double buns/top knot with accessories for Kaavya)",
+        "skin_shader": "Peaches-and-cream soft glowing toddler skin with gentle subsurface scattering",
+        "lighting": "Bright, cheerful pastel studio lighting, soft ambient occlusion, gentle cinematic depth of field",
+        "color_palette": "Vibrant soft pastels (baby pink, sky blue, mint green, buttercup yellow, crisp white)",
+        "strict_negatives": [
+            "NO 2D drawings",
+            "NO flat sketches",
+            "NO line art or outlines",
+            "NO comic speech bubbles",
+            "NO written text overlays",
+            "NO dark or muddy shadows",
+            "NO realistic uncanny adult proportions"
+        ]
+    },
+    "character_locks": {
+        "kaartik": "Kaartik (5 years old, adorable chubby 3D toddler boy, big glassy brown 3D eyes, bright yellow polo shirt, blue shorts, joyful smile)",
+        "kaavya": "Kaavya (3 years old, cute chubby toddler girl, button nose, wide blushing pink cheeks, pink frock, double buns/top knot, sparkling giggly eyes)",
+        "mummy_pinki": "Mummy Pinki (25 years old, beautiful warm 3D mother, smooth Pixar Disney facial features, powder-blue Indian kurti, loving warm smile)"
+    },
+    "universal_prompt_prefix": "Vertical 9:16 aspect ratio, 8 seconds. CoComelon meets Pixar 3D animated style for toddlers (gold standard: https://youtube.com/shorts/mROirKAfmE4). Full 3D CGI animation, ultra-adorable rounded chubby toddler character models, oversized cute heads, rosy blushing cheeks, big expressive glassy 3D brown eyes, volumetric 3D hair with glossy highlights, soft glowing peach skin with gentle subsurface scattering, bright pastel studio lighting, soft ambient occlusion. STRICTLY NO 2D drawings, NO flat sketches, NO line art outlines, NO comic speech bubbles, NO text overlays."
+}
