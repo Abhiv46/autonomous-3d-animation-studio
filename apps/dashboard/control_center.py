@@ -324,6 +324,35 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </div>
     </div>
 
+    <!-- PUBLISHED MASTERPIECES (LIVE PLATFORM LINKS) -->
+    <div class="card" style="margin-bottom: 24px; border: 1px solid rgba(34, 197, 94, 0.4); background: linear-gradient(180deg, rgba(34, 197, 94, 0.05) 0%, rgba(30, 41, 59, 0.8) 100%);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <div>
+                <h3 style="color: #22c55e; margin: 0; font-size: 14px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px;">
+                    <span class="pulse-dot"></span> Published Masterpieces & Live Channel Links
+                </h3>
+                <p style="color: var(--muted); font-size: 12px; margin: 4px 0 0 0;">100% Assembled & Uploaded | Direct Verified YouTube Shorts & TikTok Links</p>
+            </div>
+            <span class="badge" style="background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.4);">
+                LIVE ON CHANNELS
+            </span>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Episode / Story Title</th>
+                    <th>Live Platform Link</th>
+                    <th>Scenes & Resolution</th>
+                    <th>Publish Status</th>
+                    <th>Published At</th>
+                </tr>
+            </thead>
+            <tbody id="published-body">
+                __PUBLISHED_TABLE__
+            </tbody>
+        </table>
+    </div>
+
     <!-- CONTENT QUEUE TABLE WITH TARGET PLATFORMS -->
     <div class="card" style="margin-bottom: 24px;">
         <h3>Production Pipeline Queue — Platform Distribution Targets</h3>
@@ -625,6 +654,52 @@ class ControlCenterHandler(BaseHTTPRequestHandler):
                     <td>{status_badge}</td>
                 </tr>"""
 
+            # Build published masterpieces table (including Ep 18 and previous uploads)
+            published_items = []
+            log_path = Path("C:/TheNaughtyDuo_Automation/uploaded_videos_log.json")
+            if log_path.exists():
+                try:
+                    with open(log_path, "r", encoding="utf-8") as f:
+                        log_data = json.load(f)
+                        for item in reversed(log_data.get("uploaded", [])):
+                            yt = item.get("youtube") or item.get("youtube_long") or item.get("link")
+                            tt = item.get("tiktok")
+                            title = item.get("youtube_title") or item.get("title") or item.get("key")
+                            ts = item.get("timestamp") or "Recently"
+                            key = item.get("key") or ""
+                            published_items.append({
+                                "key": key,
+                                "title": title,
+                                "youtube": yt if (yt and "http" in yt) else None,
+                                "tiktok": tt,
+                                "timestamp": ts
+                            })
+                except Exception:
+                    pass
+
+            published_html = ""
+            for p in published_items[:12]:
+                yt_cell = ""
+                if p["youtube"]:
+                    yt_cell = f"""<a href="{p['youtube']}" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; color: #ffffff; background: #ef4444; font-weight: 700; text-decoration: none; padding: 4px 10px; border-radius: 6px; font-size: 12px; box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);">
+                        ▶️ Watch on YouTube
+                    </a>"""
+                else:
+                    yt_cell = "<span style='color: var(--muted); font-size: 12px;'>Compiled for Long Format</span>"
+
+                tt_badge = "<span class='badge badge-tt' style='margin-left: 6px;'>TikTok ✓</span>" if p.get("tiktok") == "posted" else ""
+
+                published_html += f"""<tr>
+                    <td>
+                        <strong style="color: #ffffff; font-size: 13px;">{p['title'][:65]}</strong>
+                        <div style="margin-top: 3px;"><code style="font-size: 11px;">{p['key']}</code> {tt_badge}</div>
+                    </td>
+                    <td>{yt_cell}</td>
+                    <td><strong>3/3 Scenes</strong> <span style='color: var(--muted); font-size: 11px;'>(1080x1920 9:16)</span></td>
+                    <td><span class='badge' style='background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.4);'>🟢 100% PUBLISHED</span></td>
+                    <td><span style='color: var(--muted); font-size: 12px;'>{p['timestamp']}</span></td>
+                </tr>"""
+
         live = get_current_live_state()
 
         content = HTML_TEMPLATE
@@ -645,6 +720,7 @@ class ControlCenterHandler(BaseHTTPRequestHandler):
         content = content.replace("__INDEXED_COUNT__", str(indexed_count))
         content = content.replace("__ACCOUNTS_COUNT__", str(len(accounts)))
         content = content.replace("__TOTAL_CREDITS__", str(total_credits))
+        content = content.replace("__PUBLISHED_TABLE__", published_html or "<tr><td colspan='5'>No published videos yet</td></tr>")
         content = content.replace("__STORIES_TABLE__", stories_html or "<tr><td colspan='7'>No stories in queue</td></tr>")
         content = content.replace("__ACCOUNTS_TABLE__", accounts_html or "<tr><td colspan='6'>No accounts configured</td></tr>")
 

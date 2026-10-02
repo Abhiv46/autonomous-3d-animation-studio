@@ -85,6 +85,28 @@ class CrossPlatformScanner:
             except Exception as e:
                 logger.error(f"[SCANNER] Error reading schedule_slots: {e}")
 
+        # 3. Scan uploaded_videos_log.json
+        up_file = self.automation_dir / "uploaded_videos_log.json"
+        if up_file.exists():
+            try:
+                with open(up_file, "r", encoding="utf-8") as f:
+                    up_data = json.load(f)
+                for item in up_data.get("uploaded", []):
+                    title = item.get("youtube_title") or item.get("title") or item.get("filename") or ""
+                    link = item.get("youtube") or item.get("link") or ""
+                    if link and link.startswith("http"):
+                        records.append({
+                            "id": f"yt_log_{item.get('key', title[:15])}",
+                            "platform": "YOUTUBE",
+                            "title": title or item.get("key"),
+                            "normalized": self.normalize_text(title or item.get("key")),
+                            "keywords": ",".join(self.extract_concept_keywords(title or item.get("key"))),
+                            "source": "UPLOAD_LOG",
+                            "status": "PUBLISHED"
+                        })
+            except Exception as e:
+                logger.error(f"[SCANNER] Error reading uploaded_videos_log: {e}")
+
         # Insert records into SQLite
         with self.db.get_connection() as conn:
             for r in records:
