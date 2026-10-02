@@ -1,11 +1,11 @@
-# The Naughty Duo — Autonomous Content Operations Engine
+# Autonomous 3D Animation Studio — Pixar-Style Content Factory
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Platform Compliance](https://img.shields.io/badge/Compliance-COPPA%20Verified-green.svg)]()
 
-Production-grade, modular, self-healing autonomous AI content automation platform engineered for **The Naughty Duo** children's entertainment brand. Extensible architecture supporting multi-account **Google Flow (Veo 3.1 Lite)** browser automation, **YouTube Shorts/Theatrical Long-Form API**, and **TikTok Studio Creator Rewards** publishing with strict character continuity, zero-duplicate content protection, and P0 incomplete story recovery.
+Production-grade, modular, self-healing autonomous AI content automation studio engineered for **The Naughty Duo** brand. End-to-end autonomous pipeline featuring 9:16 Reference 3D Image Anchoring (I2V), multi-account **Google Flow** orchestration, cute toddler Hindi dialogues, 100% original natural audio preservation, and automated multi-platform publishing to **YouTube Shorts** and **TikTok Studio**.
 
 ---
 
@@ -131,8 +131,8 @@ flowchart TD
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/YourUsername/the-naughty-duo-autonomous-content-engine.git
-cd the-naughty-duo-autonomous-content-engine
+git clone https://github.com/Abhiv46/autonomous-3d-animation-studio.git
+cd autonomous-3d-animation-studio
 ```
 
 ### Step 2: Install Python Dependencies
