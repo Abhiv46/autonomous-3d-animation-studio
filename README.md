@@ -107,9 +107,9 @@ flowchart TD
     end
 
     subgraph Production_Engine ["2. Multi-Account Google Flow Engine"]
-        REG -->|P0 Incomplete Priority| AM[Account Manager Agent (8 Accounts)]
-        AM -->|Project Lock Enforced| BD[Browser Driver (Brave / Chromium)]
-        BD -->|Dynamic Cloud Render| RC[data/raw_clips]
+        REG -->|P0 Incomplete Priority| AM["Account Manager Agent (8 Accounts)"]
+        AM -->|Project Lock Enforced| BD["Browser Driver (Brave / Chromium)"]
+        BD -->|Dynamic Cloud Render| RC["data/raw_clips"]
     end
 
     subgraph Processing_and_QC ["3. Assembly & Quality Control"]
