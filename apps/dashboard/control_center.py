@@ -672,19 +672,26 @@ class ControlCenterHandler(BaseHTTPRequestHandler):
                                 "title": title,
                                 "youtube": yt if (yt and "http" in yt) else None,
                                 "tiktok": tt,
-                                "timestamp": ts
+                                "timestamp": ts,
+                                "youtube_status": item.get("youtube_status")
                             })
                 except Exception:
                     pass
 
             published_html = ""
-            for p in published_items[:12]:
+            for p in published_items[:14]:
                 yt_cell = ""
-                if p["youtube"]:
+                y_stat = p.get("youtube_status")
+                if y_stat and "PRIVATED" in y_stat:
+                    status_badge = f"<span class='badge' style='background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4);'>🔒 PRIVATED</span>"
+                    yt_cell = f"<span style='color: #ef4444; font-size: 11px; font-weight: 600;'>{y_stat}</span>"
+                elif p["youtube"]:
+                    status_badge = "<span class='badge' style='background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.4);'>🟢 100% LIVE</span>"
                     yt_cell = f"""<a href="{p['youtube']}" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; color: #ffffff; background: #ef4444; font-weight: 700; text-decoration: none; padding: 4px 10px; border-radius: 6px; font-size: 12px; box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);">
                         ▶️ Watch on YouTube
                     </a>"""
                 else:
+                    status_badge = "<span class='badge' style='background: rgba(255, 255, 255, 0.08); color: var(--muted);'>SAVED</span>"
                     yt_cell = "<span style='color: var(--muted); font-size: 12px;'>Compiled for Long Format</span>"
 
                 tt_badge = "<span class='badge badge-tt' style='margin-left: 6px;'>TikTok ✓</span>" if p.get("tiktok") == "posted" else ""
@@ -696,7 +703,7 @@ class ControlCenterHandler(BaseHTTPRequestHandler):
                     </td>
                     <td>{yt_cell}</td>
                     <td><strong>3/3 Scenes</strong> <span style='color: var(--muted); font-size: 11px;'>(1080x1920 9:16)</span></td>
-                    <td><span class='badge' style='background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.4);'>🟢 100% PUBLISHED</span></td>
+                    <td>{status_badge}</td>
                     <td><span style='color: var(--muted); font-size: 12px;'>{p['timestamp']}</span></td>
                 </tr>"""
 
