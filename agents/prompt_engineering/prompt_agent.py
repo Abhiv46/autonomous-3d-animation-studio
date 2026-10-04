@@ -5,7 +5,7 @@ from typing import Dict, Any, List
 class PromptEngineeringAgent:
     """Enforces Character Lock, visual benchmark consistency, and automatic prompt repair for Google Flow."""
 
-    def __init__(self, characters: List[Dict[str, Any]] = None, benchmark: str = "CoComelon & Pixar 3D Masterpiece (https://youtube.com/shorts/mROirKAfmE4)"):
+    def __init__(self, characters: List[Dict[str, Any]] = None, benchmark: str = "Garden Me Jhula (High-Fidelity 3D Pixar / CoComelon Benchmark)"):
         self.characters = {c["name"]: c for c in characters} if characters else {}
         self.benchmark = benchmark
         self.style_lock = (
@@ -32,10 +32,11 @@ class PromptEngineeringAgent:
 
         prompt = (
             f"{self.style_lock} "
+            f"Benchmark: {self.benchmark}. "
             f"Characters locked: {char_refs}. "
             f"Scene action: {base_scene_action.strip()}.{cta_instruction} "
             f"Dialogue constraint: All characters speak strictly in cute natural HINDI dialogues. "
-            f"Strict constraints: Exactly ONE of each character, locked clothing, joyful toddler expressions, fluid 3D character motion, 9:16 vertical."
+            f"Strict constraints: Exactly ONE of each character, No duplicate or clone characters, locked clothing, joyful toddler expressions, fluid 3D character motion, 9:16 vertical."
         )
         return prompt
 
