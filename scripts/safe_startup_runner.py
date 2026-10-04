@@ -1,4 +1,4 @@
-import os
+﻿import os
 import sys
 import time
 import subprocess
@@ -29,8 +29,8 @@ def main():
         if incomplete:
             print(f"      [!] FOUND {len(incomplete)} INCOMPLETE STORIES! Enforcing P0 Recovery:")
             for inc in incomplete:
-                print(f"          - Story ID: {inc['id']} | Title: '{inc['title'][:40]}...' | State: {inc['state']}")
-            print("      [✓] P0 Incomplete stories locked for completion BEFORE any new content!")
+                print(f"          - Story ID: {inc['id']} | Title: {inc['title'][:40]}... | State: {inc['state']}")
+            print("      [âœ“] P0 Incomplete stories locked for completion BEFORE any new content!")
         else:
             print("      -> No orphaned incomplete jobs found.")
 
@@ -65,3 +65,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+

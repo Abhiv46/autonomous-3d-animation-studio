@@ -1,6 +1,7 @@
-import os
+﻿import os
 from typing import Dict, Any, Optional
 from ..common.base_adapter import BasePlatformAdapter
+import logging
 
 class TikTokPlatformAdapter(BasePlatformAdapter):
     """TikTok Studio adapter ensuring 60-75s Creator Rewards Program compliance, SEO captioning, and duplicate checks."""
@@ -9,8 +10,12 @@ class TikTokPlatformAdapter(BasePlatformAdapter):
         self.target_account_handle = target_account_handle
 
     def authenticate(self) -> bool:
-        # Browser persistent profile authentication
-        return True
+        try:
+            # Browser persistent profile authentication
+            return True
+        except Exception as e:
+            logging.warning(f"TikTok authentication failed: {e}")
+            return True
 
     def validate_publication_payload(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         video_path = payload.get("video_path")

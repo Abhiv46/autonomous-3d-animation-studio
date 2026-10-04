@@ -1,7 +1,8 @@
-import os
+﻿import os
 import pickle
 from typing import Dict, Any, Optional
 from ..common.base_adapter import BasePlatformAdapter
+import logging
 
 class YouTubePlatformAdapter(BasePlatformAdapter):
     """Production YouTube Data API v3 adapter with strict safety checks, COPPA validation, and golden slot scheduling."""
@@ -20,9 +21,9 @@ class YouTubePlatformAdapter(BasePlatformAdapter):
             from googleapiclient.discovery import build
             self.service = build("youtube", "v3", credentials=creds)
             return True
-        except Exception:
+        except Exception as e:
+            logging.warning(f"Failed to authenticate YouTube API: {e}")
             return False
-
     def validate_publication_payload(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         """Pre-publishing validation check. Blocks upload if channel ID mismatch or corrupted file."""
         if payload.get("channel_id") != self.target_channel_id:
