@@ -8,6 +8,9 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BASE_DIR))
 
+import os
+os.environ['PYTHONIOENCODING'] = 'utf-8'  # <-- Encoding safety for Windows console
+
 from agents.orchestrator.orchestrator import AutonomousContentOrchestrator
 from backend.db.database import DatabaseManager
 
@@ -29,17 +32,18 @@ def main():
         if incomplete:
             print(f"      [!] FOUND {len(incomplete)} INCOMPLETE STORIES! Enforcing P0 Recovery:")
             for inc in incomplete:
-                print(f"          - Story ID: {inc['id']} | Title: '{inc['title'][:40]}...' | State: {inc['state']}")
-            print("      [✓] P0 Incomplete stories locked for completion BEFORE any new content!")
+                print(f"          - Story ID: {inc['id']} | Title: {inc['title'][:40]}... | State: {inc['state']}")
+            print("      [\u2713] P0 Incomplete stories locked for completion BEFORE any new content!")
         else:
             print("      -> No orphaned incomplete jobs found.")
 
     # Step 3: Run Duplicate Protection Check
     print("[3/6] Running global content fingerprint registry verification...")
     with db.get_connection() as conn:
-        total_stories = conn.execute("SELECT COUNT(*) as c FROM stories").fetchone()["c"]
-        total_fps = conn.execute("SELECT COUNT(*) as c FROM content_fingerprints").fetchone()["c"]
+        total_stories = conn.execute("SELECT COUNT(*) as c FROM stories").fetchone()[\"c\"]
+        total_fps = conn.execute("SELECT COUNT(*) as c FROM content_fingerprints").fetchone()[\"c\"]
     print(f"      -> {total_stories} registered stories, {total_fps} active content fingerprints.")
+    print()  # <-- Blank line for readability
 
     # Step 4: Verify 8 Google Flow Accounts & Project Locks
     print("[4/6] Verifying Google Flow account configurations and project locking policies...")
