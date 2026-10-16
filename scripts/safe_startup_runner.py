@@ -17,6 +17,7 @@ if sys.platform == "win32":
         pass
 
 from agents.orchestrator.orchestrator import AutonomousContentOrchestrator
+from agents.social_media_team.agent_team import SocialMediaAgentTeam
 from backend.db.database import DatabaseManager
 
 def main():
@@ -65,6 +66,12 @@ def main():
     orch = AutonomousContentOrchestrator()
     res = orch.run_next_operational_cycle()
     print(f"      -> Initial cycle result: {res['status']}")
+
+    # Step 7: Seed the daily social-media agent batch in safe dry-run mode
+    print("[7/7] Scheduling the social-media research, scripting and publishing team...")
+    team = SocialMediaAgentTeam()
+    summary = team.run_daily_cycle(max_videos=3, live_mode=False, dry_run=True)
+    print(f"      -> Daily plan generated for {summary['batch_size']} items")
 
     print("\n" + "=" * 75)
     print("   AUTONOMOUS CONTENT ENGINE ACTIVE! MONITORING BACKGROUND OPERATIONS.")

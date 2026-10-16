@@ -1,0 +1,144 @@
+{
+  "generated_at": "2026-10-06T20:21:01.186440+00:00",
+  "batch_size": 3,
+  "live_mode": false,
+  "dry_run": true,
+  "job_flow": [
+    "planned",
+    "generated",
+    "qc_passed",
+    "scheduled",
+    "published"
+  ],
+  "items": [
+    {
+      "id": "idea-01",
+      "title": "Daily Family Routine Comedy 1",
+      "platform": "youtube",
+      "account_email": "TecHWirE9999@gmail.com",
+      "slot_index": 0,
+      "duration_seconds": 45,
+      "hook": "Start with a fast visual surprise in the first 2 seconds: daily family routine comedy with an adorable reaction, bright color palette, and a punchy family payoff. Quick, playful and visually obvious in the first 1.5 seconds.",
+      "thumbnail_plan": {
+        "platform": "youtube",
+        "thumbnail_title": "Daily Family Routine",
+        "layout": "close-up face + dramatic reaction + one short text line",
+        "color_rule": "high contrast, warm yellow + pink + red accents",
+        "text_rule": "max 3 words, 3.5x height, huge face expression",
+        "cta": "SURPRISE REACTION",
+        "concept": "Start with a fast visual surprise in the first 2 seconds: daily family routine comedy with an adorable reaction, bright color palette, and a punchy family payoff.",
+        "safe_guidance": "Keep the character expression clear and 9:16 framing consistent; no text clutter."
+      },
+      "trend_signal": {
+        "topic": "tiny problem with funny reaction",
+        "hook": "Open on the exact surprise in the first 2 seconds: tiny problem with funny reaction with a huge reaction, bright colors, and immediate payoff.",
+        "score": 85,
+        "publish_slot": "prime_window",
+        "expected_retention": 72
+      },
+      "upload_status": "BLOCKED_QA",
+      "quality_gate": "REWORK_REQUIRED",
+      "job_state": "blocked",
+      "scheduled_at": "2026-10-06T20:21:01.184223+00:00"
+    },
+    {
+      "id": "idea-02",
+      "title": "Tiny Toddler Problem And Playful Payoff 2",
+      "platform": "tiktok",
+      "account_email": "abhiv46@gmail.com",
+      "slot_index": 1,
+      "duration_seconds": 60,
+      "hook": "Start with a fast visual surprise in the first 2 seconds: tiny toddler problem and playful payoff with an adorable reaction, bright color palette, and a punchy family payoff. Quick, playful and visually obvious in the first 1.5 seconds.",
+      "thumbnail_plan": {
+        "platform": "tiktok",
+        "thumbnail_title": "Tiny Toddler Problem",
+        "layout": "close-up face + dramatic reaction + one short text line",
+        "color_rule": "high contrast, warm yellow + pink + red accents",
+        "text_rule": "max 3 words, 3.5x height, huge face expression",
+        "cta": "SURPRISE REACTION",
+        "concept": "Start with a fast visual surprise in the first 2 seconds: tiny toddler problem and playful payoff with an adorable reaction, bright color palette, and a punchy family payoff.",
+        "safe_guidance": "Keep the character expression clear and 9:16 framing consistent; no text clutter."
+      },
+      "trend_signal": {
+        "topic": "sudden surprise reveal",
+        "hook": "Open on the exact surprise in the first 2 seconds: sudden surprise reveal with a huge reaction, bright colors, and immediate payoff.",
+        "score": 88,
+        "publish_slot": "prime_window",
+        "expected_retention": 72
+      },
+      "upload_status": "BLOCKED_QA",
+      "quality_gate": "REWORK_REQUIRED",
+      "job_state": "blocked",
+      "scheduled_at": "2026-10-06T20:21:01.184468+00:00"
+    },
+    {
+      "id": "idea-03",
+      "title": "Imaginative Indoor Adventure 3",
+      "platform": "youtube",
+      "account_email": "rkumar.pub@gmail.com",
+      "slot_index": 2,
+      "duration_seconds": 45,
+      "hook": "Start with a fast visual surprise in the first 2 seconds: imaginative indoor adventure with an adorable reaction, bright color palette, and a punchy family payoff. Quick, playful and visually obvious in the first 1.5 seconds.",
+      "thumbnail_plan": {
+        "platform": "youtube",
+        "thumbnail_title": "Imaginative Indoor Adven",
+        "layout": "close-up face + dramatic reaction + one short text line",
+        "color_rule": "high contrast, warm yellow + pink + red accents",
+        "text_rule": "max 3 words, 3.5x height, huge face expression",
+        "cta": "SURPRISE REACTION",
+        "concept": "Start with a fast visual surprise in the first 2 seconds: imaginative indoor adventure with an adorable reaction, bright color palette, and a punchy family payoff.",
+        "safe_guidance": "Keep the character expression clear and 9:16 framing consistent; no text clutter."
+      },
+      "trend_signal": {
+        "topic": "family challenge with cute win",
+        "hook": "Open on the exact surprise in the first 2 seconds: family challenge with cute win with a huge reaction, bright colors, and immediate payoff.",
+        "score": 91,
+        "publish_slot": "prime_window",
+        "expected_retention": 72
+      },
+      "upload_status": "BLOCKED_QA",
+      "quality_gate": "REWORK_REQUIRED",
+      "job_state": "blocked",
+      "scheduled_at": "2026-10-06T20:21:01.184665+00:00"
+    }
+  ],
+  "quality_checks": [
+    {
+      "id": "idea-01",
+      "title": "Daily Family Routine Comedy 1",
+      "platform": "youtube",
+      "passed": false,
+      "score": 80,
+      "quality_gate": "REWORK_REQUIRED",
+      "issues": [
+        "VIDEO_FILE_NOT_FOUND"
+      ]
+    },
+    {
+      "id": "idea-02",
+      "title": "Tiny Toddler Problem And Playful Payoff 2",
+      "platform": "tiktok",
+      "passed": false,
+      "score": 80,
+      "quality_gate": "REWORK_REQUIRED",
+      "issues": [
+        "VIDEO_FILE_NOT_FOUND"
+      ]
+    },
+    {
+      "id": "idea-03",
+      "title": "Imaginative Indoor Adventure 3",
+      "platform": "youtube",
+      "passed": false,
+      "score": 80,
+      "quality_gate": "REWORK_REQUIRED",
+      "issues": [
+        "VIDEO_FILE_NOT_FOUND"
+      ]
+    }
+  ],
+  "platform_mix": {
+    "youtube": 2,
+    "tiktok": 1
+  }
+}

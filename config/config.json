@@ -116,12 +116,13 @@
     ],
     "project_lock_policy": "STRICT_EXISTING_ONLY",
     "on_project_missing": "HALT_AND_ALERT",
+    "production_slot": 4,
     "max_concurrent_workers": 3
   },
   "platforms": {
     "youtube": {
       "enabled": true,
-      "channel_id": "UCULzzCCm0Y-ZHiYF480ioLg",
+      "channel_id": "UCULzzCCm0Y-ZHiyF480ioLg",
       "channel_handle": "@TheNaughtyDuoOfficial",
       "prime_slots_ist": [
         "09:00",
@@ -145,6 +146,7 @@
     },
     "tiktok": {
       "enabled": true,
+      "channel_handle": "@thenaughtyduoofficial",
       "min_duration_seconds": 60,
       "target_duration_seconds": 70,
       "creator_rewards_compliant": true,

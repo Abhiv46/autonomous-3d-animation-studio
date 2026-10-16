@@ -1,0 +1,8 @@
+file 'C:/TheNaughtyDuo_Automation/the-naughty-duo-autonomous-content-engine/data/trimmed_clips/norm_part1.mp4'
+file 'C:/TheNaughtyDuo_Automation/the-naughty-duo-autonomous-content-engine/data/trimmed_clips/norm_part2.mp4'
+file 'C:/TheNaughtyDuo_Automation/the-naughty-duo-autonomous-content-engine/data/trimmed_clips/norm_part3.mp4'
+file 'C:/TheNaughtyDuo_Automation/the-naughty-duo-autonomous-content-engine/data/trimmed_clips/norm_part4.mp4'
+file 'C:/TheNaughtyDuo_Automation/the-naughty-duo-autonomous-content-engine/data/trimmed_clips/norm_part5.mp4'
+file 'C:/TheNaughtyDuo_Automation/the-naughty-duo-autonomous-content-engine/data/trimmed_clips/norm_part6.mp4'
+file 'C:/TheNaughtyDuo_Automation/the-naughty-duo-autonomous-content-engine/data/trimmed_clips/norm_part7.mp4'
+file 'C:/TheNaughtyDuo_Automation/the-naughty-duo-autonomous-content-engine/data/trimmed_clips/norm_part8.mp4'

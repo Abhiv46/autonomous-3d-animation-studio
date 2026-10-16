@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import argparse
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 
@@ -308,9 +309,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             <p style="color: var(--muted); font-size: 12px; margin: 0;">Format: <strong>Creator Rewards (60s+)</strong></p>
         </div>
         <div class="card">
-            <h3>Zero Duplicate Guard</h3>
+            <h3>Duplicate History Index</h3>
             <div class="stat-val" style="color: var(--success);">__INDEXED_COUNT__ Indexed</div>
-            <p style="color: var(--muted); font-size: 12px; margin: 0;">YouTube + TikTok: <strong style="color: var(--success);">0% Duplicates Lock</strong></p>
+            <p style="color: var(--muted); font-size: 12px; margin: 0;">Indexed history helps flag duplicates; it cannot guarantee zero duplicates.</p>
         </div>
         <div class="card">
             <h3>Google Flow Pool</h3>
@@ -318,24 +319,22 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             <p style="color: var(--muted); font-size: 12px; margin: 0;">Project Lock: <strong style="color: var(--success);">The Naughty Duo</strong></p>
         </div>
         <div class="card">
-            <h3>Total Daily Credits</h3>
+            <h3>Locally Recorded Credits</h3>
             <div class="stat-val" style="color: #a855f7;">__TOTAL_CREDITS__ Credits</div>
-            <p style="color: var(--muted); font-size: 12px; margin: 0;">Across All 8 ID Slots</p>
+            <p style="color: var(--muted); font-size: 12px; margin: 0;">Cached database values only; not live-verified with Google Flow.</p>
         </div>
     </div>
 
-    <!-- PUBLISHED MASTERPIECES (LIVE PLATFORM LINKS) -->
-    <div class="card" style="margin-bottom: 24px; border: 1px solid rgba(34, 197, 94, 0.4); background: linear-gradient(180deg, rgba(34, 197, 94, 0.05) 0%, rgba(30, 41, 59, 0.8) 100%);">
+    <!-- PLATFORM UPLOAD LOG -->
+    <div class="card" style="margin-bottom: 24px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
             <div>
                 <h3 style="color: #22c55e; margin: 0; font-size: 14px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px;">
-                    <span class="pulse-dot"></span> Published Masterpieces & Live Channel Links
+                    Platform Upload Log
                 </h3>
-                <p style="color: var(--muted); font-size: 12px; margin: 4px 0 0 0;">100% Assembled & Uploaded | Direct Verified YouTube Shorts & TikTok Links</p>
+                <p style="color: var(--muted); font-size: 12px; margin: 4px 0 0 0;">Entries are read from the local upload log; verify publication in YouTube Studio or TikTok.</p>
             </div>
-            <span class="badge" style="background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.4);">
-                LIVE ON CHANNELS
-            </span>
+            <span class="badge" style="background: rgba(234, 179, 8, 0.15); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.4);">LOG DATA — VERIFY</span>
         </div>
         <table>
             <thead>
@@ -376,14 +375,14 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     <!-- ACCOUNTS TABLE WITH CREDITS BREAKDOWN -->
     <div class="card">
-        <h3>Google Flow Accounts — Live Credits & Quota Breakdown</h3>
+        <h3>Google Flow Accounts — Cached Local Values (Not Live Balance)</h3>
         <table>
             <thead>
                 <tr>
                     <th>Slot</th>
                     <th>Google Account (Email)</th>
                     <th>Tier</th>
-                    <th>Total Available Credits</th>
+                    <th>Locally Recorded Credits</th>
                     <th>Locked Project</th>
                     <th>Account Status</th>
                 </tr>
@@ -608,30 +607,54 @@ class ControlCenterHandler(BaseHTTPRequestHandler):
             tt_jobs_count = conn.execute("SELECT COUNT(*) as c FROM publishing_jobs WHERE platform = 'TIKTOK' AND status = 'PENDING'").fetchone()["c"]
 
             stories_html = ""
-            for s in stories:
-                done = s["done_parts"]
-                total = s["total_parts_db"] or s["total_parts"]
-                state_color = "#22c55e" if s["state"] == "COMPLETED" else ("#38bdf8" if s["state"] == "GENERATING" else "#94a3b8")
-                
-                # Render platforms badge
-                plats = s["platforms"] or "YOUTUBE,TIKTOK"
-                plat_badges = ""
-                if "YOUTUBE" in plats:
-                    plat_badges += "<span class='badge badge-yt'>YouTube</span> "
-                if "TIKTOK" in plats:
-                    plat_badges += "<span class='badge badge-tt'>TikTok</span>"
+            queue_status_path = BASE_DIR / "data" / "ops_command_center_status.json"
+            queue_items = []
+            if queue_status_path.exists():
+                try:
+                    with open(queue_status_path, "r", encoding="utf-8") as queue_file:
+                        queue_data = json.load(queue_file)
+                        queue_items = queue_data.get("items", [])
+                except Exception:
+                    queue_items = []
 
-                target_dur = f"{s['target_duration_seconds']}s" if s['target_duration_seconds'] else "60-70s"
+            if queue_items:
+                for item in queue_items[:10]:
+                    platform_badge = "<span class='badge badge-yt'>YouTube</span>" if item.get("platform") == "youtube" else "<span class='badge badge-tt'>TikTok</span>"
+                    state_label = item.get("job_state", "planned").replace("_", " ").upper()
+                    stories_html += f"""<tr>
+                        <td><code>{item['id']}</code></td>
+                        <td>{item['title'][:50]}...</td>
+                        <td>{platform_badge}</td>
+                        <td><strong>{item.get('duration_seconds', 60)}s</strong></td>
+                        <td><span class='badge' style='background: rgba(56, 189, 248, 0.15); color: #38bdf8;'>{state_label}</span></td>
+                        <td>P2</td>
+                        <td><strong>{item.get('quality_gate', 'UNKNOWN')}</strong></td>
+                    </tr>"""
+            else:
+                for s in stories:
+                    done = s["done_parts"]
+                    total = s["total_parts_db"] or s["total_parts"]
+                    state_color = "#22c55e" if s["state"] == "COMPLETED" else ("#38bdf8" if s["state"] == "GENERATING" else "#94a3b8")
+                    
+                    # Render platforms badge
+                    plats = s["platforms"] or "YOUTUBE,TIKTOK"
+                    plat_badges = ""
+                    if "YOUTUBE" in plats:
+                        plat_badges += "<span class='badge badge-yt'>YouTube</span> "
+                    if "TIKTOK" in plats:
+                        plat_badges += "<span class='badge badge-tt'>TikTok</span>"
 
-                stories_html += f"""<tr>
-                    <td><code>{s['id']}</code></td>
-                    <td>{s['title'][:50]}...</td>
-                    <td>{plat_badges}</td>
-                    <td><strong>{target_dur}</strong></td>
-                    <td><span class='badge' style='background: rgba(255,255,255,0.08); color: {state_color};'>{s['state']}</span></td>
-                    <td>P{s['priority']}</td>
-                    <td><strong>{done}/{total} Scenes</strong></td>
-                </tr>"""
+                    target_dur = f"{s['target_duration_seconds']}s" if s['target_duration_seconds'] else "60-70s"
+
+                    stories_html += f"""<tr>
+                        <td><code>{s['id']}</code></td>
+                        <td>{s['title'][:50]}...</td>
+                        <td>{plat_badges}</td>
+                        <td><strong>{target_dur}</strong></td>
+                        <td><span class='badge' style='background: rgba(255,255,255,0.08); color: {state_color};'>{s['state']}</span></td>
+                        <td>P{s['priority']}</td>
+                        <td><strong>{done}/{total} Scenes</strong></td>
+                    </tr>"""
 
             accounts_html = ""
             total_credits = 0
@@ -641,9 +664,9 @@ class ControlCenterHandler(BaseHTTPRequestHandler):
                 tier_badge = f"<span class='badge' style='background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4);'>{a['tier']}</span>" if a['tier'] == 'PRO' else f"<span class='badge' style='background: rgba(255, 255, 255, 0.08); color: var(--muted);'>{a['tier']}</span>"
                 
                 if creds > 0:
-                    creds_badge = f"<strong style='color: #22c55e; font-size: 14px;'>{creds} Credits</strong>"
+                    creds_badge = f"<strong style='color: #22c55e; font-size: 14px;'>{creds} Cached</strong>"
                 else:
-                    creds_badge = f"<strong style='color: #ef4444; font-size: 14px;'>0 Credits</strong>"
+                    creds_badge = f"<strong style='color: #ef4444; font-size: 14px;'>0 Cached</strong>"
                     
                 if a['status'] == 'ACTIVE':
                     status_badge = "<span class='badge' style='background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.4);'>🟢 READY / ACTIVE</span>"
@@ -746,4 +769,7 @@ def run_server(port=8088):
     server.serve_forever()
 
 if __name__ == "__main__":
-    run_server()
+    parser = argparse.ArgumentParser(description="Run the local content operations dashboard.")
+    parser.add_argument("port", nargs="?", type=int, default=8088)
+    args = parser.parse_args()
+    run_server(port=args.port)

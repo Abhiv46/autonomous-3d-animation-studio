@@ -3,30 +3,28 @@ import psutil
 import subprocess
 import time
 from typing import Optional, Dict, Any
-from playwright.sync_api import sync_playwright, BrowserContext, Page
+from playwright.sync_api import sync_playwright, Browser, BrowserContext, Page
 
 class BrowserAutomationEngine:
     """Enterprise-grade browser automation manager with process health checks, profile locking recovery, and auto-cleanup."""
     
-    def __init__(self, browser_exe: str, user_data_dir: str, headless: bool = True):
+    def __init__(self, browser_exe: str = "", user_data_dir: str = "", headless: bool = True):
         self.browser_exe = browser_exe
         self.user_data_dir = user_data_dir
         self.headless = headless
         self.playwright = None
         self.context: Optional[BrowserContext] = None
+        self.browser: Optional[Browser] = None
+        self._owns_context = False
 
     @staticmethod
     def cleanup_stale_processes(browser_name: str = "brave.exe", user_data_dir: Optional[str] = None):
-        """Safely cleans up stale lockfiles without touching other browsers (NEVER kills chrome.exe)."""
-        if user_data_dir and os.path.exists(user_data_dir):
-            for lock_name in ("SingletonLock", "SingletonCookie", "SingletonSocket", "lockfile"):
-                lock_path = os.path.join(user_data_dir, lock_name)
-                try:
-                    if os.path.exists(lock_path):
-                        os.remove(lock_path)
-                except Exception:
-                    pass
-        # Never kill chrome.exe since user uses it for dashboard viewing!
+        """Intentionally does not remove browser profile locks.
+
+        Chromium owns these files. Removing them while a profile is open can
+        corrupt or disconnect a user's active browser session.
+        """
+        return None
 
     @staticmethod
     def is_browser_running(browser_name: str = "brave.exe") -> bool:
@@ -65,12 +63,33 @@ class BrowserAutomationEngine:
                     args=args,
                     timeout=30000
                 )
+                self._owns_context = True
                 return self.context
             except Exception as e:
                 time.sleep(2)
                 self.cleanup_stale_processes(os.path.basename(self.browser_exe), self.user_data_dir)
                 if attempt == 2:
                     raise RuntimeError(f"Failed to launch browser after 3 attempts: {e}")
+
+    def connect_over_cdp(self, endpoint: str = "http://127.0.0.1:9222") -> BrowserContext:
+        """Attaches to the user's already-running browser without owning its context."""
+        self.playwright = sync_playwright().start()
+        try:
+            self.browser = self.playwright.chromium.connect_over_cdp(endpoint, timeout=10000)
+        except Exception as exc:
+            self.playwright.stop()
+            self.playwright = None
+            raise RuntimeError(
+                f"Could not attach to the pinned Brave browser at {endpoint}. "
+                "Start Brave with its local remote-debugging port enabled."
+            ) from exc
+
+        if not self.browser.contexts:
+            self.close()
+            raise RuntimeError("Pinned Brave is connected but has no available browser context.")
+        self.context = self.browser.contexts[0]
+        self._owns_context = False
+        return self.context
 
     def capture_error_screenshot(self, page: Page, filepath: str) -> str:
         try:
@@ -81,10 +100,11 @@ class BrowserAutomationEngine:
             return ""
 
     def close(self):
-        try:
-            if self.context:
-                self.context.close()
-            if self.playwright:
-                self.playwright.stop()
-        except Exception:
-            pass
+        if self._owns_context and self.context:
+            self.context.close()
+        if self.playwright:
+            self.playwright.stop()
+        self.context = None
+        self.browser = None
+        self.playwright = None
+        self._owns_context = False

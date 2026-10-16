@@ -12,7 +12,7 @@ class DuplicateDetectionAgent:
     Guarantees 0% chance of generating or publishing an already existing concept, title, or scene.
     """
 
-    def __init__(self, similarity_threshold: float = 0.70, scanner: Optional[CrossPlatformScanner] = None):
+    def __init__(self, similarity_threshold: float = 0.82, scanner: Optional[CrossPlatformScanner] = None):
         self.threshold = similarity_threshold
         self.scanner = scanner if scanner else CrossPlatformScanner()
 
@@ -28,7 +28,8 @@ class DuplicateDetectionAgent:
             "mummy", "kaartik", "kaavya", "pinki", "aur", "ka", "ki", "ke", "me", "se", "ko",
             "par", "hai", "ye", "kya", "bana", "gaya", "gaye", "wale", "wala", "full", "hd", "3d",
             "ghar", "aaya", "aayi", "gayi", "hoga", "hogi", "karein", "karo", "rahe", "rahi",
-            "raha", "thi", "tha", "the", "ek", "do", "sab", "naya", "nayi", "bhi", "toh", "jab", "tab", "ab"
+            "raha", "thi", "tha", "the", "ek", "do", "sab", "naya", "nayi", "bhi", "toh", "jab", "tab", "ab",
+            "thenaughtyduo", "giant", "bani", "hilarious", "reaction"
         }
         words = re.findall(r"\b[a-zA-Z]{3,}\b", text.lower())
         return {w for w in words if w not in stop_words}
@@ -50,7 +51,7 @@ class DuplicateDetectionAgent:
             platform = item.get("platform", "UNKNOWN")
             existing_title = item.get("title", "")
             ex_norm = item.get("normalized_title", self.normalize_text(existing_title))
-            ex_keywords = set(item.get("keywords", "").split(",")) if item.get("keywords") else self.extract_keywords(existing_title)
+            ex_keywords = self.extract_keywords(existing_title)
 
             # 1. Exact or Substring Normalized Match
             if c_norm and (c_norm == ex_norm or c_norm in ex_norm or ex_norm in c_norm):

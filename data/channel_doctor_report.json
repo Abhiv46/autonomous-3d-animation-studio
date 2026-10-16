@@ -1,0 +1,170 @@
+{
+  "generated_at": "2026-10-07T18:19:40+00:00",
+  "scope": {
+    "youtube_handle": "@TheNaughtyDuoOfficial",
+    "tiktok_handle": "@thenaughtyduoofficial",
+    "promises_of_virality": false,
+    "publishing_or_deleting_performed": false
+  },
+  "overall_assessment": "EVIDENCE_BASED_REVIEW",
+  "data_coverage": {
+    "youtube_posts_analyzed": 10,
+    "youtube_as_of": "2026-10-07T18:19:12+00:00",
+    "youtube_source": "authenticated YouTube Studio analytics overview",
+    "tiktok_posts_analyzed": 6,
+    "tiktok_as_of": "2026-10-07T18:19:12+00:00",
+    "tiktok_source": "authenticated TikTok Studio content page",
+    "limitations": [
+      "Studio UI snapshot includes visible rows, not necessarily every post.",
+      "Retention graphs, swipe decisions, traffic sources, and share counts require their dedicated Studio analytics views."
+    ]
+  },
+  "findings": [
+    {
+      "id": "YOUTUBE_OWN_BASELINE",
+      "severity": "low",
+      "evidence_type": "verified",
+      "summary": "10 supplied posts have view counts; their median is 35.5. This is an internal comparison only, not an algorithm benchmark.",
+      "recommended_action": [
+        "Compare each post to this account's own baseline using the same post-age window."
+      ]
+    },
+    {
+      "id": "YOUTUBE_RETENTION_SPREAD",
+      "severity": "medium",
+      "evidence_type": "verified",
+      "summary": "Among the 3 highest-viewed supplied videos, average percentage viewed ranges from 17.1% to 78%. This identifies a test opportunity, not a proven causal format difference.",
+      "recommended_action": [
+        "Use the higher-retention video (Toys Sameto / Clean Up Song! 🧸🧹 Good Habits for Kids | CoComelon Hindi #TheNaughtyDuo #shorts) as one reference; test its hook/pacing against a new original idea.",
+        "Review the early drop-off on the lower-retention video (Kaartik & Kaavya Ki Pyari Adatein! 🌟 Hindi Cartoons & Rhymes Collection | #TheNaughtyDuo) in per-video retention graphs."
+      ]
+    },
+    {
+      "id": "YOUTUBE_SHORTS_FEED_MISSING",
+      "severity": "high",
+      "evidence_type": "hypothesis",
+      "summary": "Shorts feed exposure and viewed-vs-swiped data are missing, so distribution versus creative performance cannot be separated.",
+      "recommended_action": [
+        "Add shown-in-feed and viewed-vs-swiped metrics from YouTube Studio."
+      ]
+    },
+    {
+      "id": "YOUTUBE_LATEST_VIDEO_TOO_EARLY_TO_JUDGE",
+      "severity": "low",
+      "evidence_type": "verified",
+      "summary": "The latest Studio card is only First 3 hours 15 minutes old; its early view count is not a reliable performance diagnosis yet.",
+      "recommended_action": [
+        "Recheck after at least 24-48 hours and compare with videos at the same age."
+      ]
+    },
+    {
+      "id": "YOUTUBE_CHANNEL_STUDIO_SNAPSHOT",
+      "severity": "low",
+      "evidence_type": "verified",
+      "summary": "YouTube Studio currently reports views last 28 days: 4700, watch hours last 28 days: 13.8, subscribers gained net last 28 days: 10, current subscribers: 10. These are channel-level totals, not proof of which video factor caused reach.",
+      "recommended_action": [
+        "Use per-Short feed exposure and retention data to diagnose individual videos."
+      ]
+    },
+    {
+      "id": "YOUTUBE_TOP_CONTENT_CONCENTRATION",
+      "severity": "low",
+      "evidence_type": "verified",
+      "summary": "The three highest-viewed supplied videos account for about 81% of YouTube Studio's 28-day channel views. Studio's displayed channel total is rounded, so this share is approximate.",
+      "recommended_action": [
+        "Study what differs in the top videos, then test one original hook/pacing variation at a time rather than repeating titles or scenes."
+      ]
+    },
+    {
+      "id": "TIKTOK_OWN_BASELINE",
+      "severity": "low",
+      "evidence_type": "verified",
+      "summary": "6 supplied posts have view counts; their median is 170. This is an internal comparison only, not an algorithm benchmark.",
+      "recommended_action": [
+        "Compare each post to this account's own baseline using the same post-age window."
+      ]
+    },
+    {
+      "id": "TIKTOK_RETENTION_AND_SHARES_MISSING",
+      "severity": "high",
+      "evidence_type": "hypothesis",
+      "summary": "The supplied TikTok posts do not include all diagnostic fields: average_watch_time_seconds, full_video_watch_rate, shares.",
+      "recommended_action": [
+        "Add average watch time, full-video watch rate, and shares before attributing low reach to a particular cause."
+      ]
+    },
+    {
+      "id": "TIKTOK_GENERIC_HASHTAG_OVERUSE",
+      "severity": "low",
+      "evidence_type": "verified",
+      "summary": "Among supplied captions, 1 generic reach hashtag and 0 captions with 8+ hashtags were found. This is a metadata quality issue, not proof of suppression.",
+      "recommended_action": [
+        "Replace broad tag piles with a few accurate topic, language, and audience phrases; do not promise that hashtags alone increase reach."
+      ]
+    },
+    {
+      "id": "TIKTOK_STUDIO_POST_COUNT",
+      "severity": "low",
+      "evidence_type": "verified",
+      "summary": "TikTok Studio displays 100 posts. This confirms account activity, not current reach or monetization eligibility.",
+      "recommended_action": [
+        "Review the latest post-level watch time, completion, shares, and traffic-source metrics."
+      ]
+    },
+    {
+      "id": "TIKTOK_POSTING_BURST",
+      "severity": "medium",
+      "evidence_type": "verified",
+      "summary": "The current Studio snapshot shows 4 posts within about 13 minutes. That pacing is observable; any effect on distribution is unproven.",
+      "recommended_action": [
+        "Test a more spaced schedule on the next comparable batch and compare equal-age metrics; do not delete or repost these videos."
+      ]
+    },
+    {
+      "id": "YOUTUBE_POSSIBLE_DUPLICATE_UPLOADS",
+      "severity": "medium",
+      "evidence_type": "verified",
+      "summary": "The local log contains 1 repeated YOUTUBE title group(s); this does not prove multiple public posts because the log can include drafts, retries, or privacy changes.",
+      "recommended_action": [
+        "Cross-check platform video IDs and visibility in official Studio before deleting, privating, or re-uploading anything."
+      ]
+    },
+    {
+      "id": "UPLOAD_LOG_STALE",
+      "severity": "medium",
+      "evidence_type": "verified",
+      "summary": "The newest timestamp in the local upload log is 2026-10-02; it is older than 3 days.",
+      "recommended_action": [
+        "Verify recent live uploads in each platform's Studio; local logs are not authoritative publication records."
+      ]
+    }
+  ],
+  "safe_fixes_applied": [
+    {
+      "id": "tiktok_structured_row_extraction",
+      "status": "fixed_in_code",
+      "detail": "The Studio scraper now falls back to role-based rows when table rows are absent and extracts visible data rows from the pinned Brave session."
+    },
+    {
+      "id": "synthetic_zero_analytics",
+      "status": "fixed_in_code",
+      "detail": "Platform adapters now report analytics as unavailable instead of inventing zero views and likes."
+    },
+    {
+      "id": "youtube_channel_target",
+      "status": "corrected_after_studio_verification",
+      "detail": "The configured YouTube channel ID was corrected to the ID linked from the signed-in The Naughty Duo Studio dashboard."
+    },
+    {
+      "id": "preset_growth_scores",
+      "status": "fixed_in_code",
+      "detail": "The doctor labels missing evidence explicitly and does not present static targets as measured performance."
+    }
+  ],
+  "next_experiment": {
+    "rule": "Change one variable at a time and compare against the channel's own recent baseline.",
+    "youtube": "Test first-second hook clarity while holding topic, duration, and posting window as constant as practical.",
+    "tiktok": "Test searchable on-screen/caption phrasing and a visible payoff; compare average watch time, full-video watch rate, and shares.",
+    "approval_boundary": "Drafts and local reports only; no live metadata edits, deletes, uploads, paid promotion, or account changes."
+  }
+}

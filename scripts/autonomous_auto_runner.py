@@ -30,10 +30,10 @@ signal.signal(signal.SIGINT, handle_sigint)
 
 def main():
     print("=" * 78)
-    print("   THE NAUGHTY DUO - AUTONOMOUS MULTI-ACCOUNT PARALLEL PRODUCTION ENGINE")
+    print("   THE NAUGHTY DUO - GUARDED SINGLE-ACCOUNT PRODUCTION RUNNER")
     print("=" * 78)
-    print("[*] Mode: FULLY AUTONOMOUS (AUTO-PILOT)")
-    print("[*] Multi-Account Parallel Generation: ACTIVE")
+    print("[*] Mode: GUARDED AUTO-RUN")
+    print("[*] Production account: configured slot only; no automatic account switching")
     print("[*] Strict Project Lock: 'The Naughty Duo' ENFORCED")
     print("[*] Permanent Character Lock: Pinki, Kaartik, Kaavya ENFORCED")
     print("[*] P0 Incomplete Recovery: ENFORCED")
@@ -46,12 +46,16 @@ def main():
     with open(config_path, "r", encoding="utf-8") as f:
         config = json.load(f)
 
-    # Initialize Engine with configured max concurrent accounts (default 4)
+    # Production targets one configured account; this remains a worker-thread ceiling.
     max_workers = config.get("google_flow", {}).get("max_concurrent_workers", 4)
     engine = MultiAccountParallelEngine(config=config, max_concurrent=max_workers)
     db = DatabaseManager()
 
-    logger.info(f"[AUTOPILOT] Initialized with {max_workers} concurrent account worker threads.")
+    production_slot = int(config.get("google_flow", {}).get("production_slot", 0))
+    logger.info(
+        f"[AUTOPILOT] Worker-thread ceiling: {max_workers}; "
+        f"production account slots: 1 (configured slot {production_slot})."
+    )
 
     cycle_count = 0
     while running:
@@ -73,6 +77,31 @@ def main():
         # Run Parallel Batch across available accounts
         batch_results = engine.run_parallel_batch()
         logger.info(f"[CYCLE #{cycle_count} RESULTS]: {batch_results}")
+
+        if any(result.get("status") == "REVIEW_REQUIRED" for result in batch_results):
+            logger.error(
+                "[AUTOPILOT] Pausing the entire production queue because a submitted Flow prompt "
+                "has an uncertain result. Review the Flow project before restarting."
+            )
+            break
+
+        if any(result.get("status") == "FAILED_OR_REQUEUED" for result in batch_results):
+            logger.error(
+                "[AUTOPILOT] Pausing after a generation attempt failed before a confirmed download. "
+                "Review the Flow profile and queued scene before restarting."
+            )
+            break
+
+        if batch_results and all(
+            result.get("status") in {"QUOTA_BLOCKED", "NO_ACTIVE_PRIMARY_ACCOUNT"}
+            for result in batch_results
+        ):
+            logger.warning(
+                "[AUTOPILOT] Production paused: primary Flow account is unavailable or out of quota. "
+                "No alternate account will be used; restart after the account is available."
+            )
+            time.sleep(60)
+            continue
 
         # Short inter-batch pacing to allow Google Flow API / canvas cooldown
         time.sleep(5)

@@ -67,19 +67,17 @@ def test_2_incomplete_story_recovery(temp_db):
     assert job["state"] == "PARTIAL"
     assert job["priority"] == 0 # P0 Priority!
 
-def test_3_account_switching_on_credits_exhausted():
-    """TEST 3: When credits are exhausted on Account 1, system safely switches to next healthy account."""
+def test_3_account_manager_does_not_switch_when_primary_quota_is_exhausted():
+    """Production never fails over to another account when the primary quota is exhausted."""
     accounts = [
         {"slot_index": 0, "email": "acc0@test.com", "status": "ACTIVE", "available_credits": 0},
         {"slot_index": 1, "email": "acc1@test.com", "status": "ACTIVE", "available_credits": 50}
     ]
     mgr = AccountManagerAgent(accounts)
     
-    # Account 0 has 0 credits -> Must select Account 1
+    # Account 0 has 0 credits; Account 1 must not be used as a quota failover.
     selected = mgr.select_best_account(required_credits=15, current_slot=0)
-    assert selected is not None
-    assert selected["slot_index"] == 1
-    assert selected["email"] == "acc1@test.com"
+    assert selected is None
 
 def test_5_character_lock_enforcement():
     """TEST 5: Verify character lock permanently inserts Pinki, Kaartik, and Kaavya without hallucinated characters."""
@@ -168,6 +166,130 @@ def test_8_parallel_multi_account_generation(temp_db, monkeypatch):
         assigned = {p["assigned_account_id"] for p in parts}
         assert "acc_0" in assigned and "acc_1" in assigned
 
+def test_production_generation_uses_only_primary_account(temp_db, monkeypatch):
+    from agents.worker_pool.parallel_engine import MultiAccountParallelEngine
+
+    monkeypatch.delenv("SIMULATION", raising=False)
+    config = {
+        "google_flow": {
+            "production_slot": 0,
+            "accounts": [
+                {"slot_index": 0, "email": "acc0@test.com", "status": "ACTIVE", "tier": "FREE"},
+                {"slot_index": 1, "email": "acc1@test.com", "status": "ACTIVE", "tier": "FREE"},
+            ],
+        },
+        "character_lock": {"characters": []},
+    }
+    engine = MultiAccountParallelEngine(config, max_concurrent=2, db=temp_db)
+    used_slots = []
+
+    def fake_worker(account):
+        used_slots.append(account["slot_index"])
+        return {"slot": account["slot_index"], "status": "COMPLETED"}
+
+    monkeypatch.setattr(engine, "execute_worker_task", fake_worker)
+    results = engine.run_parallel_batch()
+
+    assert used_slots == [0]
+    assert len(results) == 1
+    assert results[0]["slot"] == 0
+
+def test_production_generation_waits_for_quota_reset(temp_db, monkeypatch):
+    from agents.worker_pool.parallel_engine import MultiAccountParallelEngine
+
+    monkeypatch.delenv("SIMULATION", raising=False)
+    config = {
+        "google_flow": {
+            "production_slot": 0,
+            "accounts": [
+                {"slot_index": 0, "email": "acc0@test.com", "status": "ACTIVE", "tier": "FREE"},
+                {"slot_index": 1, "email": "acc1@test.com", "status": "ACTIVE", "tier": "FREE"},
+            ],
+        },
+        "character_lock": {"characters": []},
+    }
+    engine = MultiAccountParallelEngine(config, max_concurrent=2, db=temp_db)
+    engine._quota_blocked_slots.add(0)
+
+    results = engine.run_parallel_batch()
+
+    assert results == [{
+        "slot": 0,
+        "status": "QUOTA_BLOCKED",
+        "message": "Waiting for this account's quota reset.",
+    }]
+
+def test_production_generation_pauses_when_database_credits_are_zero(temp_db, monkeypatch):
+    from agents.worker_pool.parallel_engine import MultiAccountParallelEngine
+
+    monkeypatch.delenv("SIMULATION", raising=False)
+    config = {
+        "google_flow": {
+            "production_slot": 0,
+            "accounts": [
+                {"slot_index": 0, "email": "acc0@test.com", "status": "ACTIVE", "tier": "FREE"},
+                {"slot_index": 1, "email": "acc1@test.com", "status": "ACTIVE", "tier": "FREE"},
+            ],
+        },
+        "character_lock": {"characters": []},
+    }
+    engine = MultiAccountParallelEngine(config, max_concurrent=2, db=temp_db)
+    with temp_db.get_connection() as conn:
+        conn.execute(
+            "UPDATE accounts SET available_credits = 0 WHERE slot_index = 0"
+        )
+
+    results = engine.run_parallel_batch()
+
+    assert results[0]["status"] == "QUOTA_BLOCKED"
+    assert "No locally recorded credits" in results[0]["message"]
+    with temp_db.get_connection() as conn:
+        status = conn.execute(
+            "SELECT status FROM accounts WHERE slot_index = 0"
+        ).fetchone()["status"]
+    assert status == "COOLDOWN"
+
+def test_generation_blocks_story_matching_indexed_platform_title(temp_db, monkeypatch):
+    from agents.worker_pool.parallel_engine import MultiAccountParallelEngine
+
+    story_id = "TND-DUPLICATE-BLOCK-001"
+    title = "Unique Test Story Title"
+    prompts = [{"part_number": 1, "scene_label": "Hook", "prompt_text": "A unique test scene action."}]
+    temp_db.register_story(story_id, title, "Test concept", "PROBLEM_PAYOFF", prompts)
+    with temp_db.get_connection() as conn:
+        normalized = "unique test story title"
+        conn.execute(
+            """
+            INSERT INTO platform_indexed_videos
+                (id, platform, title, normalized_title, keywords, source_type, status)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            """,
+            ("yt_duplicate_guard", "YOUTUBE", title, normalized, "unique,test,story,title", "TEST", "PUBLISHED"),
+        )
+
+    config = {
+        "google_flow": {
+            "production_slot": 0,
+            "accounts": [{"slot_index": 0, "email": "acc0@test.com", "status": "ACTIVE", "tier": "FREE"}],
+        },
+        "character_lock": {"characters": []},
+    }
+    engine = MultiAccountParallelEngine(config, max_concurrent=1, db=temp_db)
+    monkeypatch.setattr(
+        engine.duplicate_agent,
+        "verify_zero_duplicate",
+        lambda title, prompts: {"is_duplicate": True, "reason": "TEST_MATCH"},
+    )
+
+    claimed = engine.claim_next_work_item(0)
+
+    assert claimed is None
+    with temp_db.get_connection() as conn:
+        story = conn.execute("SELECT state FROM stories WHERE id = ?", (story_id,)).fetchone()
+        part = conn.execute("SELECT status FROM story_parts WHERE story_id = ?", (story_id,)).fetchone()
+    assert story["state"] == "FAILED"
+    assert part["status"] == "PENDING"
+
 def test_9_cross_platform_zero_duplicate_guard(temp_db):
     """TEST 9: Zero-tolerance duplicate prevention rejects candidate if already on YouTube or TikTok."""
     from backend.services.cross_platform_scanner import CrossPlatformScanner
@@ -192,5 +314,3 @@ def test_9_cross_platform_zero_duplicate_guard(temp_db):
     res_fresh = agent.verify_zero_duplicate('Mummy Ka Magic Remote! Sab Freeze Ho Gaye!')
     assert res_fresh["is_duplicate"] is False
     assert res_fresh["status"] == "VERIFIED_100_PERCENT_ORIGINAL_AND_FRESH"
-
-

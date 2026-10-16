@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-10-06T19:34:12.715401+00:00",
+  "batch_size": 2,
+  "live_mode": false,
+  "dry_run": true,
+  "platform_mix": {
+    "youtube": 1,
+    "tiktok": 1
+  },
+  "items": [
+    {
+      "id": "idea-01",
+      "title": "Daily Family Routine Comedy 1",
+      "platform": "youtube",
+      "account_email": "TecHWirE9999@gmail.com",
+      "slot_index": 0,
+      "duration_seconds": 45,
+      "hook": "Start with a fast visual surprise in the first 2 seconds: daily family routine comedy with an adorable reaction, bright color palette, and a punchy family payoff. Quick, playful and visually obvious in the first 1.5 seconds.",
+      "upload_status": "SIMULATED_POSTED"
+    },
+    {
+      "id": "idea-02",
+      "title": "Tiny Toddler Problem And Playful Payoff 2",
+      "platform": "tiktok",
+      "account_email": "abhiv46@gmail.com",
+      "slot_index": 1,
+      "duration_seconds": 60,
+      "hook": "Start with a fast visual surprise in the first 2 seconds: tiny toddler problem and playful payoff with an adorable reaction, bright color palette, and a punchy family payoff. Quick, playful and visually obvious in the first 1.5 seconds.",
+      "upload_status": "SIMULATED_POSTED"
+    }
+  ]
+}

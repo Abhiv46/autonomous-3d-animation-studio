@@ -1,25 +1,29 @@
 from typing import List, Dict, Any, Optional
 
 class AccountManagerAgent:
-    """Intelligently orchestrates up to 8 Google Flow accounts. Manages credit tracking, cooldowns, and seamless job handoffs without restarting completed work."""
+    """Manages one configured Google Flow account and pauses when its quota is unavailable."""
 
-    def __init__(self, accounts: List[Dict[str, Any]]):
+    def __init__(self, accounts: List[Dict[str, Any]], primary_slot: int = 0):
         self.accounts = {a["slot_index"]: a for a in accounts}
+        self.primary_slot = primary_slot
 
     def select_best_account(self, required_credits: int = 15, current_slot: Optional[int] = None) -> Optional[Dict[str, Any]]:
-        """Prefers keeping the entire story on the current account if sufficient credits exist; otherwise switches to next healthy account."""
-        # 1. Check current slot first to avoid unnecessary story splitting
-        if current_slot is not None and current_slot in self.accounts:
-            curr = self.accounts[current_slot]
-            if curr.get("status") == "ACTIVE" and curr.get("available_credits", 50) >= required_credits:
-                return curr
-
-        # 2. Find next active account with available credits
-        for slot in sorted(self.accounts.keys()):
-            acc = self.accounts[slot]
-            if acc.get("status") == "ACTIVE" and acc.get("available_credits", 50) >= required_credits:
-                return acc
-
+        """Selects only the primary/current account; never fails over to another account."""
+        slot = self.primary_slot
+        if current_slot is not None:
+            try:
+                slot = int(str(current_slot).removeprefix("acc_"))
+            except ValueError:
+                return None
+            if slot != self.primary_slot:
+                return None
+        account = self.accounts.get(slot)
+        if (
+            account
+            and account.get("status") == "ACTIVE"
+            and account.get("available_credits", 50) >= required_credits
+        ):
+            return account
         return None
 
     def mark_credits_exhausted(self, slot_index: int):

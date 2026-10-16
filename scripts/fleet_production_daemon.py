@@ -458,7 +458,14 @@ def run_slate_production():
                 tt_caption = f"{clean_title} #TheNaughtyDuo #shorts #viral #funny #comedy #3danimation #hindicartoon #foryou #fyp #trending"
                 
                 update_live_status(ep_id, title, f"/u/{s_num}/ ({s_email})", "Publishing to TikTok", 95, "Uploading with Full Viral SEO to TikTok Studio")
-                tt_ok = upload_to_tiktok_studio(str(master_out), tt_caption)
+                tt_result = upload_to_tiktok_studio(str(master_out), tt_caption)
+                tt_ok = bool(tt_result.get("success"))
+                if not tt_ok:
+                    print(
+                        f"[!] TikTok not published: {tt_result.get('status', 'UNKNOWN')} "
+                        f"{tt_result.get('error', '')}",
+                        flush=True,
+                    )
 
                 if yt_link or tt_ok:
                     print(f"\n[🎉 PUBLISHED DUAL]: YT: {yt_link} | TikTok: {'LIVE' if tt_ok else 'FAILED'}", flush=True)

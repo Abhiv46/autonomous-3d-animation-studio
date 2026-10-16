@@ -43,7 +43,11 @@ class AutonomousContentOrchestrator:
             self.config.get("character_lock", {}).get("characters", []),
             benchmark=self.config.get("character_lock", {}).get("quality_benchmark", "Garden Me Jhula (High-Fidelity 3D Pixar)")
         )
-        self.account_agent = AccountManagerAgent(self.config.get("google_flow", {}).get("accounts", []))
+        flow_cfg = self.config.get("google_flow", {})
+        self.account_agent = AccountManagerAgent(
+            flow_cfg.get("accounts", []),
+            primary_slot=int(flow_cfg.get("production_slot", 0)),
+        )
         self.qc_agent = QualityControlAgent()
         self.seo_agent = YouTubeSEOAgent()
 
@@ -85,8 +89,11 @@ class AutonomousContentOrchestrator:
         part_id = target_part["id"]
         logger.info(f"[ORCHESTRATOR] Resuming generation for {part_id}: '{target_part['scene_label']}'...")
 
-        # 4. Account selection (preserves account continuity or switches on credit exhaustion)
-        selected_acc = self.account_agent.select_best_account(required_credits=15, current_slot=target_part.get("assigned_account_id"))
+        # Use only the configured production account; wait for its quota instead of failing over.
+        selected_acc = self.account_agent.select_best_account(
+            required_credits=15,
+            current_slot=target_part.get("assigned_account_id"),
+        )
         if not selected_acc:
             logger.warning(f"[ORCHESTRATOR] No accounts with available credits found! Marking Story {story_id} as WAITING_FOR_CREDITS (P0).")
             with self.db.get_connection() as conn:
