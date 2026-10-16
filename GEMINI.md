@@ -105,8 +105,16 @@ While **FACES ARE 100% LOCKED**, clothing must be vibrant, engaging, attractive,
   4. **Teamwork & Love:** Helping each other clean up toys, clapping for each other's tiny achievements, dancing happily on the bedroom rug.
 - **Emotional Impact:** High-tear/heart-melting retention, wholesome family sentiment that parents, kids, and international audiences love to re-watch and share.
 
-### 🚫 STRICTLY BANNED & BLACKLISTED THEME: "Dadi Ki Mithai Chori / Stealing Tropes"
-- **FORBIDDEN:** Absolutely **NO** plots, scripts, concepts, or titles involving stealing sweets, sneaking food dishonestly, or negative mischief like "chori" hooks (*Dadi Ki Mithai Chori*, *Laddu Chori*, sneaking snacks behind parents' backs).
-- **Reason:** User explicitly mandated: *"Dadi Ki Mithai Chori - Indian Family Comedy Hook aisa bilkul nahi chahiye isko remove krdo aur save krlo memory me aisi video dubra na bane"*.
-- **Rule:** If food/sweets appear in any video, they must ONLY be shared with love, baked together with Mummy Pinki, or celebrated openly at a family table. Any sneakiness, theft, or dishonest tropes are **PERMANENTLY BLACKLISTED**.
+### 🚫 VISUAL DEFECT ANALYSIS & RECTIFICATION: "Dadi Ki Mithai / Sweet Scenes"
+- **User Clarification:** *"Dadi Ki Mithai Chori - Indian Family Comedy iski story me koi problem nahi bs iski video me problem hai"*
+- **The Story is Great & Approved:** The core family comedy idea (kids being playfully tempted by delicious warm Indian sweets/gulab jamun at home) is relatable and wholesome.
+- **The Video Execution was Completely Broken (Strictly Forbidden Flaws):**
+  1. **Floating Phantom Objects:** In Scene 1, a second giant bowl of gulab jamuns was hallucinated floating mid-air above their heads.
+  2. **Character & Facial Drift:** Kaavya had flat clay eyes, low pigtails instead of high space buns, and a bindi put on a 3yo toddler. Kaartik's face turned into an elongated caricature.
+  3. **Wardrobe Flickering:** Clothes shifted between yellow/pink to blue/magenta to orange/blue across clips.
+  4. **Grotesque Food Hallucinations:** In Scene 3, Google Flow hallucinated syrup oozing unnaturally out of characters' noses and melting into grotesque sticky slime over their hands.
+- **Mandatory Production Rule for Sweet/Food Scenes:**
+  - Food scenes must look appetizing, clean, and Disney-Pixar polished (like Remy in *Ratatouille* or the cookie in *Bhai Ka Pyar*).
+  - NEVER prompt or allow sticky syrup/melted food to distort character faces, noses, or limbs.
+  - Characters MUST maintain their exact locked faces (`kaartik_face_anchor.jpg`, `kaavya_face_anchor.jpg`, `mummy_face_anchor.jpg`) and signature outfits without wardrobe shifts.
 
