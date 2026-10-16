@@ -41,6 +41,8 @@ Profile */
 *.jpg
 *.jpeg
 *.webp
+!character_master_bible/*.jpg
+!character_master_bible/*.png
 *.wav
 *.mp3
 data/raw_clips/

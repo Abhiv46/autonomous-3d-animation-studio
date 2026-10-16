@@ -1,0 +1,143 @@
+{
+  "channel_name": "The Naughty Duo (@TheNaughtyDuoOfficial)",
+  "last_updated": "2026-10-16T20:10:00+01:00",
+  "registry_description": "Master permanent tracking list of all generated and uploaded videos across YouTube and TikTok. Every future upload must pass the verification gate against this file to prevent duplicates.",
+  "videos": [
+    {
+      "id": "EP28_BRUSH_TEETH",
+      "topic": "Chhuk-Chhuk Brush Karo! (Good Habits / Toothpaste Fun)",
+      "file_name": "TheNaughtyDuo_BrushTeeth_Toddler_HD_Final.mp4",
+      "duration": "40s",
+      "youtube": {
+        "uploaded": true,
+        "title": "Chhuk-Chhuk Brush Karo! 🪥✨ Kaavya & Kaartik Good Habits Song 🦷 | The Naughty Duo #Shorts",
+        "views": "1.4K views",
+        "status": "PUBLIC"
+      },
+      "tiktok": {
+        "uploaded": true,
+        "caption": "Chhuk-Chhuk Brush Karo! 🪥✨ Kaavya aur Kaartik ki cute brush masti!",
+        "views": "721 views",
+        "upload_date": "16 Oct 2026, 7:50 am",
+        "status": "PUBLIC"
+      }
+    },
+    {
+      "id": "EP27_FRUIT_BASKET",
+      "topic": "Yummy Fruits Song! (Fruit Basket & Sharing)",
+      "file_name": "TheNaughtyDuo_FruitBasket_Toddler_HD_Final.mp4",
+      "duration": "70s",
+      "youtube": {
+        "uploaded": true,
+        "title": "Yummy Fruits Song! 🍎🍌 Kaavya & Kaartik Fruit Basket 🍇🍓 | The Naughty Duo #Shorts",
+        "views": "7 views",
+        "status": "PUBLIC"
+      },
+      "tiktok": {
+        "uploaded": true,
+        "caption": "Yummy Fruits Song! 🍎🍌 Kaavya aur Kaartik ki cute toddler fruit party!",
+        "views": "724 views",
+        "upload_date": "15 Oct 2026, 9:36 pm",
+        "status": "PUBLIC"
+      }
+    },
+    {
+      "id": "EP26_DADI_CHASHMA",
+      "topic": "Dadi Ka Chashma Kahan Gaya? (Glasses Mystery)",
+      "file_name": "TheNaughtyDuo_Dadi_Chashma_70s_Final.mp4",
+      "duration": "70s",
+      "youtube": {
+        "uploaded": true,
+        "title": "Dadi Ka Chashma Kahan Gaya? 👓🔍 | Hindi Cartoon | The Naughty Duo #shorts",
+        "views": "2 views",
+        "status": "PUBLIC"
+      },
+      "tiktok": {
+        "uploaded": true,
+        "caption": "Dadi Ka Chashma Kahan Gaya? 👓🔍 Kaartik aur Kaavya bane detective!",
+        "views": "252 views",
+        "upload_date": "15 Oct 2026, 9:37 am",
+        "status": "PUBLIC"
+      }
+    },
+    {
+      "id": "EP25_MALAI_MONSTER",
+      "topic": "Doodh Par Malai Ka Monster! (Milk Cream Mustache)",
+      "file_name": "TheNaughtyDuo_Malai_Monster_70s_Final.mp4",
+      "duration": "70s",
+      "youtube": {
+        "uploaded": true,
+        "title": "Doodh Par Malai Ka Monster! 🥛👹 | The Naughty Duo #Shorts",
+        "views": "1 view",
+        "status": "PUBLIC"
+      },
+      "tiktok": {
+        "uploaded": true,
+        "caption": "Doodh Par Malai Ka Monster! 🥛 Kaartik Ka White Mustache!",
+        "views": "57 views",
+        "upload_date": "15 Oct 2026, 7:58 am",
+        "status": "PUBLIC"
+      }
+    },
+    {
+      "id": "EP24_FACE_MASK",
+      "topic": "Kaavya Ne Chata Mummy Ka Face Mask",
+      "file_name": "TheNaughtyDuo_FaceMask_Seamless_Pixar.mp4",
+      "duration": "60s",
+      "youtube": {
+        "uploaded": true,
+        "title": "Kaavya Ne Chata Mummy Ka Face Mask! 😂🍫 3 Badi Shararat Non-Stop | The Naughty Duo #shorts",
+        "views": "3 views",
+        "status": "PUBLIC"
+      },
+      "tiktok": {
+        "uploaded": true,
+        "status": "PUBLIC"
+      }
+    },
+    {
+      "id": "EP23_LADDOO_CHOR",
+      "topic": "Mummy Ke Laddoo Kisne Churaye?",
+      "file_name": "viral_laddoo_detective_short.mp4",
+      "duration": "75s",
+      "youtube": {
+        "uploaded": true,
+        "title": "Mummy Ke Laddoo Kisne Churaye? 🕵️‍♀️ Laddu Chor Kaartik Pakda Gaya! 😂 (Full Episode) #TheNaughtyDuo",
+        "views": "2 views",
+        "status": "PUBLIC"
+      },
+      "tiktok": {
+        "uploaded": true,
+        "status": "PUBLIC"
+      }
+    },
+    {
+      "id": "EP29_TOYS_CLEANUP",
+      "topic": "Toys Clean Up Toddler Adventure",
+      "file_name": "TheNaughtyDuo_ToysCleanUp_Toddler_HD_Final.mp4",
+      "duration": "32s",
+      "youtube": {
+        "uploaded": false,
+        "status": "PENDING_VERIFICATION (Needs expansion to 1.3 - 2.5 min per rule)"
+      },
+      "tiktok": {
+        "uploaded": false,
+        "status": "PENDING_VERIFICATION"
+      }
+    },
+    {
+      "id": "EP30_MORNING_ROUTINE_MASTER",
+      "topic": "Morning Routine Master Movie (Bath to Dance)",
+      "file_name": "TheNaughtyDuo_MorningRoutine_Master_HD.mp4",
+      "duration": "85.5s (1.43 min)",
+      "youtube": {
+        "uploaded": false,
+        "status": "HOLD: Middle bridge scenes being re-rendered on PRO (u/3) with Face Anchors"
+      },
+      "tiktok": {
+        "uploaded": false,
+        "status": "HOLD: Middle bridge scenes being re-rendered on PRO (u/3) with Face Anchors"
+      }
+    }
+  ]
+}

@@ -7,6 +7,121 @@
 
 Production-grade, modular, self-healing autonomous AI content automation studio engineered for **The Naughty Duo** brand. End-to-end autonomous pipeline featuring 9:16 Reference 3D Image Anchoring (I2V), multi-account **Google Flow** orchestration, cute toddler Hindi dialogues, 100% original natural audio preservation, and automated multi-platform publishing to **YouTube Shorts** and **TikTok Studio**.
 
+## 🤖 Social Media Agent Team
+
+This project now includes a daily social-media agent team that coordinates research, scripting, editing, publication validation, and analytics for YouTube and TikTok. It is built as a safe, policy-aware starter layer on top of the existing production engine.
+
+Run a single daily cycle:
+
+```bash
+python scripts/run_daily_social_media_cycle.py --max-videos 3
+```
+
+Live publishing is disabled by default. Do not enable it until the operator has reviewed the batch, all video assets pass QA, and platform credentials have been validated:
+
+```bash
+python scripts/run_daily_social_media_cycle.py --max-videos 3 --live --no-dry-run
+```
+
+To run a persisted daily plan that stores the generated queue to `data/daily_social_media_plan.json`:
+
+```bash
+python scripts/daily_social_media_scheduler.py --max-videos 3
+```
+
+To safely prepare and dispatch a live batch only when output files already exist:
+
+```bash
+python scripts/live_content_dispatch.py --max-videos 3 --live --no-dry-run
+```
+
+The team uses the existing config in `config/config.json`, rotates across active Google Flow accounts, and stays in safe dry-run mode by default so it never uploads without explicit live approval.
+
+### Use Brave while Flow automation runs
+
+The Flow browser worker uses a dedicated persistent profile per account at `browser_sessions/flow_slot_<slot>`, separate from your everyday Brave profile. It no longer removes browser profile lock files. This lets you keep using your regular Brave window while a worker uses its isolated profile.
+
+Before using a slot for the first time, open that dedicated profile and sign into the matching Google account:
+
+```powershell
+python scripts/open_flow_automation_profile.py --slot 0
+```
+
+Use the configured account for that slot, then close the dedicated window before running automation for that slot. Repeat for each account slot you intend to automate. Keep your normal Brave window separate; do not point `BRAVE_EXECUTABLE` or automation profile paths at your everyday Brave `User Data` directory. The profiles are persistent and contain account sessions, so do not share or commit `browser_sessions`.
+
+### Full-stack launch command
+
+To launch the full autonomous system and operator dashboard together:
+
+```bash
+python scripts/run_full_social_media_suite.py --max-videos 3
+```
+
+This starts the local control center on `http://127.0.0.1:8088`, runs a daily batch plan in dry-run mode, and prints the batch health and publishing gate. Dry-run is not an upload and must not be treated as published content.
+
+See [FINAL_RUNBOOK.md](./FINAL_RUNBOOK.md) for the frozen release workflow, safe commands, job states, live prerequisites, and limitations. The current project is a release candidate, not a guarantee of viral reach or production-ready platform authentication.
+
+### Viral growth stack
+
+The default production workflow now includes a second layer of viral-growth agents:
+
+- `TrendResearchAgent`: picks the strongest hook patterns for YouTube Shorts and TikTok.
+- `ThumbnailEngineerAgent`: optimizes first-frame attention, color contrast, and headline clarity.
+- `PerformanceAnalyticsAgent`: evaluates watch time, retention, CTR, and recommends what to double down on.
+- `ComplianceGuardAgent`: makes sure CTA, title, and platform rules remain safe.
+- `LocalOpsDashboardAgent`: shows which agent is active and whether the batch is healthy enough to publish.
+
+This keeps the system aligned with the real viral formula:
+
+1. 0–2 second visual hook
+2. single idea, no slow setup
+3. emotional reaction before logic/explanation
+4. strong payoff in the first third
+5. CTA pinned in the last 2–3 seconds
+6. consistent publishing in the best platform windows for retention
+
+## 🎬 Google Flow Generation Agent
+
+The repo now includes a specialized `GoogleFlowGenerationAgent` that builds locked prompt packs for multi-scene short-form videos. It enforces:
+
+- exact character identity for Kaavya, Kaartik, and Pinki
+- fixed room layout and placement rules
+- safe 9:16 vertical generation guidance
+- no forbidden deep-water or dangerous framing
+- exact scene ordering for 8-scene Shorts/ TikTok storytelling
+- final LIKE + SUBSCRIBE CTA in the last scene
+
+You can use it directly from Python:
+
+```python
+from agents.google_flow.google_flow_agent import GoogleFlowGenerationAgent
+
+agent = GoogleFlowGenerationAgent()
+pack = agent.build_default_waterpark_story()
+print(pack["scene_sequence"][0]["prompt"])
+```
+
+## 🔒 Permanent Character Benchmark & Face Lock System
+To completely eliminate character inconsistency and facial drift across long multi-clip stories, this engine enforces a **Disk-Level Face Lock Protocol**:
+- **Master Reference Assets (`character_master_bible/`):** High-resolution cropped face anchors for all primary characters:
+  - `kaartik_face_anchor.jpg` (5yo Boy: glossy hazel doe eyes, dark wavy hair tuft with messy side-swoop, chubby dimpled cheeks).
+  - `kaavya_face_anchor.jpg` (3yo Toddler: signature **Double High Space Buns** with cute floral ties, rosy cherub cheeks, doe eyes).
+  - `mummy_face_anchor.jpg` (Young Indian Mother: warm almond eyes, voluminous wavy espresso hair, radiant smile).
+- **Zero-Drift Continuity Policy:** Every generation chain begins from canonical face anchors or the preceding clip's exact uncompressed end-frame.
+
+## 🛡️ Master Upload Registry Gate (Instant Zero-Waste Verification)
+Never waste credits or audience retention on duplicate uploads:
+- **Registry Database (`channel_master_upload_registry.json`):** Tracks every generated episode, platform publish status (YouTube Shorts & TikTok), view counts, and video IDs.
+- **Instant Pre-Upload Gate (`verify_before_upload.py`):**
+  ```bash
+  python verify_before_upload.py <video_filename_or_keyword>
+  ```
+  Runs in **0.01 seconds** without opening browsers or consuming API quota. If the video is already live on YouTube or TikTok, the pipeline immediately halts and prevents duplicate publication.
+
+## 🎬 Single Continuous Movie Illusion (1.3 to 2.5 Minutes)
+- Multi-clip episodes (78s to 150s) are seamlessly stitched with sub-second crossfades and continuous forward narrative motion.
+- **Zero Repetition Rule:** Zero looping, zero repeated actions. Every second delivers fresh comedy, emotion, or story progression.
+
 ---
 
 ## 📑 Table of Contents
@@ -50,18 +165,9 @@ The platform strictly locks the identity of the three official characters across
 
 ---
 
-## 🔄 8 Google Flow Account Orchestration
+## 🔄 Google Flow Account and Quota Handling
 
-The system rotates through up to 8 configured Google accounts to maximize throughput:
-
-```
-Story TND-2026-0001:
-  ├─ Part 1 (Hook)        -> Account 3 (pinku.pub@gmail.com) [Credits: 50]
-  ├─ Part 2 (Comedy)      -> Account 3 (Continued on same account)
-  └─ Part 3 (Payoff)      -> Credits exhausted?
-                              └─> Saves State -> Switches to Account 6 (abhiv446@gmail.com)
-                                  └─> Renders Part 3 ONLY (NEVER re-renders Part 1 or 2!)
-```
+Production generation uses one configured account (`google_flow.production_slot`, default `0`) and one isolated Brave profile at a time. When that account reaches its credit or quota limit, generation pauses and leaves the scene queued for a later run after the quota resets. It does not rotate through accounts to bypass per-account free-credit limits. Simulation tests may still use multiple workers.
 
 ---
 
