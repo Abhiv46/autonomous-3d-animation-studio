@@ -1,6 +1,6 @@
 {
   "channel_name": "The Naughty Duo (@TheNaughtyDuoOfficial)",
-  "last_updated": "2026-10-16T20:10:00+01:00",
+  "last_updated": "2026-10-16T21:27:41+01:00",
   "registry_description": "Master permanent tracking list of all generated and uploaded videos across YouTube and TikTok. Every future upload must pass the verification gate against this file to prevent duplicates.",
   "videos": [
     {
@@ -128,15 +128,21 @@
     {
       "id": "EP30_MORNING_ROUTINE_MASTER",
       "topic": "Morning Routine Master Movie (Bath to Dance)",
-      "file_name": "TheNaughtyDuo_MorningRoutine_Master_HD.mp4",
-      "duration": "85.5s (1.43 min)",
+      "file_name": "TheNaughtyDuo_MorningRoutine_PERFECT_PIXAR_HD.mp4",
+      "duration": "46.5s",
       "youtube": {
-        "uploaded": false,
-        "status": "HOLD: Middle bridge scenes being re-rendered on PRO (u/3) with Face Anchors"
+        "uploaded": true,
+        "title": "Subah Ki Masti! 🥛✨ Kaartik & Kaavya Milk Mustache Comedy 😂 | The Naughty Duo #Shorts",
+        "views": "Published Just Now",
+        "upload_date": "2026-10-16T21:27:41+01:00",
+        "status": "PUBLIC"
       },
       "tiktok": {
-        "uploaded": false,
-        "status": "HOLD: Middle bridge scenes being re-rendered on PRO (u/3) with Face Anchors"
+        "uploaded": true,
+        "caption": "Subah Ki Masti! 🥛✨ Kaartik aur Kaavya ka milk mustache comedy! 😂🥰 Dekho Kaavya kaise has rahi hai! #TheNaughtyDuo #MorningRoutine #KidsCartoon #PixarStyle #FunnyKids #HindiCartoons #Viral #ForYou",
+        "views": "Published Just Now",
+        "upload_date": "2026-10-16T21:27:41+01:00",
+        "status": "PUBLIC"
       }
     }
   ]

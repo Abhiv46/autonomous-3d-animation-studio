@@ -17,7 +17,7 @@
 | **EP24** | Kaavya Ne Chata Mummy Ka Face Mask 😂🍫 | `TheNaughtyDuo_FaceMask_Seamless_Pixar.mp4` | 60s | ✅ **Uploaded (3 views)** | ✅ **Uploaded** |
 | **EP23** | Mummy Ke Laddoo Kisne Churaye? 🕵️‍♀️ | `viral_laddoo_detective_short.mp4` | 75s | ✅ **Uploaded (2 views)** | ✅ **Uploaded** |
 | **EP29** | Toys Clean Up Toddler Adventure 🧹 | `TheNaughtyDuo_ToysCleanUp_Toddler_HD_Final.mp4` | 32s | ⏳ **PENDING (Needs expansion to 1.3 - 2.5 min)** | ⏳ **PENDING** |
-| **EP30** | Morning Routine Master Movie 🎬 | `TheNaughtyDuo_MorningRoutine_Master_HD.mp4` | 85.5s (1.43 min) | ⏳ **HOLD (Middle bridge scenes being re-rendered on PRO `u/3` with Face Anchors)** | ⏳ **HOLD** |
+| **EP30** | Subah Ki Masti! 🥛✨ (Morning Routine Master) | `TheNaughtyDuo_MorningRoutine_PERFECT_PIXAR_HD.mp4` | 46.5s | ✅ **Uploaded (Just Now)** | ✅ **Uploaded (Just Now)** |
 
 ---
 
