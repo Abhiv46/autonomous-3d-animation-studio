@@ -91,3 +91,22 @@ While **FACES ARE 100% LOCKED**, clothing must be vibrant, engaging, attractive,
    - Every generated clip must be inspected at seconds 4 and 7.
    - If facial geometry or hair drifts from the Face Anchors, **ABORT IMMEDIATELY**.
    - NEVER chain a drifted clip to the next scene.
+
+---
+
+## 5. CONTENT POLICIES & STORY THEME LOCKS (WHAT TO CREATE VS WHAT IS STRICTLY BANNED)
+
+### 💖 PERMANENTLY LOCKED GOLD BENCHMARK: "Bhai Ka Pyar - Heartwarming Sibling Bond"
+- **Core Theme:** Unconditional love, protection, innocent empathy, and heartwarming sibling bonding between big brother Kaartik (5yo) and baby sister Kaavya (3yo).
+- **Approved Narrative Anchors:**
+  1. **Selfless Sharing:** Giving the last cookie/biscuit to little sister when she holds her tummy innocently.
+  2. **Protection & Comfort:** Kaartik holding Kaavya's hand, wiping her tears, comforting her during thunder/darkness, or giving a gentle warm bear hug.
+  3. **Animal Empathy & Care:** Rescuing a cold/injured puppy in the rain (*Bhai Ne Bachaya Ghayal Puppy* style), gently wrapping it in a towel together.
+  4. **Teamwork & Love:** Helping each other clean up toys, clapping for each other's tiny achievements, dancing happily on the bedroom rug.
+- **Emotional Impact:** High-tear/heart-melting retention, wholesome family sentiment that parents, kids, and international audiences love to re-watch and share.
+
+### 🚫 STRICTLY BANNED & BLACKLISTED THEME: "Dadi Ki Mithai Chori / Stealing Tropes"
+- **FORBIDDEN:** Absolutely **NO** plots, scripts, concepts, or titles involving stealing sweets, sneaking food dishonestly, or negative mischief like "chori" hooks (*Dadi Ki Mithai Chori*, *Laddu Chori*, sneaking snacks behind parents' backs).
+- **Reason:** User explicitly mandated: *"Dadi Ki Mithai Chori - Indian Family Comedy Hook aisa bilkul nahi chahiye isko remove krdo aur save krlo memory me aisi video dubra na bane"*.
+- **Rule:** If food/sweets appear in any video, they must ONLY be shared with love, baked together with Mummy Pinki, or celebrated openly at a family table. Any sneakiness, theft, or dishonest tropes are **PERMANENTLY BLACKLISTED**.
+
