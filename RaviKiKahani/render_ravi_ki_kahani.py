@@ -32,32 +32,24 @@ font_sub = None
 font_hindi = None
 font_badge = None
 
-for fp in [r"C:\Windows\Fonts\arialbd.ttf", r"C:\Windows\Fonts\segoeuib.ttf"]:
-    if os.path.exists(fp):
-        font_title = ImageFont.truetype(fp, 68)
-        font_sub = ImageFont.truetype(fp, 44)
-        font_badge = ImageFont.truetype(fp, 52)
-        break
-
-# Hindi font fallback
-hindi_fonts = [
-    r"C:\Windows\Fonts\mangal.ttf",
-    r"C:\Windows\Fonts\aparaj.ttf",
-    r"C:\Windows\Fonts\nirmala.ttf",
-    r"C:\Windows\Fonts\arial.ttf"
-]
-for fp in hindi_fonts:
-    if os.path.exists(fp):
-        try:
-            font_hindi = ImageFont.truetype(fp, 46)
-            font_hindi_large = ImageFont.truetype(fp, 60)
+# Load Official Noto Sans Devanagari Font
+noto_path = os.path.join(PROJECT_DIR, "fonts", "NotoSansDevanagari-Bold.ttf")
+if os.path.exists(noto_path):
+    font_hindi = ImageFont.truetype(noto_path, 44)
+    font_hindi_large = ImageFont.truetype(noto_path, 58)
+    font_title = ImageFont.truetype(noto_path, 66)
+    font_sub = ImageFont.truetype(noto_path, 42)
+    font_badge = ImageFont.truetype(noto_path, 50)
+    print("✅ Loaded official NotoSansDevanagari-Bold font successfully!")
+else:
+    for fp in [r"C:\Windows\Fonts\arialbd.ttf", r"C:\Windows\Fonts\segoeuib.ttf"]:
+        if os.path.exists(fp):
+            font_title = ImageFont.truetype(fp, 68)
+            font_sub = ImageFont.truetype(fp, 44)
+            font_badge = ImageFont.truetype(fp, 52)
+            font_hindi = font_sub
+            font_hindi_large = font_title
             break
-        except Exception:
-            pass
-
-if not font_hindi:
-    font_hindi = font_sub
-    font_hindi_large = font_title
 
 # Helper function to draw Stick Man
 def draw_stickman(draw, x, y, scale=1.0, walk_frame=0, arm_pose="walk", has_bag=False, has_seed=False, is_happy=False, color=(30, 30, 30, 255)):

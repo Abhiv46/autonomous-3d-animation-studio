@@ -1,0 +1,7 @@
+file 'C:\TheNaughtyDuo_Automation\RaviKiKahani\scene_audio\scene_1_padded.mp3'
+file 'C:\TheNaughtyDuo_Automation\RaviKiKahani\scene_audio\scene_2_padded.mp3'
+file 'C:\TheNaughtyDuo_Automation\RaviKiKahani\scene_audio\scene_3_padded.mp3'
+file 'C:\TheNaughtyDuo_Automation\RaviKiKahani\scene_audio\scene_4_padded.mp3'
+file 'C:\TheNaughtyDuo_Automation\RaviKiKahani\scene_audio\scene_5_padded.mp3'
+file 'C:\TheNaughtyDuo_Automation\RaviKiKahani\scene_audio\scene_6_padded.mp3'
+file 'C:\TheNaughtyDuo_Automation\RaviKiKahani\scene_audio\scene_7_padded.mp3'
