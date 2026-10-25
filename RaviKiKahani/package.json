@@ -1,0 +1,15 @@
+{
+  "name": "RaviKiKahani",
+  "version": "1.0.0",
+  "description": "60-second vertical Stick Man animated story in Hindi",
+  "scripts": {
+    "start": "remotion studio",
+    "build": "remotion render RaviKiKahani out/video.mp4 --codec=h264"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.538",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.538"
+  }
+}
