@@ -1,81 +1,32 @@
-# Python bytecode & cache
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.pytest_cache/
-.coverage
-htmlcov/
-
-# Virtual Environment
-venv/
-env/
-ENV/
-.venv/
-
-# Environment variables & secrets (CRITICAL)
-.env
-.env.local
-.env.*.local
-token.pickle
-client_secrets.json
-*.pem
-*.key
-*.p12
-
-# Browser Profiles & Sessions (Never commit user data)
-User Data/
-browser_session/
-*.session
-*.cookies
-Default/
-Profile */
-
-# Video, audio, rendered media files
+# Large media files
 *.mp4
-*.mkv
 *.mov
+*.mkv
 *.avi
-*.webm
-*.png
-*.jpg
-*.jpeg
-*.webp
-!character_master_bible/*.jpg
-!character_master_bible/*.png
 *.wav
-*.mp3
-data/raw_clips/
-data/processed_episodes/
-data/output/
-data/archive/
-data/tiktok_raw_clips/
-data/youtube_long_videos/
-episodes/
+*.flv
+
+# Directories containing large renders
 output/
 raw_clips/
-archive/
-
-# Database files
-*.db
-*.sqlite
-*.sqlite3
-!database/migrations/*.sql
+render_cache/
+browser_sessions/
+.temp/
+temp/
 
 # Logs & temp files
 *.log
-logs/
-autopilot_logs/
 *.tmp
 *.temp
-debug_*.json
-dialog_open.png
-*.png
+live_stream.log
 
-# OS & IDE
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.env
+
+# System & OS
 .DS_Store
 Thumbs.db
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace

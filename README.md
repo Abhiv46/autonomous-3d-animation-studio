@@ -7,6 +7,26 @@
 
 Production-grade, modular, self-healing autonomous AI content automation studio engineered for **The Naughty Duo** brand. End-to-end autonomous pipeline featuring 9:16 Reference 3D Image Anchoring (I2V), multi-account **Google Flow** orchestration, cute toddler Hindi dialogues, 100% original natural audio preservation, and automated multi-platform publishing to **YouTube Shorts** and **TikTok Studio**.
 
+## 🚀 Antigravity Custom Skill: Viral Shorts Autopilot
+
+This repository contains the official **`viral-shorts-autopilot`** skill located at [`.agents/skills/viral-shorts-autopilot/SKILL.md`](.agents/skills/viral-shorts-autopilot/SKILL.md).
+
+### 🔒 8-Point Gatekeeper Validation (`strict_shorts_validator.py`)
+No video can be published or scheduled to YouTube Shorts without meeting all 8 conditions:
+1. **Bilingual Title**: Hindi Devanagari script + Emoji + English Transliteration + `#Shorts`.
+2. **SEO Description**: Dialogue script summary + 24/7 Live Stream Link + Viral Hashtags.
+3. **Tags**: 500-characters of rich search keywords.
+4. **Related Video**: Explicitly selected in YouTube Studio to route viewers.
+5. **Language**: Set to `Hindi`.
+6. **Custom 3D Thumbnail**: 1080x1920 high-CTR with yellow top & white bottom text.
+7. **Dual-Audio System**: 100% Original AI Audio (`volume=1.0`) + Trending Viral Sound (Millions of views in Shorts feed) at Zero Volume (`volume=0.0`).
+8. **Audience**: Set to `Not Made for Kids` (to preserve comments, recommendations, and analytics).
+
+### 🎥 24/7 RTMP Live Streaming (`live_stream_daemon.py`)
+- Real-time zero-latency transcoding (`-preset ultrafast -tune zerolatency` @ 2600 kbps, 30fps).
+- **8-Hour VOD Archival Rule**: Gracefully restarts stream every 8 hours, allowing YouTube to fully process and archive the VOD, permanently saving 100% of accumulated watch hours within the 12-hour limit.
+- Windows Scheduled Watchdog (`run_watchdog_silent.vbs`) for 24/7 headless self-healing.
+
 ## 🤖 Social Media Agent Team
 
 This project now includes a daily social-media agent team that coordinates research, scripting, editing, publication validation, and analytics for YouTube and TikTok. It is built as a safe, policy-aware starter layer on top of the existing production engine.

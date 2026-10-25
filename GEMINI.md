@@ -1,120 +1,59 @@
-# THE NAUGHTY DUO - PERMANENT PRODUCTION & CHARACTER BIBLE (FACE LOCKED)
+# 🚨 STRICT YOUTUBE SHORTS PUBLISHING RULES — THE NAUGHTY DUO
 
-> [!CRITICAL]
-> These rules are PERMANENT and HARDCODED into Antigravity's system architecture. They apply to EVERY turn, EVERY subagent, and EVERY video generation script, regardless of chat length or context truncation.
-
----
-
-## 0. OUR CORE MISSION & MAIN WORK (HUMARA MAIN KAAM)
-**Channel:** **The Naughty Duo** (Starring: Kaartik [5yo], Kaavya [3yo], and Mummy Pinki)
-
-1. **Autonomous High-Quality 3D Pixar Animation Production:**
-   - Create world-class 3D Disney/Pixar CGI animation episodes for YouTube & TikTok.
-2. **Single Continuous Movie Illusion (1.3 to 2.5 Minutes / 78s - 150s):**
-   - Every video must look and feel like **ONE unbroken, seamless single-camera movie sequence** — absolutely NOT separate, disjointed clips glued together.
-   - **Zero Repetition Rule:** Zero looping, zero repeated actions. Every single second must drive the funny/emotional family story forward.
-3. **Permanent Face & Benchmark Lock (Zero Drift):**
-   - Faces, eyes, facial geometry, and signature hair MUST 100% match the 5 Master Thumbnails on disk.
-4. **Attractive, Cute & Eye-Catching Wardrobe:**
-   - Basic/dull/plain clothes are strictly forbidden. Characters must always wear cute, vibrant, colorful, and engaging outfits appropriate for the story.
-5. **Zero Wasted Credits Guarantee:**
-   - Strictly generate using **Google Flow PRO (`u/3`)**.
-   - Review and verify every frame before chaining so no credits or time are ever wasted.
-   - Always present review verification frames and metadata to the user before publishing.
-6. **Viral Growth & Algorithm Engineering (100% Virality Focus):**
-   - Every episode must be crafted for maximum viral retention, strong 3-second visual hooks, funny relatable family moments, and high re-watchability.
-7. **Channel Analytics & Viewer Preference Analysis:**
-   - Continuously analyze channel analytics and video performance: track which videos get the most views, viewer retention curves, what audiences love most (e.g., sibling comedy, cute baby Kaavya reactions, Mummy scolding/pampering), and *why* they performed well.
-   - Use these analytical insights to direct upcoming video scripts, pacing, and visual concepts.
-8. **Viral Metadata on Every Video Upload:**
-   - Every upload MUST include high-CTR viral Titles (with emoji & curiosity gap), rich SEO Descriptions, trending Tags, and hashtag clusters (#TheNaughtyDuo #Pixar3D #Shorts #Animation).
-9. **Master Upload Registry Gate (Instant Zero-Waste Verification):**
-   - Registry File: `C:\TheNaughtyDuo_Automation\channel_master_upload_registry.json`
-   - BEFORE uploading ANY video to YouTube or TikTok, the system/script MUST check the registry. If a video or topic is already marked uploaded, re-upload is **STRICTLY FORBIDDEN**.
-   - As soon as a new video is published, the registry is instantly updated with timestamp, video ID, title, and views.
+> [!IMPORTANT]
+> **ABSOLUTE RULE**: KOI BHI YOUTUBE SHORT TAB TAK POST YA SCHEDULE NAHI HOGA JAB TAK NEECHE DIYE GAYE SAARE 8 CONDITIONS 100% COMPLETE NA HO. AGAR EK BHI CONDITION MISSING HAI TO VIDEO POST NAHI HOGI!
 
 ---
 
-## 1. OFFICIAL MASTER BENCHMARKS & FACE ANCHORS (PERMANENT DISK STORAGE)
-All generations must strictly lock faces and features to these 5 canonical master thumbnails located at:
-`C:\TheNaughtyDuo_Automation\character_master_bible\`
-
-- **Thumbnail 1:** `master_ref_1_bedtime_love.jpg` (Emotional bedtime with Mummy & Kaavya)
-- **Thumbnail 2:** `master_ref_2_paper_airplane.jpg` (Paper airplane living room race)
-- **Thumbnail 3:** `master_ref_3_lemon_honey.jpg` (Sour lemon & sweet honey table comedy)
-- **Thumbnail 4:** `master_ref_4_tv_remote_fight.jpg` (TV remote tug-of-war on couch)
-- **Thumbnail 5:** `master_ref_5_pani_puri_feast.jpg` (Pani puri feast celebration)
-
-### Cropped Face Anchor Files:
-- **Kaartik:** `C:\TheNaughtyDuo_Automation\character_master_bible\kaartik_face_anchor.jpg`
-- **Kaavya:** `C:\TheNaughtyDuo_Automation\character_master_bible\kaavya_face_anchor.jpg`
-- **Mummy Pinki:** `C:\TheNaughtyDuo_Automation\character_master_bible\mummy_face_anchor.jpg`
+### 1. DUAL-AUDIO SYSTEM (100% Original + 0% Viral Sound)
+* **Audio Track 1 (100% Original Audio)**: Video generator se aayi hui original bacchon aur characters ki awaaz **100% Volume (`volume=1.0`)** par honi chahiye. Koi alag mismatched voiceover nahi hona chahiye.
+* **Audio Track 2 (0% Volume Viral Audio)**: YouTube Shorts feed me jisme Millions of views aa rahe hain (jaise *Monkeys Spinning Monkeys* ya *Carefree*), wo audio video me attach hona chahiye aur uska volume **Strictly ZERO (`volume=0.0`)** hona chahiye (`normalize=0:weights=1 0`).
+* **Purpose**: Video ko YouTube aur TikTok ke viral audio algorithm me push karna bina original audio ko disturb kiye.
 
 ---
 
-## 2. CHARACTER FACIAL IDENTITY (100% LOCKED - ZERO DRIFT)
-
-### 👦 KAARTIK (5-Year-Old Boy):
-- **Face Structure:** Rounded chubby toddler cheeks, prominent dimples when smiling, soft jawline.
-- **Eyes:** Giant glossy hazel-brown Disney Pixar doe eyes, delicate lower lash line, expressive arched dark eyebrows.
-- **Hair:** Dark brownish-black textured wavy silky hair with a natural messy side swoop/tuft.
-- **Expressions:** Wide joyful open-mouth smile showing neat toddler teeth, cheeky comical pouts, or laughing gasps.
-- **FORBIDDEN:** Spiky anime hair, generic flat 3D eyes, adult proportions.
-
-### 👧 KAAVYA (3-Year-Old Toddler Sister):
-- **Face Structure:** Ultra-chubby round cherubic cheeks, tiny cute button nose, sweet rosy blushed cheek apples.
-- **Eyes:** Extra-large sparkling dark-brown doe eyes with long delicate baby eyelashes.
-- **Hair:** Adorable signature **DOUBLE HIGH BUNS (Space Buns)** with soft wispy bangs on forehead. Hair buns are ALWAYS tied with cute colorful accessories (pink pom-pom flowers, daisies, purple ribbon ties).
-- **Expressions:** Infectious open-mouth giggles, tongue sticking out playfully, or comical toddler stubborn pouts with puffed cheeks.
-- **FORBIDDEN:** Single ponytail, plain flat hair without buns, distorted mouth or teeth.
-
-### 👩 MUMMY PINKI (Loving Indian Mother):
-- **Face Structure:** Warm, beautiful, expressive young Indian mother with elegant bone structure, warm smile lines, glowing peach skin with subsurface scattering.
-- **Eyes:** Warm hazel-brown almond Pixar eyes, neat arched eyebrows.
-- **Hair:** Long, voluminous, wavy dark espresso-brown hair with soft natural curls falling past shoulders.
-- **Expressions:** Warm maternal adoration, big hearty laughs, playful comedic scolding or gasping with hands on cheeks.
+### 2. BILINGUAL TITLE (Hindi + English)
+* Har Short ka Title hamesha Bilingual hoga:
+  `[Hindi Devanagari Script] [Emoji] [English Transliteration] | The Naughty Duo #Shorts`
+* Example: `कालू मदारी आया 🐻🥁 Kalu Madari Aaya | The Naughty Duo #Shorts`
+* Example: `मछली जल की रानी है 🐟 Machhli Jal Ki Rani Hai | The Naughty Duo #Shorts`
 
 ---
 
-## 3. WARDROBE & CLOTHING RULE (BEAUTIFUL, ENGAGING, STORY-SPECIFIC)
-While **FACES ARE 100% LOCKED**, clothing must be vibrant, engaging, attractive, and story-appropriate:
-- **Kaartik:** Vibrant polo shirts (royal blue, red, yellow), graphic tees (Lightning McQueen racecars, star prints), cute corduroy or denim bib overalls.
-- **Kaavya:** Cute tiered ruffled cupcake frocks, pink polka-dot skater dresses, yellow daisy floral frocks, purple flutter-sleeve dresses with matching bun accessories.
-- **Mummy:** Elegant embroidered cotton/silk kurtis with intricate neck patterns (mustard yellow, sky blue floral, teal embroidered, pink paisley).
-- **Rule:** NEVER use drab, dull, grey, or plain basic clothing. Every outfit must be colorful, cheerful, and visually rich.
+### 3. SEO DESCRIPTION WITH LIVE STREAM LINK
+* Story & Rhyme dialogue transcript.
+* **Live Stream Link (Mandatory)**:  
+  `📺 Watch Our 24/7 Live Stream: https://www.youtube.com/channel/UCULzzCCm0Y-ZHiyF480ioLg/live`
+* Relevant Viral Hashtags: `#TheNaughtyDuo #Shorts #HindiRhymes #KidsCartoon #3DAnimation #TrendingShorts`.
 
 ---
 
-## 4. ENGINE & QUALITY PROTOCOL (ZERO WASTED CREDITS)
-1. **Always Use Google Flow PRO (`u/3`):** Never generate on free standard accounts that compress quality or time out.
-2. **Quality Verification Gate:**
-   - Every generated clip must be inspected at seconds 4 and 7.
-   - If facial geometry or hair drifts from the Face Anchors, **ABORT IMMEDIATELY**.
-   - NEVER chain a drifted clip to the next scene.
+### 4. 500-CHARACTER SEARCH TAGS
+* High-volume search keywords in both Roman Hindi and English (500 characters limit tak).
 
 ---
 
-## 5. CONTENT POLICIES & STORY THEME LOCKS (WHAT TO CREATE VS WHAT IS STRICTLY BANNED)
+### 5. VIDEO LANGUAGE: HINDI
+* YouTube Studio me Video Language dropdown hamesha **Hindi** select hoga.
 
-### 💖 PERMANENTLY LOCKED GOLD BENCHMARK: "Bhai Ka Pyar - Heartwarming Sibling Bond"
-- **Core Theme:** Unconditional love, protection, innocent empathy, and heartwarming sibling bonding between big brother Kaartik (5yo) and baby sister Kaavya (3yo).
-- **Approved Narrative Anchors:**
-  1. **Selfless Sharing:** Giving the last cookie/biscuit to little sister when she holds her tummy innocently.
-  2. **Protection & Comfort:** Kaartik holding Kaavya's hand, wiping her tears, comforting her during thunder/darkness, or giving a gentle warm bear hug.
-  3. **Animal Empathy & Care:** Rescuing a cold/injured puppy in the rain (*Bhai Ne Bachaya Ghayal Puppy* style), gently wrapping it in a towel together.
-  4. **Teamwork & Love:** Helping each other clean up toys, clapping for each other's tiny achievements, dancing happily on the bedroom rug.
-- **Emotional Impact:** High-tear/heart-melting retention, wholesome family sentiment that parents, kids, and international audiences love to re-watch and share.
+---
 
-### 🚫 VISUAL DEFECT ANALYSIS & RECTIFICATION: "Dadi Ki Mithai / Sweet Scenes"
-- **User Clarification:** *"Dadi Ki Mithai Chori - Indian Family Comedy iski story me koi problem nahi bs iski video me problem hai"*
-- **The Story is Great & Approved:** The core family comedy idea (kids being playfully tempted by delicious warm Indian sweets/gulab jamun at home) is relatable and wholesome.
-- **The Video Execution was Completely Broken (Strictly Forbidden Flaws):**
-  1. **Floating Phantom Objects:** In Scene 1, a second giant bowl of gulab jamuns was hallucinated floating mid-air above their heads.
-  2. **Character & Facial Drift:** Kaavya had flat clay eyes, low pigtails instead of high space buns, and a bindi put on a 3yo toddler. Kaartik's face turned into an elongated caricature.
-  3. **Wardrobe Flickering:** Clothes shifted between yellow/pink to blue/magenta to orange/blue across clips.
-  4. **Grotesque Food Hallucinations:** In Scene 3, Google Flow hallucinated syrup oozing unnaturally out of characters' noses and melting into grotesque sticky slime over their hands.
-- **Mandatory Production Rule for Sweet/Food Scenes:**
-  - Food scenes must look appetizing, clean, and Disney-Pixar polished (like Remy in *Ratatouille* or the cookie in *Bhai Ka Pyar*).
-  - NEVER prompt or allow sticky syrup/melted food to distort character faces, noses, or limbs.
-  - Characters MUST maintain their exact locked faces (`kaartik_face_anchor.jpg`, `kaavya_face_anchor.jpg`, `mummy_face_anchor.jpg`) and signature outfits without wardrobe shifts.
+### 6. RELATED VIDEO LINK (YOUTUBE STUDIO)
+* YouTube Studio me **"Related video"** feature me channel ki dusri popular video ya 24/7 Live Stream ko link karna mandatory hai.
 
+---
+
+### 7. CLICK-BASED 3D THUMBNAIL
+* 1080x1920 high-res 3D frame:
+  - Top Text: **Bright Yellow Stroked Text**
+  - Bottom Text: **Clean White Stroked Text** with emojis.
+
+---
+
+### 8. AUDIENCE SETTING
+* `Not Made for Kids` (Comments, recommendations aur share features active rakhne ke liye).
+
+---
+
+### ⛔ ENFORCEMENT & ABORT POLICY
+Agar script ya agent kisi video me Title, Tags, Description, Live Link, Related Video, Language, 3D Thumbnail ya Dual-Audio me se koi bhi cheez missing paye, to execution **ABORT** hoga aur video post nahi hogi!
